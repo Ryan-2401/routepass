@@ -250,18 +250,25 @@ export async function buildPlan(req: TripRequest): Promise<Plan & { hubSuggestio
   }
 
   // 도시별 일정과 이동수단을 따로 요청해 동시에 실행 (한 번에 다 만들면 느려서 시간 초과가 남)
-  const jobs: (() => Promise<void>)[] = [];
+  const jobs: (() => Promise<void>)[] = []; // 이동 구간(필수)을 먼저, 도시 일정을 그다음에
   const hubSuggestions: Record<number, string[]> = {};
   let tips: string[] = [];
   stays.forEach((s, i) =>
     jobs.push(async () => {
-      const r = await generateJson(cityPrompt(req, s, i, stays.length), CitySchema, { extraCheck: (v) => checkCity(v, s), retries: 1 });
-      if (r.fixes.length) validation.push(`${s.place.name}: ${r.fixes.join(" / ")}`);
-      s.summary = r.value.summary;
-      s.days = r.value.days as DayPlan[];
+      try {
+        const r = await generateJson(cityPrompt(req, s, i, stays.length), CitySchema, { extraCheck: (v) => checkCity(v, s), retries: 1 });
+        if (r.fixes.length) validation.push(`${s.place.name}: ${r.fixes.join(" / ")}`);
+        s.summary = r.value.summary;
+        s.days = r.value.days as DayPlan[];
+      } catch (e) {
+        // 도시 하나가 실패해도 나머지 결과는 보여줌 (이동·출입국·항공은 그대로 계산)
+        validation.push(`${s.place.name}: AI 일정 생성 실패 — ${(e as Error).message}`);
+        s.summary = "AI 서버가 붐벼서 이 도시의 하루 일정을 만들지 못했습니다. 잠시 뒤 다시 만들기를 눌러 주세요.";
+        s.days = s.days.map((d) => ({ date: d.date, theme: "일정 생성 실패", items: [{ slot: "오전", title: "잠시 뒤 다시 시도하세요", kind: "rest" }] }));
+      }
     }),
   );
-  jobs.push(async () => {
+  jobs.unshift(async () => {
     const r = await generateJson(legsPrompt(req, legs, hubs), LegsSchema, { extraCheck: (v) => checkLegs(v, legs, hubs), retries: 1 });
     if (r.fixes.length) validation.push(`이동 구간: ${r.fixes.join(" / ")}`);
     legs.forEach((l) => {
