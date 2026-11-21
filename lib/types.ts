@@ -16,7 +16,12 @@ export interface Place {
 
 /** 사용자 입력 */
 export interface TripRequest {
-  cities: { name: string; country?: ISO2; days?: number }[]; // 방문 순서대로 (country: 화면에서 고른 나라)
+  cities: {
+    name: string;
+    country?: ISO2; // 화면에서 고른 나라
+    days?: number;
+    geo?: { nameEn: string; lat: number; lng: number; region?: string }; // 직접 입력한 도시를 브라우저에서 찾은 결과
+  }[]; // 방문 순서대로
   startDate: string; // YYYY-MM-DD (인천 출발일)
   totalDays?: number; // 도시별 일수를 비웠을 때 AI가 나눌 전체 일수
   budgetKRW: number; // 1인 총예산 (항공·교통·숙박·식비 포함)

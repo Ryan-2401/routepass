@@ -105,9 +105,17 @@ export async function nearbyAirports(lat: number, lng: number, maxKm = 150): Pro
   }
 }
 
-export async function resolveCity(input: string, country?: string): Promise<Place | null> {
+export async function resolveCity(
+  input: string,
+  country?: string,
+  geo?: { nameEn: string; lat: number; lng: number; region?: string },
+): Promise<Place | null> {
   const local = findLocalCity(input, country);
   if (local) return local;
+  // 브라우저가 OpenStreetMap에서 이미 찾은 좌표가 있으면 그대로 사용 (서버 IP는 Nominatim에서 자주 막힘)
+  if (geo && country) {
+    return { name: input.trim(), nameEn: geo.nameEn, country, region: geo.region, lat: geo.lat, lng: geo.lng, airports: await nearbyAirports(geo.lat, geo.lng, 120) };
+  }
   return cached(`resolve:${country ?? ""}:${norm(input)}`, DAY, async () => {
     const p = await nominatim(input, country).catch(() => null);
     if (!p || (country && p.country !== country)) return null;

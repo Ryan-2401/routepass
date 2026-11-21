@@ -1,0 +1,528 @@
+# 유럽 인구 10만 이상 도시 (GeoNames cities 데이터, 2026-11-22 추출)
+# 한국어 이름: 위키데이터 라벨, 없으면 표준 외래어 표기로 보충. 수도권 위성 구역(이스탄불·모스크바·런던·파리 근교)은 제외.
+# 공항: 반경 120km 안 운항 공항 (Travelpayouts 공항 목록 기준)
+# 형식: 한국어|영어|나라|위도|경도|공항|지역(여행경보 판정용, 러시아·벨라루스만)
+티라나|Tirana|AL|41.327|19.819|TIA,OHD|
+두러스|Durres|AL|41.324|19.455|TIA,OHD|
+블로러|Vlore|AL|40.470|19.484|TIA|
+엘바산|Elbasan|AL|41.111|20.082|TIA,OHD|
+빈|Vienna|AT|48.209|16.372|VIE,BTS|
+그라츠|Graz|AT|47.067|15.442|GRZ|
+린츠|Linz|AT|48.306|14.286|LNZ,SZG|
+잘츠부르크|Salzburg|AT|47.799|13.044|SZG,LNZ|
+인스브루크|Innsbruck|AT|47.263|11.395|INN|
+클라겐푸르트|Klagenfurt|AT|46.625|14.305|KLU,LJU|
+사라예보|Sarajevo|BA|43.849|18.356|SJJ,TZL|
+바냐루카|Banja Luka|BA|44.779|17.206|BNX|
+제니차|Zenica|BA|44.202|17.904|SJJ,TZL|
+투즐라|Tuzla|BA|44.538|18.667|TZL,SJJ|
+모스타르|Mostar|BA|43.343|17.808|OMO,SJJ|
+브뤼셀|Brussels|BE|50.850|4.349|BRU,CRL|
+안트베르펜|Antwerp|BE|51.221|4.400|BRU,ANR|
+겐트|Ghent|BE|51.050|3.717|BRU|
+샤를루아|Charleroi|BE|50.411|4.444|CRL,BRU|
+리에주|Liege|BE|50.634|5.567|LGG,MST|
+브뤼허|Bruges|BE|51.209|3.224|BRU,OST|
+나뮈르|Namur|BE|50.467|4.867|CRL,LGG|
+뢰번|Leuven|BE|50.880|4.701|BRU|
+소피아|Sofia|BG|42.697|23.324|SOF|
+플로브디프|Plovdiv|BG|42.154|24.750|PDV,SOF|
+바르나|Varna|BG|43.219|27.910|VAR,BOJ|
+부르가스|Burgas|BG|42.507|27.469|BOJ,VAR|
+스타라자고라|Stara Zagora|BG|42.432|25.643|PDV|
+루세|Ruse|BG|43.849|25.953|OTP|
+민스크|Minsk|BY|53.900|27.567|MSQ|
+고멜|Gomel|BY|52.434|30.975|GME|Gomel Region
+그로드노|Grodno|BY|53.676|23.829|GNA|Grodno Region
+비쳅스크|Vitebsk|BY|55.190|30.205|VTB|
+마힐료우|Mogilev|BY|53.909|30.340|MVQ|
+브레스트|Brest|BY|52.109|23.718|BQT|Brest Region
+바브루이스크|Babruysk|BY|53.147|29.206|MVQ,MSQ|
+바라나비치|Baranovichi|BY|53.133|26.008|MSQ|Brest Region
+바리사우|Barysaw|BY|54.228|28.505|MSQ|
+핀스크|Pinsk|BY|52.121|26.067|BQT|Brest Region
+마지르|Mazyr|BY|52.042|29.216|GME|Gomel Region
+리다|Lida|BY|53.883|25.300|VNO|
+오르샤|Orsha|BY|54.514|30.404|VTB,MVQ|
+취리히|Zurich|CH|47.367|8.550|ZRH|
+제네바|Geneva|CH|46.202|6.146|GVA|
+바젤|Basel|CH|47.558|7.573|BSL|
+로잔|Lausanne|CH|46.516|6.633|GVA|
+베른|Bern|CH|46.948|7.447|BRN,ZRH|
+빈터투어|Winterthur|CH|47.506|8.724|ZRH|
+니코시아|Nicosia|CY|35.173|33.354|LCA|
+리마솔|Limassol|CY|34.684|33.038|PFO,LCA|
+프라하|Prague|CZ|50.088|14.421|PRG|
+브르노|Brno|CZ|49.195|16.608|BRQ,VIE|
+오스트라바|Ostrava|CZ|49.835|18.282|OSR,KTW|
+플젠|Plzen|CZ|49.748|13.378|PRG|
+리베레츠|Liberec|CZ|50.767|15.056|PRG|
+베를린|Berlin|DE|52.524|13.411|BER|
+함부르크|Hamburg|DE|53.551|9.993|HAM|
+뮌헨|Munich|DE|48.137|11.575|MUC|
+쾰른|Cologne|DE|50.933|6.950|CGN,DUS|
+프랑크푸르트|Frankfurt|DE|50.115|8.684|FRA|
+뒤셀도르프|Dusseldorf|DE|51.223|6.779|DUS,CGN|
+슈투트가르트|Stuttgart|DE|48.782|9.177|STR|
+에센|Essen|DE|51.457|7.012|DUS,DTM|
+도르트문트|Dortmund|DE|51.515|7.466|DTM,DUS|
+드레스덴|Dresden|DE|51.051|13.738|DRS|
+브레멘|Bremen|DE|53.076|8.807|BRE,HAM|
+뉘른베르크|Nuremberg|DE|49.454|11.078|NUE,MUC|
+하노버|Hannover|DE|52.370|9.733|HAJ|
+라이프치히|Leipzig|DE|51.340|12.371|LEJ|
+뒤스부르크|Duisburg|DE|51.432|6.765|DUS|
+부퍼탈|Wuppertal|DE|51.256|7.148|DUS,CGN|
+빌레펠트|Bielefeld|DE|52.033|8.533|PAD,FMO|
+본|Bonn|DE|50.734|7.096|CGN|
+뮌스터|Munster|DE|51.962|7.626|FMO,DTM|
+만하임|Mannheim|DE|49.489|8.467|FRA|
+아우크스부르크|Augsburg|DE|48.371|10.899|MUC,FMM|
+비스바덴|Wiesbaden|DE|50.086|8.244|FRA|
+카를스루에|Karlsruhe|DE|49.009|8.404|FKB,STR|
+아헨|Aachen|DE|50.777|6.083|CGN,MST|
+묀헨글라트바흐|Monchengladbach|DE|51.185|6.442|DUS|
+킬|Kiel|DE|54.321|10.135|HAM|
+켐니츠|Chemnitz|DE|50.836|12.929|DRS,LEJ|
+브라운슈바이크|Braunschweig|DE|52.266|10.527|HAJ|
+마그데부르크|Magdeburg|DE|52.131|11.632|LEJ|
+크레펠트|Krefeld|DE|51.336|6.554|DUS|
+할레|Halle|DE|51.482|11.979|LEJ|
+프라이부르크|Freiburg|DE|47.996|7.852|BSL|
+에르푸르트|Erfurt|DE|50.977|11.035|ERF,LEJ|
+뤼베크|Lubeck|DE|53.869|10.687|HAM,LBC|
+하겐|Hagen|DE|51.361|7.472|DTM,DUS|
+로스토크|Rostock|DE|54.089|12.140|RLG,HAM|
+카셀|Kassel|DE|51.317|9.500|KSF,PAD|
+포츠담|Potsdam|DE|52.399|13.066|BER|
+자르브뤼켄|Saarbrucken|DE|49.233|7.010|SCN,LUX|
+함|Hamm|DE|51.680|7.821|DTM|
+다름슈타트|Darmstadt|DE|49.872|8.650|FRA|
+오스나브뤼크|Osnabruck|DE|52.274|8.051|FMO|
+올덴부르크|Oldenburg|DE|53.140|8.215|BRE|
+레겐스부르크|Regensburg|DE|49.015|12.102|MUC,NUE|
+하이델베르크|Heidelberg|DE|49.408|8.691|FRA|
+파더보른|Paderborn|DE|51.719|8.754|PAD|
+뷔르츠부르크|Wurzburg|DE|49.794|9.951|NUE,FRA|
+볼프스부르크|Wolfsburg|DE|52.424|10.776|HAJ|
+괴팅겐|Gottingen|DE|51.534|9.932|HAJ,KSF|
+하일브론|Heilbronn|DE|49.140|9.220|STR|
+잉골슈타트|Ingolstadt|DE|48.765|11.424|MUC,NUE|
+울름|Ulm|DE|48.398|9.992|STR,FMM|
+포르츠하임|Pforzheim|DE|48.884|8.699|STR,FKB|
+브레머하펜|Bremerhaven|DE|53.554|8.575|BRE,HAM|
+로이틀링겐|Reutlingen|DE|48.491|9.204|STR|
+코블렌츠|Koblenz|DE|50.354|7.579|FRA,CGN|
+지겐|Siegen|DE|50.875|8.024|CGN,DTM|
+예나|Jena|DE|50.929|11.590|LEJ,ERF|
+게라|Gera|DE|50.880|12.082|LEJ|
+힐데스하임|Hildesheim|DE|52.151|9.951|HAJ|
+에를랑겐|Erlangen|DE|49.591|11.008|NUE|
+트리어|Trier|DE|49.756|6.639|LUX|
+코펜하겐|Copenhagen|DK|55.676|12.566|CPH|
+오르후스|Aarhus|DK|56.157|10.211|AAR,BLL|
+오덴세|Odense|DK|55.396|10.388|BLL,CPH|
+올보르|Aalborg|DK|57.048|9.919|AAL|
+탈린|Tallinn|EE|59.437|24.753|TLL|
+마드리드|Madrid|ES|40.416|-3.703|MAD|
+바르셀로나|Barcelona|ES|41.389|2.159|BCN|
+발렌시아|Valencia|ES|39.474|-0.380|VLC|
+사라고사|Zaragoza|ES|41.656|-0.877|ZAZ,BCN|
+세비야|Seville|ES|37.383|-5.973|SVQ|
+말라가|Malaga|ES|36.720|-4.420|AGP|
+무르시아|Murcia|ES|37.987|-1.130|RMU,ALC|
+라스팔마스|Las Palmas de Gran Canaria|ES|28.102|-15.416|LPA|
+알리칸테|Alicante|ES|38.345|-0.481|ALC|
+빌바오|Bilbao|ES|43.263|-2.925|BIO|
+코르도바|Cordoba|ES|37.892|-4.773|SVQ,AGP|
+바야돌리드|Valladolid|ES|41.655|-4.723|VLL,MAD|
+비고|Vigo|ES|42.233|-8.723|VGO,SCQ|
+히혼|Gijon|ES|43.536|-5.662|OVD|
+비토리아가스테이스|Vitoria-Gasteiz|ES|42.850|-2.673|BIO,VIT|
+아코루냐|A Coruna|ES|43.371|-8.396|LCG,SCQ|
+엘체|Elche|ES|38.262|-0.701|ALC|
+그라나다|Granada|ES|37.188|-3.607|GRX,AGP|
+오비에도|Oviedo|ES|43.360|-5.845|OVD|
+카르타헤나|Cartagena|ES|37.602|-0.984|RMU,ALC|
+헤레스데라프론테라|Jerez de la Frontera|ES|36.687|-6.136|XRY,SVQ|
+산타크루스데테네리페|Santa Cruz de Tenerife|ES|28.468|-16.255|TFN,TFS|
+팜플로나|Pamplona|ES|42.817|-1.643|PNA,BIO|
+알메리아|Almeria|ES|36.838|-2.460|LEI|
+산세바스티안|San Sebastian|ES|43.313|-1.975|EAS,BIO|
+카스테욘|Castellon de la Plana|ES|39.986|-0.049|VLC|
+부르고스|Burgos|ES|42.341|-3.702|BIO|
+산탄데르|Santander|ES|43.466|-3.805|SDR,BIO|
+알바세테|Albacete|ES|38.994|-1.856|VLC|
+마르베야|Marbella|ES|36.515|-4.886|AGP|
+로그로뇨|Logrono|ES|42.466|-2.451|BIO|
+바다호스|Badajoz|ES|38.878|-6.971|BJZ|
+살라망카|Salamanca|ES|40.969|-5.664|MAD|
+우엘바|Huelva|ES|37.266|-6.940|SVQ,FAO|
+타라고나|Tarragona|ES|41.119|1.245|REU,BCN|
+예이다|Lleida|ES|41.617|0.622|BCN|
+레온|Leon|ES|42.600|-5.570|OVD|
+알헤시라스|Algeciras|ES|36.133|-5.450|AGP,GIB|
+카디스|Cadiz|ES|36.527|-6.289|XRY|
+하엔|Jaen|ES|37.769|-3.790|GRX|
+오우렌세|Ourense|ES|42.337|-7.864|VGO,SCQ|
+지로나|Girona|ES|41.983|2.825|GRO,BCN|
+헬싱키|Helsinki|FI|60.169|24.935|HEL|
+탐페레|Tampere|FI|61.499|23.787|TMP,HEL|
+오울루|Oulu|FI|65.012|25.468|OUL|
+투르쿠|Turku|FI|60.452|22.269|TKU|
+위바스퀼레|Jyvaskyla|FI|62.242|25.721|JYV|
+쿠오피오|Kuopio|FI|62.892|27.677|KUO|
+라흐티|Lahti|FI|60.983|25.662|HEL|
+파리|Paris|FR|48.853|2.349|CDG,ORY|
+마르세유|Marseille|FR|43.297|5.381|MRS|
+리옹|Lyon|FR|45.749|4.848|LYS|
+툴루즈|Toulouse|FR|43.604|1.444|TLS|
+니스|Nice|FR|43.703|7.266|NCE|
+낭트|Nantes|FR|47.217|-1.553|NTE|
+스트라스부르|Strasbourg|FR|48.584|7.745|SXB|
+보르도|Bordeaux|FR|44.841|-0.581|BOD|
+몽펠리에|Montpellier|FR|43.611|3.876|MPL|
+릴|Lille|FR|50.634|3.055|LIL,BRU|
+렌|Rennes|FR|48.111|-1.674|RNS|
+랭스|Reims|FR|49.265|4.029|CDG|
+르아브르|Le Havre|FR|49.493|0.108|CDG|
+생테티엔|Saint-Etienne|FR|45.434|4.390|LYS|
+툴롱|Toulon|FR|43.124|5.928|TLN,MRS|
+앙제|Angers|FR|47.472|-0.552|NTE|
+디종|Dijon|FR|47.313|5.014|LYS|
+그르노블|Grenoble|FR|45.179|5.715|GNB,LYS|
+님|Nimes|FR|43.837|4.358|FNI,MPL|
+클레르몽페랑|Clermont-Ferrand|FR|45.780|3.087|CFE|
+엑상프로방스|Aix-en-Provence|FR|43.528|5.450|MRS|
+브레스트|Brest|FR|48.390|-4.486|BES|
+르망|Le Mans|FR|48.002|0.203|NTE|
+아미앵|Amiens|FR|49.900|2.300|BVA,CDG|
+투르|Tours|FR|47.395|0.704|TUF,NTE|
+리모주|Limoges|FR|45.834|1.248|LIG|
+브장송|Besancon|FR|47.249|6.018|BSL,GVA|
+메스|Metz|FR|49.119|6.173|ETZ,LUX|
+오를레앙|Orleans|FR|47.903|1.904|ORY|
+루앙|Rouen|FR|49.443|1.099|CDG,BVA|
+뮐루즈|Mulhouse|FR|47.752|7.329|BSL|
+페르피냥|Perpignan|FR|42.698|2.895|PGF|
+캉|Caen|FR|49.186|-0.359|CFR|
+낭시|Nancy|FR|48.684|6.185|ETZ,LUX|
+런던|London|GB|51.508|-0.126|LHR,LGW,STN|
+버밍엄|Birmingham|GB|52.481|-1.900|BHX|
+글래스고|Glasgow|GB|55.865|-4.258|GLA|
+맨체스터|Manchester|GB|53.481|-2.237|MAN|
+셰필드|Sheffield|GB|53.383|-1.466|MAN,EMA|
+리즈|Leeds|GB|53.797|-1.548|LBA,MAN|
+에든버러|Edinburgh|GB|55.952|-3.196|EDI|
+리버풀|Liverpool|GB|53.411|-2.978|LPL,MAN|
+브리스틀|Bristol|GB|51.455|-2.597|BRS|
+카디프|Cardiff|GB|51.480|-3.180|CWL,BRS|
+레스터|Leicester|GB|52.639|-1.132|EMA,BHX|
+벨파스트|Belfast|GB|54.597|-5.925|BFS,BHD|
+코번트리|Coventry|GB|52.407|-1.512|BHX|
+노팅엄|Nottingham|GB|52.954|-1.151|EMA|
+레딩|Reading|GB|51.456|-0.971|LHR|
+헐|Kingston upon Hull|GB|53.745|-0.335|LBA,HUY|
+프레스턴|Preston|GB|53.763|-2.704|MAN,LPL|
+스완지|Swansea|GB|51.621|-3.943|CWL|
+뉴캐슬|Newcastle upon Tyne|GB|54.973|-1.614|NCL|
+사우스엔드온시|Southend-on-Sea|GB|51.538|0.714|SEN,STN|
+브라이턴|Brighton|GB|50.828|-0.140|LGW|
+더비|Derby|GB|52.923|-1.477|EMA|
+사우샘프턴|Southampton|GB|50.904|-1.404|SOU,LHR|
+울버햄프턴|Wolverhampton|GB|52.586|-2.123|BHX|
+플리머스|Plymouth|GB|50.371|-4.143|EXT,NQY|
+스토크온트렌트|Stoke-on-Trent|GB|53.004|-2.185|MAN|
+밀턴케인스|Milton Keynes|GB|52.042|-0.756|LTN|
+노샘프턴|Northampton|GB|52.250|-0.883|LTN,BHX|
+루턴|Luton|GB|51.880|-0.417|LTN|
+포츠머스|Portsmouth|GB|50.799|-1.091|SOU|
+스윈던|Swindon|GB|51.558|-1.781|BRS,LHR|
+애버딘|Aberdeen|GB|57.144|-2.098|ABZ|
+입스위치|Ipswich|GB|52.059|1.155|STN|
+선덜랜드|Sunderland|GB|54.905|-1.382|NCL|
+본머스|Bournemouth|GB|50.721|-1.879|BOH,SOU|
+피터버러|Peterborough|GB|52.574|-0.248|STN|
+옥스퍼드|Oxford|GB|51.752|-1.256|LHR|
+뉴포트|Newport|GB|51.588|-2.998|CWL,BRS|
+요크|York|GB|53.958|-1.083|LBA|
+던디|Dundee|GB|56.469|-2.975|EDI|
+케임브리지|Cambridge|GB|52.200|0.117|STN|
+블랙풀|Blackpool|GB|53.817|-3.050|MAN,LPL|
+노리치|Norwich|GB|52.628|1.298|NWI,STN|
+미들즈브러|Middlesbrough|GB|54.576|-1.235|NCL,MME|
+볼턴|Bolton|GB|53.583|-2.433|MAN|
+글로스터|Gloucester|GB|51.866|-2.243|BRS|
+엑서터|Exeter|GB|50.724|-3.527|EXT|
+콜체스터|Colchester|GB|51.889|0.904|STN|
+크롤리|Crawley|GB|51.113|-0.183|LGW|
+동커스터|Doncaster|GB|53.523|-1.131|MAN,LBA|
+첼름스퍼드|Chelmsford|GB|51.736|0.470|STN|
+링컨|Lincoln|GB|53.227|-0.538|EMA|
+우스터|Worcester|GB|52.189|-2.220|BHX|
+바스|Bath|GB|51.375|-2.362|BRS|
+인버네스|Inverness|GB|57.478|-4.225|INV|
+아테네|Athens|GR|37.984|23.728|ATH|
+테살로니키|Thessaloniki|GR|40.641|22.935|SKG|
+파트라|Patras|GR|38.246|21.735|ATH,GPA|
+라리사|Larissa|GR|39.629|22.421|SKG,VOL|
+이라클리온|Heraklion|GR|35.328|25.143|HER|
+자그레브|Zagreb|HR|45.814|15.978|ZAG|
+스플리트|Split|HR|43.509|16.439|SPU|
+리예카|Rijeka|HR|45.327|14.442|RJK,ZAG|
+부다페스트|Budapest|HU|47.498|19.040|BUD|
+데브레첸|Debrecen|HU|47.532|21.624|DEB,BUD|
+세게드|Szeged|HU|46.253|20.148|BUD|
+미슈콜츠|Miskolc|HU|48.103|20.778|BUD,KSC|
+페치|Pecs|HU|46.076|18.228|BUD|
+죄르|Gyor|HU|47.683|17.635|VIE,BTS|
+니레지하저|Nyiregyhaza|HU|47.955|21.717|DEB|
+케치케메트|Kecskemet|HU|46.906|19.691|BUD|
+세케슈페헤르바르|Szekesfehervar|HU|47.190|18.410|BUD|
+더블린|Dublin|IE|53.333|-6.249|DUB|
+코크|Cork|IE|51.898|-8.471|ORK|
+리머릭|Limerick|IE|52.665|-8.623|SNN|
+골웨이|Galway|IE|53.271|-9.057|SNN|
+레이캬비크|Reykjavik|IS|64.135|-21.895|KEF|
+로마|Rome|IT|41.892|12.511|FCO,CIA|
+밀라노|Milan|IT|45.464|9.190|MXP,LIN|
+나폴리|Naples|IT|40.852|14.268|NAP|
+토리노|Turin|IT|45.071|7.687|TRN|
+팔레르모|Palermo|IT|38.117|13.364|PMO|
+제노바|Genoa|IT|44.405|8.944|GOA|
+볼로냐|Bologna|IT|44.494|11.339|BLQ|
+피렌체|Florence|IT|43.779|11.246|FLR,PSA|
+바리|Bari|IT|41.121|16.870|BRI|
+카타니아|Catania|IT|37.492|15.070|CTA|
+베로나|Verona|IT|45.438|10.994|VRN|
+메시나|Messina|IT|38.194|15.553|REG,CTA|
+트리에스테|Trieste|IT|45.650|13.777|TRS|
+파도바|Padua|IT|45.408|11.886|VCE|
+브레시아|Brescia|IT|45.536|10.215|BGY,VRN|
+타란토|Taranto|IT|40.464|17.247|BRI,BDS|
+파르마|Parma|IT|44.799|10.326|BLQ,PMF|
+프라토|Prato|IT|43.880|11.097|FLR|
+모데나|Modena|IT|44.648|10.925|BLQ|
+레조넬에밀리아|Reggio Emilia|IT|44.698|10.631|BLQ|
+리보르노|Livorno|IT|43.544|10.326|PSA|
+칼리아리|Cagliari|IT|39.230|9.119|CAG|
+리미니|Rimini|IT|44.057|12.565|RMI,BLQ|
+포자|Foggia|IT|41.458|15.552|BRI|
+페라라|Ferrara|IT|44.838|11.621|BLQ|
+살레르노|Salerno|IT|40.675|14.793|NAP|
+시라쿠사|Syracuse|IT|37.075|15.287|CTA|
+베르가모|Bergamo|IT|45.696|9.667|BGY|
+트렌토|Trento|IT|46.068|11.121|VRN|
+페루자|Perugia|IT|43.112|12.389|PEG,FCO|
+페스카라|Pescara|IT|42.458|14.203|PSR|
+비첸차|Vicenza|IT|45.547|11.547|VCE,VRN|
+피사|Pisa|IT|43.709|10.404|PSA|
+볼차노|Bolzano|IT|46.491|11.340|VRN,INN|
+피아첸차|Piacenza|IT|45.052|9.693|LIN,BGY|
+노바라|Novara|IT|45.447|8.621|MXP|
+아레초|Arezzo|IT|43.463|11.881|FLR|
+우디네|Udine|IT|46.069|13.237|TRS|
+빌뉴스|Vilnius|LT|54.689|25.280|VNO|
+카우나스|Kaunas|LT|54.902|23.909|KUN,VNO|
+클라이페다|Klaipeda|LT|55.707|21.139|PLQ|
+리가|Riga|LV|56.946|24.106|RIX|
+키시너우|Chisinau|MD|47.009|28.859|RMO|
+티라스폴|Tiraspol|MD|46.843|29.628|RMO|
+벨치|Balti|MD|47.763|27.928|RMO|
+포드고리차|Podgorica|ME|42.441|19.263|TGD,TIV|
+스코페|Skopje|MK|41.996|21.431|SKP|
+암스테르담|Amsterdam|NL|52.374|4.890|AMS|
+로테르담|Rotterdam|NL|51.922|4.479|RTM,AMS|
+헤이그|The Hague|NL|52.077|4.299|AMS,RTM|
+위트레흐트|Utrecht|NL|52.091|5.122|AMS|
+흐로닝언|Groningen|NL|53.219|6.567|GRQ,AMS|
+에인트호번|Eindhoven|NL|51.441|5.478|EIN|
+틸뷔르흐|Tilburg|NL|51.556|5.091|EIN|
+브레다|Breda|NL|51.587|4.776|EIN,RTM|
+네이메헌|Nijmegen|NL|51.843|5.853|EIN,AMS|
+알메러|Almere|NL|52.370|5.214|AMS|
+하를럼|Haarlem|NL|52.381|4.637|AMS|
+아른험|Arnhem|NL|51.980|5.911|AMS,EIN|
+스헤르토헨보스|'s-Hertogenbosch|NL|51.699|5.304|EIN|
+엔스헤데|Enschede|NL|52.218|6.896|AMS|
+아메르스포르트|Amersfoort|NL|52.155|5.388|AMS|
+아펠도른|Apeldoorn|NL|52.210|5.969|AMS|
+즈볼러|Zwolle|NL|52.513|6.094|AMS,GRQ|
+레이우아르던|Leeuwarden|NL|53.203|5.810|GRQ|
+마스트리흐트|Maastricht|NL|50.848|5.689|MST,EIN|
+레이던|Leiden|NL|52.158|4.493|AMS|
+도르드레흐트|Dordrecht|NL|51.810|4.674|RTM|
+벤로|Venlo|NL|51.370|6.168|EIN,DUS|
+오슬로|Oslo|NO|59.913|10.746|OSL|
+베르겐|Bergen|NO|60.393|5.324|BGO|
+트론헤임|Trondheim|NO|63.431|10.395|TRD|
+스타방에르|Stavanger|NO|58.970|5.733|SVG|
+크리스티안산|Kristiansand|NO|58.147|7.996|KRS|
+드람멘|Drammen|NO|59.744|10.204|OSL|
+바르샤바|Warsaw|PL|52.230|21.012|WAW|
+크라쿠프|Krakow|PL|50.061|19.937|KRK|
+브로츠와프|Wroclaw|PL|51.103|17.030|WRO|
+우치|Lodz|PL|51.771|19.474|WAW|
+포즈난|Poznan|PL|52.407|16.930|POZ|
+그단스크|Gdansk|PL|54.352|18.649|GDN|
+슈체친|Szczecin|PL|53.429|14.553|SZZ|
+루블린|Lublin|PL|51.251|22.570|LUZ|
+비드고슈치|Bydgoszcz|PL|53.123|18.008|BZG|
+비아위스토크|Bialystok|PL|53.133|23.164|WAW|
+카토비체|Katowice|PL|50.260|19.022|KTW,KRK|
+그디니아|Gdynia|PL|54.519|18.532|GDN|
+쳉스토호바|Czestochowa|PL|50.797|19.124|KTW|
+라돔|Radom|PL|51.403|21.147|WAW|
+제슈프|Rzeszow|PL|50.041|21.999|RZE|
+토룬|Torun|PL|53.014|18.598|BZG,GDN|
+키엘체|Kielce|PL|50.870|20.628|KRK|
+비엘스코비아와|Bielsko-Biala|PL|49.822|19.047|KRK,KTW|
+올슈틴|Olsztyn|PL|53.784|20.493|GDN|
+오폴레|Opole|PL|50.671|17.926|KTW,WRO|
+리스본|Lisbon|PT|38.725|-9.150|LIS|
+포르투|Porto|PT|41.148|-8.611|OPO|
+브라가|Braga|PT|41.551|-8.423|OPO|
+코임브라|Coimbra|PT|40.207|-8.420|OPO,LIS|
+레이리아|Leiria|PT|39.744|-8.807|LIS|
+세투발|Setubal|PT|38.524|-8.888|LIS|
+푼샬|Funchal|PT|32.666|-16.925|FNC|
+비제우|Viseu|PT|40.662|-7.909|OPO|
+부쿠레슈티|Bucharest|RO|44.432|26.106|OTP|
+이아시|Iasi|RO|47.167|27.600|IAS|
+콘스탄차|Constanta|RO|44.181|28.634|CND,OTP|
+클루지나포카|Cluj-Napoca|RO|46.767|23.600|CLJ|
+브라쇼브|Brasov|RO|45.649|25.606|GHV,OTP|
+티미쇼아라|Timisoara|RO|45.754|21.226|TSR|
+크라이오바|Craiova|RO|44.317|23.800|CRA|
+갈라치|Galati|RO|45.437|28.050|OTP|
+트르구무레슈|Targu Mures|RO|46.542|24.558|TGM,CLJ|
+오라데아|Oradea|RO|47.046|21.918|OMR,DEB|
+플로이에슈티|Ploiesti|RO|44.950|26.017|OTP|
+아라드|Arad|RO|46.183|21.317|TSR|
+브러일라|Braila|RO|45.272|27.974|OTP|
+피테슈티|Pitesti|RO|44.850|24.867|OTP|
+바커우|Bacau|RO|46.567|26.914|BCM|
+시비우|Sibiu|RO|45.800|24.150|SBZ|
+사투마레|Satu Mare|RO|47.799|22.863|SUJ|
+바이아마레|Baia Mare|RO|47.657|23.568|BAY,CLJ|
+베오그라드|Belgrade|RS|44.804|20.465|BEG|
+니시|Nis|RS|43.325|21.903|INI|
+노비사드|Novi Sad|RS|45.252|19.837|BEG|
+크라구예바츠|Kragujevac|RS|44.017|20.917|BEG|
+차차크|Cacak|RS|43.891|20.350|BEG|
+수보티차|Subotica|RS|46.100|19.667|BEG,BUD|
+모스크바|Moscow|RU|55.752|37.618|SVO,DME,VKO|Moscow
+상트페테르부르크|Saint Petersburg|RU|59.939|30.314|LED|Saint Petersburg
+니즈니노브고로드|Nizhny Novgorod|RU|56.329|44.002|GOJ|Nizhny Novgorod Oblast
+카잔|Kazan|RU|55.789|49.122|KZN|Tatarstan
+사마라|Samara|RU|53.208|50.136|KUF|Samara Oblast
+로스토프나도누|Rostov-on-Don|RU|47.220|39.708|ROV|Rostov Oblast
+우파|Ufa|RU|54.743|55.968|UFA|Bashkortostan
+보로네시|Voronezh|RU|51.668|39.192|VOZ|Voronezh Oblast
+볼고그라드|Volgograd|RU|48.714|44.498|VOG|Volgograd Oblast
+페름|Perm|RU|58.011|56.250|PEE|Perm Krai
+크라스노다르|Krasnodar|RU|45.045|38.982|KRR|Krasnodar Krai
+사라토프|Saratov|RU|51.541|45.990|GSV|Saratov Oblast
+톨리야티|Tolyatti|RU|53.530|49.346|KUF|Samara Oblast
+이젭스크|Izhevsk|RU|56.852|53.199|IJK|Udmurtia
+울리야놉스크|Ulyanovsk|RU|54.328|48.387|ULV|Ulyanovsk Oblast
+야로슬라블|Yaroslavl|RU|57.630|39.874|IAR|Yaroslavl Oblast
+마하치칼라|Makhachkala|RU|42.978|47.500|MCX|Dagestan
+오렌부르크|Orenburg|RU|51.767|55.099|REN|Orenburg Oblast
+랴잔|Ryazan|RU|54.627|39.704|DME|Ryazan Oblast
+아스트라한|Astrakhan|RU|46.350|48.041|ASF|Astrakhan Oblast
+펜자|Penza|RU|53.196|45.011|PEZ|Penza Oblast
+나베레즈니예첼니|Naberezhnye Chelny|RU|55.737|52.420|NBC|Tatarstan
+리페츠크|Lipetsk|RU|52.588|39.551|LPK,VOZ|Lipetsk Oblast
+키로프|Kirov|RU|58.598|49.658|KVX|Kirov Oblast
+체복사리|Cheboksary|RU|56.132|47.246|CSY|Chuvashia
+툴라|Tula|RU|54.196|37.618|VKO,DME|Tula Oblast
+칼리닌그라드|Kaliningrad|RU|54.706|20.511|KGD|Kaliningrad Oblast
+쿠르스크|Kursk|RU|51.727|36.185|URS|Kursk Oblast
+스타브로폴|Stavropol|RU|45.034|41.964|STW|Stavropol Krai
+브랸스크|Bryansk|RU|53.271|34.321|BZK|Bryansk Oblast
+트베리|Tver|RU|56.858|35.901|SVO|Tver Oblast
+이바노보|Ivanovo|RU|57.000|40.973|IWA|Ivanovo Oblast
+블라디미르|Vladimir|RU|56.139|40.400|DME|Vladimir Oblast
+아르한겔스크|Arkhangelsk|RU|64.546|40.552|ARH|Arkhangelsk Oblast
+벨고로드|Belgorod|RU|50.603|36.581|EGO|Belgorod Oblast
+칼루가|Kaluga|RU|54.531|36.270|KLF,VKO|Kaluga Oblast
+스몰렌스크|Smolensk|RU|54.778|32.051|VTB|Smolensk Oblast
+소치|Sochi|RU|43.597|39.725|AER|Krasnodar Krai
+사란스크|Saransk|RU|54.185|45.172|SKX|Mordovia
+체레포베츠|Cherepovets|RU|59.133|37.900|CEE|Vologda Oblast
+볼로그다|Vologda|RU|59.224|39.884|VGD|Vologda Oblast
+블라디캅카스|Vladikavkaz|RU|43.041|44.670|OGZ|North Ossetia
+오룔|Oryol|RU|52.969|36.079|VOZ|Oryol Oblast
+그로즈니|Grozny|RU|43.312|45.689|GRV|Chechnya
+무르만스크|Murmansk|RU|68.968|33.099|MMK|Murmansk Oblast
+탐보프|Tambov|RU|52.736|41.441|TBW|Tambov Oblast
+페트로자보츠크|Petrozavodsk|RU|61.785|34.347|PES|Karelia
+타간로크|Taganrog|RU|47.236|38.905|ROV|Rostov Oblast
+코스트로마|Kostroma|RU|57.766|40.928|KMW|Kostroma Oblast
+요시카르올라|Yoshkar-Ola|RU|56.639|47.891|JOK|Mari El
+식팁카르|Syktyvkar|RU|61.664|50.816|SCW|Komi
+노보로시스크|Novorossiysk|RU|44.732|37.762|GDZ,KRR|Krasnodar Krai
+날치크|Nalchik|RU|43.498|43.619|NAL|Kabardino-Balkaria
+스타리오스콜|Stary Oskol|RU|51.303|37.846|VOZ|Belgorod Oblast
+벨리키노브고로드|Veliky Novgorod|RU|58.521|31.271|LED|Novgorod Oblast
+샤흐티|Shakhty|RU|47.719|40.216|ROV|Rostov Oblast
+프스코프|Pskov|RU|57.819|28.332|PKV|Pskov Oblast
+노보체르카스크|Novocherkassk|RU|47.422|40.094|ROV|Rostov Oblast
+볼고돈스크|Volgodonsk|RU|47.511|42.153|ROV|Rostov Oblast
+퍄티고르스크|Pyatigorsk|RU|44.050|43.050|MRV|Stavropol Krai
+마이코프|Maykop|RU|44.608|40.102|KRR|Adygea
+키슬로보츠크|Kislovodsk|RU|43.913|42.721|MRV|Stavropol Krai
+세르기예프포사트|Sergiyev Posad|RU|56.312|38.139|SVO|Moscow Oblast
+콜롬나|Kolomna|RU|55.071|38.784|DME|Moscow Oblast
+옐리스타|Elista|RU|46.308|44.255|ESL|Kalmykia
+데르벤트|Derbent|RU|42.066|48.288|MCX|Dagestan
+스톡홀름|Stockholm|SE|59.329|18.069|ARN,BMA|
+예테보리|Gothenburg|SE|57.707|11.967|GOT|
+말뫼|Malmo|SE|55.606|13.001|CPH,MMX|
+웁살라|Uppsala|SE|59.859|17.639|ARN|
+린셰핑|Linkoping|SE|58.411|15.622|ARN|
+외레브로|Orebro|SE|59.274|15.207|ARN|
+우메오|Umea|SE|63.828|20.260|UME|
+베스테로스|Vasteras|SE|59.616|16.553|ARN|
+옌셰핑|Jonkoping|SE|57.781|14.156|GOT|
+헬싱보리|Helsingborg|SE|56.047|12.694|CPH|
+류블랴나|Ljubljana|SI|46.051|14.505|LJU|
+브라티슬라바|Bratislava|SK|48.148|17.107|BTS,VIE|
+코시체|Kosice|SK|48.714|21.258|KSC|
+이스탄불|Istanbul|TR|41.014|28.950|IST,SAW|
+앙카라|Ankara|TR|39.920|32.854|ESB|
+부르사|Bursa|TR|40.196|29.060|IST,SAW|
+이즈미르|Izmir|TR|38.413|27.138|ADB|
+가지안테프|Gaziantep|TR|37.059|37.383|GZT|
+디야르바키르|Diyarbakir|TR|37.914|40.217|DIY|
+아다나|Adana|TR|36.986|35.325|COV|
+카이세리|Kayseri|TR|38.732|35.485|ASR|
+코니아|Konya|TR|37.871|32.485|KYA|
+안탈리아|Antalya|TR|36.908|30.696|AYT|
+에스키셰히르|Eskisehir|TR|39.777|30.521|AOE|
+에르주룸|Erzurum|TR|39.909|41.277|ERZ|
+말라티아|Malatya|TR|38.350|38.317|MLX|
+메르신|Mersin|TR|36.812|34.639|COV|
+반|Van|TR|38.495|43.383|VAN|
+바트만|Batman|TR|37.887|41.132|BAL|
+샨리우르파|Sanliurfa|TR|37.167|38.794|GNY|
+엘라지|Elazig|TR|38.674|39.223|EZS|
+안타키아|Antakya|TR|36.207|36.157|HTY|
+삼순|Samsun|TR|41.280|36.336|SZF|
+카흐라만마라슈|Kahramanmaras|TR|37.585|36.926|KCM|
+우샤크|Usak|TR|38.673|29.406|DNZ|
+알라니아|Alanya|TR|36.544|32.000|GZP,AYT|
+데니즐리|Denizli|TR|37.774|29.087|DNZ|
+시바스|Sivas|TR|39.748|37.016|VAS|
+트라브존|Trabzon|TR|41.002|39.717|TZX|
+키이우|Kyiv|UA|50.455|30.524|KBP|
+하르키우|Kharkiv|UA|49.982|36.255|HRK|
+오데사|Odesa|UA|46.486|30.744|ODS|
+드니프로|Dnipro|UA|48.467|35.041|DNK|
+리비우|Lviv|UA|49.838|24.023|LWO|
+자포리자|Zaporizhzhia|UA|47.852|35.117|DNK|
+빈니차|Vinnytsia|UA|49.232|28.469|VIN|
+체르니우치|Chernivtsi|UA|48.290|25.932|CWC|
+이바노프란키우스크|Ivano-Frankivsk|UA|48.923|24.712|IFO|
+우지호로드|Uzhhorod|UA|48.624|22.295|UDJ|

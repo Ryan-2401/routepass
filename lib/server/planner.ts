@@ -231,7 +231,7 @@ export async function buildPlan(req: TripRequest): Promise<Plan & { hubSuggestio
   const outside = req.cities.filter((c) => !c.country || !europe.includes(c.country));
   if (outside.length) throw new PlanError("이 앱은 유럽 여행 전용입니다. 나라 목록에서 유럽 나라를 골라 주세요.", "input");
 
-  const places = await Promise.all(req.cities.map((c) => resolveCity(c.name, c.country)));
+  const places = await Promise.all(req.cities.map((c) => resolveCity(c.name, c.country, c.geo)));
   const missing = req.cities.filter((_, i) => !places[i]).map((c) => (c.country ? `${c.name}(${countryName(c.country)})` : c.name));
   if (missing.length)
     throw new PlanError(`도시를 찾지 못했습니다: ${missing.join(", ")}. 고른 나라에 있는 도시인지 확인하고, 직접 입력했다면 영어 이름으로 다시 넣어 보세요.`, "input");

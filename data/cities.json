@@ -1,5 +1,5 @@
 {
-  "_note": "자주 쓰는 도시의 좌표·공항 정보. 여기 없는 도시는 OpenStreetMap(Nominatim)으로 자동 검색합니다. region은 여행경보 지역 판정에 쓰는 주(州)·지역 이름입니다.",
+  "_note": "유럽 도시 좌표·공항 정보. generated: true 는 scripts/build-city-data.py 가 인구 10만 이상 도시 목록에서 만든 항목입니다. 목록에 없는 도시는 화면에서 직접 입력하면 OpenStreetMap에서 찾습니다. region은 여행경보 지역 판정에 쓰는 주(州)·지역 이름입니다.",
   "cities": [
     {
       "name": "서울",
@@ -65,7 +65,9 @@
       "region": "Kursk Oblast",
       "lat": 51.7304,
       "lng": 36.1926,
-      "airports": []
+      "airports": [
+        "URS"
+      ]
     },
     {
       "name": "벨고로드",
@@ -78,7 +80,9 @@
       "region": "Belgorod Oblast",
       "lat": 50.5997,
       "lng": 36.5983,
-      "airports": []
+      "airports": [
+        "EGO"
+      ]
     },
     {
       "name": "로스토프나도누",
@@ -137,7 +141,9 @@
       "region": "Brest Region",
       "lat": 52.0976,
       "lng": 23.7341,
-      "airports": []
+      "airports": [
+        "BQT"
+      ]
     },
     {
       "name": "고멜",
@@ -151,7 +157,9 @@
       "region": "Gomel Region",
       "lat": 52.4345,
       "lng": 30.9754,
-      "airports": []
+      "airports": [
+        "GME"
+      ]
     },
     {
       "name": "탈린",
@@ -2618,6 +2626,6434 @@
       "airports": [
         "ODS"
       ]
+    },
+    {
+      "name": "두러스",
+      "aliases": [
+        "durres",
+        "두러스"
+      ],
+      "nameEn": "Durres",
+      "country": "AL",
+      "region": "Durres",
+      "lat": 41.324,
+      "lng": 19.455,
+      "airports": [
+        "TIA",
+        "OHD"
+      ],
+      "generated": true
+    },
+    {
+      "name": "블로러",
+      "aliases": [
+        "vlore",
+        "블로러"
+      ],
+      "nameEn": "Vlore",
+      "country": "AL",
+      "region": "Vlore",
+      "lat": 40.47,
+      "lng": 19.484,
+      "airports": [
+        "TIA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "엘바산",
+      "aliases": [
+        "elbasan",
+        "엘바산"
+      ],
+      "nameEn": "Elbasan",
+      "country": "AL",
+      "region": "Elbasan",
+      "lat": 41.111,
+      "lng": 20.082,
+      "airports": [
+        "TIA",
+        "OHD"
+      ],
+      "generated": true
+    },
+    {
+      "name": "린츠",
+      "aliases": [
+        "linz",
+        "린츠"
+      ],
+      "nameEn": "Linz",
+      "country": "AT",
+      "region": "Linz",
+      "lat": 48.306,
+      "lng": 14.286,
+      "airports": [
+        "LNZ",
+        "SZG"
+      ],
+      "generated": true
+    },
+    {
+      "name": "클라겐푸르트",
+      "aliases": [
+        "klagenfurt",
+        "클라겐푸르트"
+      ],
+      "nameEn": "Klagenfurt",
+      "country": "AT",
+      "region": "Klagenfurt",
+      "lat": 46.625,
+      "lng": 14.305,
+      "airports": [
+        "KLU",
+        "LJU"
+      ],
+      "generated": true
+    },
+    {
+      "name": "바냐루카",
+      "aliases": [
+        "banja luka",
+        "바냐루카"
+      ],
+      "nameEn": "Banja Luka",
+      "country": "BA",
+      "region": "Banja Luka",
+      "lat": 44.779,
+      "lng": 17.206,
+      "airports": [
+        "BNX"
+      ],
+      "generated": true
+    },
+    {
+      "name": "제니차",
+      "aliases": [
+        "zenica",
+        "제니차"
+      ],
+      "nameEn": "Zenica",
+      "country": "BA",
+      "region": "Zenica",
+      "lat": 44.202,
+      "lng": 17.904,
+      "airports": [
+        "SJJ",
+        "TZL"
+      ],
+      "generated": true
+    },
+    {
+      "name": "투즐라",
+      "aliases": [
+        "tuzla",
+        "투즐라"
+      ],
+      "nameEn": "Tuzla",
+      "country": "BA",
+      "region": "Tuzla",
+      "lat": 44.538,
+      "lng": 18.667,
+      "airports": [
+        "TZL",
+        "SJJ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "샤를루아",
+      "aliases": [
+        "charleroi",
+        "샤를루아"
+      ],
+      "nameEn": "Charleroi",
+      "country": "BE",
+      "region": "Charleroi",
+      "lat": 50.411,
+      "lng": 4.444,
+      "airports": [
+        "CRL",
+        "BRU"
+      ],
+      "generated": true
+    },
+    {
+      "name": "리에주",
+      "aliases": [
+        "liege",
+        "리에주"
+      ],
+      "nameEn": "Liege",
+      "country": "BE",
+      "region": "Liege",
+      "lat": 50.634,
+      "lng": 5.567,
+      "airports": [
+        "LGG",
+        "MST"
+      ],
+      "generated": true
+    },
+    {
+      "name": "나뮈르",
+      "aliases": [
+        "namur",
+        "나뮈르"
+      ],
+      "nameEn": "Namur",
+      "country": "BE",
+      "region": "Namur",
+      "lat": 50.467,
+      "lng": 4.867,
+      "airports": [
+        "CRL",
+        "LGG"
+      ],
+      "generated": true
+    },
+    {
+      "name": "뢰번",
+      "aliases": [
+        "leuven",
+        "뢰번"
+      ],
+      "nameEn": "Leuven",
+      "country": "BE",
+      "region": "Leuven",
+      "lat": 50.88,
+      "lng": 4.701,
+      "airports": [
+        "BRU"
+      ],
+      "generated": true
+    },
+    {
+      "name": "바르나",
+      "aliases": [
+        "varna",
+        "바르나"
+      ],
+      "nameEn": "Varna",
+      "country": "BG",
+      "region": "Varna",
+      "lat": 43.219,
+      "lng": 27.91,
+      "airports": [
+        "VAR",
+        "BOJ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "부르가스",
+      "aliases": [
+        "burgas",
+        "부르가스"
+      ],
+      "nameEn": "Burgas",
+      "country": "BG",
+      "region": "Burgas",
+      "lat": 42.507,
+      "lng": 27.469,
+      "airports": [
+        "BOJ",
+        "VAR"
+      ],
+      "generated": true
+    },
+    {
+      "name": "스타라자고라",
+      "aliases": [
+        "stara zagora",
+        "스타라자고라"
+      ],
+      "nameEn": "Stara Zagora",
+      "country": "BG",
+      "region": "Stara Zagora",
+      "lat": 42.432,
+      "lng": 25.643,
+      "airports": [
+        "PDV"
+      ],
+      "generated": true
+    },
+    {
+      "name": "루세",
+      "aliases": [
+        "ruse",
+        "루세"
+      ],
+      "nameEn": "Ruse",
+      "country": "BG",
+      "region": "Ruse",
+      "lat": 43.849,
+      "lng": 25.953,
+      "airports": [
+        "OTP"
+      ],
+      "generated": true
+    },
+    {
+      "name": "비쳅스크",
+      "aliases": [
+        "vitebsk",
+        "비쳅스크"
+      ],
+      "nameEn": "Vitebsk",
+      "country": "BY",
+      "region": "Vitebsk",
+      "lat": 55.19,
+      "lng": 30.205,
+      "airports": [
+        "VTB"
+      ],
+      "generated": true
+    },
+    {
+      "name": "마힐료우",
+      "aliases": [
+        "mogilev",
+        "마힐료우"
+      ],
+      "nameEn": "Mogilev",
+      "country": "BY",
+      "region": "Mogilev",
+      "lat": 53.909,
+      "lng": 30.34,
+      "airports": [
+        "MVQ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "바브루이스크",
+      "aliases": [
+        "babruysk",
+        "바브루이스크"
+      ],
+      "nameEn": "Babruysk",
+      "country": "BY",
+      "region": "Babruysk",
+      "lat": 53.147,
+      "lng": 29.206,
+      "airports": [
+        "MVQ",
+        "MSQ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "바라나비치",
+      "aliases": [
+        "baranovichi",
+        "바라나비치"
+      ],
+      "nameEn": "Baranovichi",
+      "country": "BY",
+      "region": "Brest Region",
+      "lat": 53.133,
+      "lng": 26.008,
+      "airports": [
+        "MSQ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "바리사우",
+      "aliases": [
+        "barysaw",
+        "바리사우"
+      ],
+      "nameEn": "Barysaw",
+      "country": "BY",
+      "region": "Barysaw",
+      "lat": 54.228,
+      "lng": 28.505,
+      "airports": [
+        "MSQ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "핀스크",
+      "aliases": [
+        "pinsk",
+        "핀스크"
+      ],
+      "nameEn": "Pinsk",
+      "country": "BY",
+      "region": "Brest Region",
+      "lat": 52.121,
+      "lng": 26.067,
+      "airports": [
+        "BQT"
+      ],
+      "generated": true
+    },
+    {
+      "name": "마지르",
+      "aliases": [
+        "mazyr",
+        "마지르"
+      ],
+      "nameEn": "Mazyr",
+      "country": "BY",
+      "region": "Gomel Region",
+      "lat": 52.042,
+      "lng": 29.216,
+      "airports": [
+        "GME"
+      ],
+      "generated": true
+    },
+    {
+      "name": "리다",
+      "aliases": [
+        "lida",
+        "리다"
+      ],
+      "nameEn": "Lida",
+      "country": "BY",
+      "region": "Lida",
+      "lat": 53.883,
+      "lng": 25.3,
+      "airports": [
+        "VNO"
+      ],
+      "generated": true
+    },
+    {
+      "name": "오르샤",
+      "aliases": [
+        "orsha",
+        "오르샤"
+      ],
+      "nameEn": "Orsha",
+      "country": "BY",
+      "region": "Orsha",
+      "lat": 54.514,
+      "lng": 30.404,
+      "airports": [
+        "VTB",
+        "MVQ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "빈터투어",
+      "aliases": [
+        "winterthur",
+        "빈터투어"
+      ],
+      "nameEn": "Winterthur",
+      "country": "CH",
+      "region": "Winterthur",
+      "lat": 47.506,
+      "lng": 8.724,
+      "airports": [
+        "ZRH"
+      ],
+      "generated": true
+    },
+    {
+      "name": "니코시아",
+      "aliases": [
+        "nicosia",
+        "니코시아"
+      ],
+      "nameEn": "Nicosia",
+      "country": "CY",
+      "region": "Nicosia",
+      "lat": 35.173,
+      "lng": 33.354,
+      "airports": [
+        "LCA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "리마솔",
+      "aliases": [
+        "limassol",
+        "리마솔"
+      ],
+      "nameEn": "Limassol",
+      "country": "CY",
+      "region": "Limassol",
+      "lat": 34.684,
+      "lng": 33.038,
+      "airports": [
+        "PFO",
+        "LCA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "오스트라바",
+      "aliases": [
+        "ostrava",
+        "오스트라바"
+      ],
+      "nameEn": "Ostrava",
+      "country": "CZ",
+      "region": "Ostrava",
+      "lat": 49.835,
+      "lng": 18.282,
+      "airports": [
+        "OSR",
+        "KTW"
+      ],
+      "generated": true
+    },
+    {
+      "name": "플젠",
+      "aliases": [
+        "plzen",
+        "플젠"
+      ],
+      "nameEn": "Plzen",
+      "country": "CZ",
+      "region": "Plzen",
+      "lat": 49.748,
+      "lng": 13.378,
+      "airports": [
+        "PRG"
+      ],
+      "generated": true
+    },
+    {
+      "name": "리베레츠",
+      "aliases": [
+        "liberec",
+        "리베레츠"
+      ],
+      "nameEn": "Liberec",
+      "country": "CZ",
+      "region": "Liberec",
+      "lat": 50.767,
+      "lng": 15.056,
+      "airports": [
+        "PRG"
+      ],
+      "generated": true
+    },
+    {
+      "name": "에센",
+      "aliases": [
+        "essen",
+        "에센"
+      ],
+      "nameEn": "Essen",
+      "country": "DE",
+      "region": "Essen",
+      "lat": 51.457,
+      "lng": 7.012,
+      "airports": [
+        "DUS",
+        "DTM"
+      ],
+      "generated": true
+    },
+    {
+      "name": "도르트문트",
+      "aliases": [
+        "dortmund",
+        "도르트문트"
+      ],
+      "nameEn": "Dortmund",
+      "country": "DE",
+      "region": "Dortmund",
+      "lat": 51.515,
+      "lng": 7.466,
+      "airports": [
+        "DTM",
+        "DUS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "브레멘",
+      "aliases": [
+        "bremen",
+        "브레멘"
+      ],
+      "nameEn": "Bremen",
+      "country": "DE",
+      "region": "Bremen",
+      "lat": 53.076,
+      "lng": 8.807,
+      "airports": [
+        "BRE",
+        "HAM"
+      ],
+      "generated": true
+    },
+    {
+      "name": "하노버",
+      "aliases": [
+        "hannover",
+        "하노버"
+      ],
+      "nameEn": "Hannover",
+      "country": "DE",
+      "region": "Hannover",
+      "lat": 52.37,
+      "lng": 9.733,
+      "airports": [
+        "HAJ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "라이프치히",
+      "aliases": [
+        "leipzig",
+        "라이프치히"
+      ],
+      "nameEn": "Leipzig",
+      "country": "DE",
+      "region": "Leipzig",
+      "lat": 51.34,
+      "lng": 12.371,
+      "airports": [
+        "LEJ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "뒤스부르크",
+      "aliases": [
+        "duisburg",
+        "뒤스부르크"
+      ],
+      "nameEn": "Duisburg",
+      "country": "DE",
+      "region": "Duisburg",
+      "lat": 51.432,
+      "lng": 6.765,
+      "airports": [
+        "DUS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "부퍼탈",
+      "aliases": [
+        "wuppertal",
+        "부퍼탈"
+      ],
+      "nameEn": "Wuppertal",
+      "country": "DE",
+      "region": "Wuppertal",
+      "lat": 51.256,
+      "lng": 7.148,
+      "airports": [
+        "DUS",
+        "CGN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "빌레펠트",
+      "aliases": [
+        "bielefeld",
+        "빌레펠트"
+      ],
+      "nameEn": "Bielefeld",
+      "country": "DE",
+      "region": "Bielefeld",
+      "lat": 52.033,
+      "lng": 8.533,
+      "airports": [
+        "PAD",
+        "FMO"
+      ],
+      "generated": true
+    },
+    {
+      "name": "본",
+      "aliases": [
+        "bonn",
+        "본"
+      ],
+      "nameEn": "Bonn",
+      "country": "DE",
+      "region": "Bonn",
+      "lat": 50.734,
+      "lng": 7.096,
+      "airports": [
+        "CGN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "뮌스터",
+      "aliases": [
+        "munster",
+        "뮌스터"
+      ],
+      "nameEn": "Munster",
+      "country": "DE",
+      "region": "Munster",
+      "lat": 51.962,
+      "lng": 7.626,
+      "airports": [
+        "FMO",
+        "DTM"
+      ],
+      "generated": true
+    },
+    {
+      "name": "만하임",
+      "aliases": [
+        "mannheim",
+        "만하임"
+      ],
+      "nameEn": "Mannheim",
+      "country": "DE",
+      "region": "Mannheim",
+      "lat": 49.489,
+      "lng": 8.467,
+      "airports": [
+        "FRA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "아우크스부르크",
+      "aliases": [
+        "augsburg",
+        "아우크스부르크"
+      ],
+      "nameEn": "Augsburg",
+      "country": "DE",
+      "region": "Augsburg",
+      "lat": 48.371,
+      "lng": 10.899,
+      "airports": [
+        "MUC",
+        "FMM"
+      ],
+      "generated": true
+    },
+    {
+      "name": "비스바덴",
+      "aliases": [
+        "wiesbaden",
+        "비스바덴"
+      ],
+      "nameEn": "Wiesbaden",
+      "country": "DE",
+      "region": "Wiesbaden",
+      "lat": 50.086,
+      "lng": 8.244,
+      "airports": [
+        "FRA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "카를스루에",
+      "aliases": [
+        "karlsruhe",
+        "카를스루에"
+      ],
+      "nameEn": "Karlsruhe",
+      "country": "DE",
+      "region": "Karlsruhe",
+      "lat": 49.009,
+      "lng": 8.404,
+      "airports": [
+        "FKB",
+        "STR"
+      ],
+      "generated": true
+    },
+    {
+      "name": "아헨",
+      "aliases": [
+        "aachen",
+        "아헨"
+      ],
+      "nameEn": "Aachen",
+      "country": "DE",
+      "region": "Aachen",
+      "lat": 50.777,
+      "lng": 6.083,
+      "airports": [
+        "CGN",
+        "MST"
+      ],
+      "generated": true
+    },
+    {
+      "name": "묀헨글라트바흐",
+      "aliases": [
+        "monchengladbach",
+        "묀헨글라트바흐"
+      ],
+      "nameEn": "Monchengladbach",
+      "country": "DE",
+      "region": "Monchengladbach",
+      "lat": 51.185,
+      "lng": 6.442,
+      "airports": [
+        "DUS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "킬",
+      "aliases": [
+        "kiel",
+        "킬"
+      ],
+      "nameEn": "Kiel",
+      "country": "DE",
+      "region": "Kiel",
+      "lat": 54.321,
+      "lng": 10.135,
+      "airports": [
+        "HAM"
+      ],
+      "generated": true
+    },
+    {
+      "name": "켐니츠",
+      "aliases": [
+        "chemnitz",
+        "켐니츠"
+      ],
+      "nameEn": "Chemnitz",
+      "country": "DE",
+      "region": "Chemnitz",
+      "lat": 50.836,
+      "lng": 12.929,
+      "airports": [
+        "DRS",
+        "LEJ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "브라운슈바이크",
+      "aliases": [
+        "braunschweig",
+        "브라운슈바이크"
+      ],
+      "nameEn": "Braunschweig",
+      "country": "DE",
+      "region": "Braunschweig",
+      "lat": 52.266,
+      "lng": 10.527,
+      "airports": [
+        "HAJ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "마그데부르크",
+      "aliases": [
+        "magdeburg",
+        "마그데부르크"
+      ],
+      "nameEn": "Magdeburg",
+      "country": "DE",
+      "region": "Magdeburg",
+      "lat": 52.131,
+      "lng": 11.632,
+      "airports": [
+        "LEJ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "크레펠트",
+      "aliases": [
+        "krefeld",
+        "크레펠트"
+      ],
+      "nameEn": "Krefeld",
+      "country": "DE",
+      "region": "Krefeld",
+      "lat": 51.336,
+      "lng": 6.554,
+      "airports": [
+        "DUS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "할레",
+      "aliases": [
+        "halle",
+        "할레"
+      ],
+      "nameEn": "Halle",
+      "country": "DE",
+      "region": "Halle",
+      "lat": 51.482,
+      "lng": 11.979,
+      "airports": [
+        "LEJ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "프라이부르크",
+      "aliases": [
+        "freiburg",
+        "프라이부르크"
+      ],
+      "nameEn": "Freiburg",
+      "country": "DE",
+      "region": "Freiburg",
+      "lat": 47.996,
+      "lng": 7.852,
+      "airports": [
+        "BSL"
+      ],
+      "generated": true
+    },
+    {
+      "name": "에르푸르트",
+      "aliases": [
+        "erfurt",
+        "에르푸르트"
+      ],
+      "nameEn": "Erfurt",
+      "country": "DE",
+      "region": "Erfurt",
+      "lat": 50.977,
+      "lng": 11.035,
+      "airports": [
+        "ERF",
+        "LEJ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "뤼베크",
+      "aliases": [
+        "lubeck",
+        "뤼베크"
+      ],
+      "nameEn": "Lubeck",
+      "country": "DE",
+      "region": "Lubeck",
+      "lat": 53.869,
+      "lng": 10.687,
+      "airports": [
+        "HAM",
+        "LBC"
+      ],
+      "generated": true
+    },
+    {
+      "name": "하겐",
+      "aliases": [
+        "hagen",
+        "하겐"
+      ],
+      "nameEn": "Hagen",
+      "country": "DE",
+      "region": "Hagen",
+      "lat": 51.361,
+      "lng": 7.472,
+      "airports": [
+        "DTM",
+        "DUS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "로스토크",
+      "aliases": [
+        "rostock",
+        "로스토크"
+      ],
+      "nameEn": "Rostock",
+      "country": "DE",
+      "region": "Rostock",
+      "lat": 54.089,
+      "lng": 12.14,
+      "airports": [
+        "RLG",
+        "HAM"
+      ],
+      "generated": true
+    },
+    {
+      "name": "카셀",
+      "aliases": [
+        "kassel",
+        "카셀"
+      ],
+      "nameEn": "Kassel",
+      "country": "DE",
+      "region": "Kassel",
+      "lat": 51.317,
+      "lng": 9.5,
+      "airports": [
+        "KSF",
+        "PAD"
+      ],
+      "generated": true
+    },
+    {
+      "name": "포츠담",
+      "aliases": [
+        "potsdam",
+        "포츠담"
+      ],
+      "nameEn": "Potsdam",
+      "country": "DE",
+      "region": "Potsdam",
+      "lat": 52.399,
+      "lng": 13.066,
+      "airports": [
+        "BER"
+      ],
+      "generated": true
+    },
+    {
+      "name": "자르브뤼켄",
+      "aliases": [
+        "saarbrucken",
+        "자르브뤼켄"
+      ],
+      "nameEn": "Saarbrucken",
+      "country": "DE",
+      "region": "Saarbrucken",
+      "lat": 49.233,
+      "lng": 7.01,
+      "airports": [
+        "SCN",
+        "LUX"
+      ],
+      "generated": true
+    },
+    {
+      "name": "함",
+      "aliases": [
+        "hamm",
+        "함"
+      ],
+      "nameEn": "Hamm",
+      "country": "DE",
+      "region": "Hamm",
+      "lat": 51.68,
+      "lng": 7.821,
+      "airports": [
+        "DTM"
+      ],
+      "generated": true
+    },
+    {
+      "name": "다름슈타트",
+      "aliases": [
+        "darmstadt",
+        "다름슈타트"
+      ],
+      "nameEn": "Darmstadt",
+      "country": "DE",
+      "region": "Darmstadt",
+      "lat": 49.872,
+      "lng": 8.65,
+      "airports": [
+        "FRA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "오스나브뤼크",
+      "aliases": [
+        "osnabruck",
+        "오스나브뤼크"
+      ],
+      "nameEn": "Osnabruck",
+      "country": "DE",
+      "region": "Osnabruck",
+      "lat": 52.274,
+      "lng": 8.051,
+      "airports": [
+        "FMO"
+      ],
+      "generated": true
+    },
+    {
+      "name": "올덴부르크",
+      "aliases": [
+        "oldenburg",
+        "올덴부르크"
+      ],
+      "nameEn": "Oldenburg",
+      "country": "DE",
+      "region": "Oldenburg",
+      "lat": 53.14,
+      "lng": 8.215,
+      "airports": [
+        "BRE"
+      ],
+      "generated": true
+    },
+    {
+      "name": "레겐스부르크",
+      "aliases": [
+        "regensburg",
+        "레겐스부르크"
+      ],
+      "nameEn": "Regensburg",
+      "country": "DE",
+      "region": "Regensburg",
+      "lat": 49.015,
+      "lng": 12.102,
+      "airports": [
+        "MUC",
+        "NUE"
+      ],
+      "generated": true
+    },
+    {
+      "name": "파더보른",
+      "aliases": [
+        "paderborn",
+        "파더보른"
+      ],
+      "nameEn": "Paderborn",
+      "country": "DE",
+      "region": "Paderborn",
+      "lat": 51.719,
+      "lng": 8.754,
+      "airports": [
+        "PAD"
+      ],
+      "generated": true
+    },
+    {
+      "name": "뷔르츠부르크",
+      "aliases": [
+        "wurzburg",
+        "뷔르츠부르크"
+      ],
+      "nameEn": "Wurzburg",
+      "country": "DE",
+      "region": "Wurzburg",
+      "lat": 49.794,
+      "lng": 9.951,
+      "airports": [
+        "NUE",
+        "FRA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "볼프스부르크",
+      "aliases": [
+        "wolfsburg",
+        "볼프스부르크"
+      ],
+      "nameEn": "Wolfsburg",
+      "country": "DE",
+      "region": "Wolfsburg",
+      "lat": 52.424,
+      "lng": 10.776,
+      "airports": [
+        "HAJ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "괴팅겐",
+      "aliases": [
+        "gottingen",
+        "괴팅겐"
+      ],
+      "nameEn": "Gottingen",
+      "country": "DE",
+      "region": "Gottingen",
+      "lat": 51.534,
+      "lng": 9.932,
+      "airports": [
+        "HAJ",
+        "KSF"
+      ],
+      "generated": true
+    },
+    {
+      "name": "하일브론",
+      "aliases": [
+        "heilbronn",
+        "하일브론"
+      ],
+      "nameEn": "Heilbronn",
+      "country": "DE",
+      "region": "Heilbronn",
+      "lat": 49.14,
+      "lng": 9.22,
+      "airports": [
+        "STR"
+      ],
+      "generated": true
+    },
+    {
+      "name": "잉골슈타트",
+      "aliases": [
+        "ingolstadt",
+        "잉골슈타트"
+      ],
+      "nameEn": "Ingolstadt",
+      "country": "DE",
+      "region": "Ingolstadt",
+      "lat": 48.765,
+      "lng": 11.424,
+      "airports": [
+        "MUC",
+        "NUE"
+      ],
+      "generated": true
+    },
+    {
+      "name": "울름",
+      "aliases": [
+        "ulm",
+        "울름"
+      ],
+      "nameEn": "Ulm",
+      "country": "DE",
+      "region": "Ulm",
+      "lat": 48.398,
+      "lng": 9.992,
+      "airports": [
+        "STR",
+        "FMM"
+      ],
+      "generated": true
+    },
+    {
+      "name": "포르츠하임",
+      "aliases": [
+        "pforzheim",
+        "포르츠하임"
+      ],
+      "nameEn": "Pforzheim",
+      "country": "DE",
+      "region": "Pforzheim",
+      "lat": 48.884,
+      "lng": 8.699,
+      "airports": [
+        "STR",
+        "FKB"
+      ],
+      "generated": true
+    },
+    {
+      "name": "브레머하펜",
+      "aliases": [
+        "bremerhaven",
+        "브레머하펜"
+      ],
+      "nameEn": "Bremerhaven",
+      "country": "DE",
+      "region": "Bremerhaven",
+      "lat": 53.554,
+      "lng": 8.575,
+      "airports": [
+        "BRE",
+        "HAM"
+      ],
+      "generated": true
+    },
+    {
+      "name": "로이틀링겐",
+      "aliases": [
+        "reutlingen",
+        "로이틀링겐"
+      ],
+      "nameEn": "Reutlingen",
+      "country": "DE",
+      "region": "Reutlingen",
+      "lat": 48.491,
+      "lng": 9.204,
+      "airports": [
+        "STR"
+      ],
+      "generated": true
+    },
+    {
+      "name": "코블렌츠",
+      "aliases": [
+        "koblenz",
+        "코블렌츠"
+      ],
+      "nameEn": "Koblenz",
+      "country": "DE",
+      "region": "Koblenz",
+      "lat": 50.354,
+      "lng": 7.579,
+      "airports": [
+        "FRA",
+        "CGN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "지겐",
+      "aliases": [
+        "siegen",
+        "지겐"
+      ],
+      "nameEn": "Siegen",
+      "country": "DE",
+      "region": "Siegen",
+      "lat": 50.875,
+      "lng": 8.024,
+      "airports": [
+        "CGN",
+        "DTM"
+      ],
+      "generated": true
+    },
+    {
+      "name": "예나",
+      "aliases": [
+        "jena",
+        "예나"
+      ],
+      "nameEn": "Jena",
+      "country": "DE",
+      "region": "Jena",
+      "lat": 50.929,
+      "lng": 11.59,
+      "airports": [
+        "LEJ",
+        "ERF"
+      ],
+      "generated": true
+    },
+    {
+      "name": "게라",
+      "aliases": [
+        "gera",
+        "게라"
+      ],
+      "nameEn": "Gera",
+      "country": "DE",
+      "region": "Gera",
+      "lat": 50.88,
+      "lng": 12.082,
+      "airports": [
+        "LEJ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "힐데스하임",
+      "aliases": [
+        "hildesheim",
+        "힐데스하임"
+      ],
+      "nameEn": "Hildesheim",
+      "country": "DE",
+      "region": "Hildesheim",
+      "lat": 52.151,
+      "lng": 9.951,
+      "airports": [
+        "HAJ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "에를랑겐",
+      "aliases": [
+        "erlangen",
+        "에를랑겐"
+      ],
+      "nameEn": "Erlangen",
+      "country": "DE",
+      "region": "Erlangen",
+      "lat": 49.591,
+      "lng": 11.008,
+      "airports": [
+        "NUE"
+      ],
+      "generated": true
+    },
+    {
+      "name": "트리어",
+      "aliases": [
+        "trier",
+        "트리어"
+      ],
+      "nameEn": "Trier",
+      "country": "DE",
+      "region": "Trier",
+      "lat": 49.756,
+      "lng": 6.639,
+      "airports": [
+        "LUX"
+      ],
+      "generated": true
+    },
+    {
+      "name": "오덴세",
+      "aliases": [
+        "odense",
+        "오덴세"
+      ],
+      "nameEn": "Odense",
+      "country": "DK",
+      "region": "Odense",
+      "lat": 55.396,
+      "lng": 10.388,
+      "airports": [
+        "BLL",
+        "CPH"
+      ],
+      "generated": true
+    },
+    {
+      "name": "올보르",
+      "aliases": [
+        "aalborg",
+        "올보르"
+      ],
+      "nameEn": "Aalborg",
+      "country": "DK",
+      "region": "Aalborg",
+      "lat": 57.048,
+      "lng": 9.919,
+      "airports": [
+        "AAL"
+      ],
+      "generated": true
+    },
+    {
+      "name": "사라고사",
+      "aliases": [
+        "zaragoza",
+        "사라고사"
+      ],
+      "nameEn": "Zaragoza",
+      "country": "ES",
+      "region": "Zaragoza",
+      "lat": 41.656,
+      "lng": -0.877,
+      "airports": [
+        "ZAZ",
+        "BCN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "무르시아",
+      "aliases": [
+        "murcia",
+        "무르시아"
+      ],
+      "nameEn": "Murcia",
+      "country": "ES",
+      "region": "Murcia",
+      "lat": 37.987,
+      "lng": -1.13,
+      "airports": [
+        "RMU",
+        "ALC"
+      ],
+      "generated": true
+    },
+    {
+      "name": "라스팔마스",
+      "aliases": [
+        "las palmas de gran canaria",
+        "라스팔마스"
+      ],
+      "nameEn": "Las Palmas de Gran Canaria",
+      "country": "ES",
+      "region": "Las Palmas de Gran Canaria",
+      "lat": 28.102,
+      "lng": -15.416,
+      "airports": [
+        "LPA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "알리칸테",
+      "aliases": [
+        "alicante",
+        "알리칸테"
+      ],
+      "nameEn": "Alicante",
+      "country": "ES",
+      "region": "Alicante",
+      "lat": 38.345,
+      "lng": -0.481,
+      "airports": [
+        "ALC"
+      ],
+      "generated": true
+    },
+    {
+      "name": "바야돌리드",
+      "aliases": [
+        "valladolid",
+        "바야돌리드"
+      ],
+      "nameEn": "Valladolid",
+      "country": "ES",
+      "region": "Valladolid",
+      "lat": 41.655,
+      "lng": -4.723,
+      "airports": [
+        "VLL",
+        "MAD"
+      ],
+      "generated": true
+    },
+    {
+      "name": "비고",
+      "aliases": [
+        "vigo",
+        "비고"
+      ],
+      "nameEn": "Vigo",
+      "country": "ES",
+      "region": "Vigo",
+      "lat": 42.233,
+      "lng": -8.723,
+      "airports": [
+        "VGO",
+        "SCQ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "히혼",
+      "aliases": [
+        "gijon",
+        "히혼"
+      ],
+      "nameEn": "Gijon",
+      "country": "ES",
+      "region": "Gijon",
+      "lat": 43.536,
+      "lng": -5.662,
+      "airports": [
+        "OVD"
+      ],
+      "generated": true
+    },
+    {
+      "name": "비토리아가스테이스",
+      "aliases": [
+        "vitoria-gasteiz",
+        "비토리아가스테이스"
+      ],
+      "nameEn": "Vitoria-Gasteiz",
+      "country": "ES",
+      "region": "Vitoria-Gasteiz",
+      "lat": 42.85,
+      "lng": -2.673,
+      "airports": [
+        "BIO",
+        "VIT"
+      ],
+      "generated": true
+    },
+    {
+      "name": "아코루냐",
+      "aliases": [
+        "a coruna",
+        "아코루냐"
+      ],
+      "nameEn": "A Coruna",
+      "country": "ES",
+      "region": "A Coruna",
+      "lat": 43.371,
+      "lng": -8.396,
+      "airports": [
+        "LCG",
+        "SCQ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "엘체",
+      "aliases": [
+        "elche",
+        "엘체"
+      ],
+      "nameEn": "Elche",
+      "country": "ES",
+      "region": "Elche",
+      "lat": 38.262,
+      "lng": -0.701,
+      "airports": [
+        "ALC"
+      ],
+      "generated": true
+    },
+    {
+      "name": "오비에도",
+      "aliases": [
+        "oviedo",
+        "오비에도"
+      ],
+      "nameEn": "Oviedo",
+      "country": "ES",
+      "region": "Oviedo",
+      "lat": 43.36,
+      "lng": -5.845,
+      "airports": [
+        "OVD"
+      ],
+      "generated": true
+    },
+    {
+      "name": "카르타헤나",
+      "aliases": [
+        "cartagena",
+        "카르타헤나"
+      ],
+      "nameEn": "Cartagena",
+      "country": "ES",
+      "region": "Cartagena",
+      "lat": 37.602,
+      "lng": -0.984,
+      "airports": [
+        "RMU",
+        "ALC"
+      ],
+      "generated": true
+    },
+    {
+      "name": "헤레스데라프론테라",
+      "aliases": [
+        "jerez de la frontera",
+        "헤레스데라프론테라"
+      ],
+      "nameEn": "Jerez de la Frontera",
+      "country": "ES",
+      "region": "Jerez de la Frontera",
+      "lat": 36.687,
+      "lng": -6.136,
+      "airports": [
+        "XRY",
+        "SVQ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "산타크루스데테네리페",
+      "aliases": [
+        "santa cruz de tenerife",
+        "산타크루스데테네리페"
+      ],
+      "nameEn": "Santa Cruz de Tenerife",
+      "country": "ES",
+      "region": "Santa Cruz de Tenerife",
+      "lat": 28.468,
+      "lng": -16.255,
+      "airports": [
+        "TFN",
+        "TFS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "팜플로나",
+      "aliases": [
+        "pamplona",
+        "팜플로나"
+      ],
+      "nameEn": "Pamplona",
+      "country": "ES",
+      "region": "Pamplona",
+      "lat": 42.817,
+      "lng": -1.643,
+      "airports": [
+        "PNA",
+        "BIO"
+      ],
+      "generated": true
+    },
+    {
+      "name": "알메리아",
+      "aliases": [
+        "almeria",
+        "알메리아"
+      ],
+      "nameEn": "Almeria",
+      "country": "ES",
+      "region": "Almeria",
+      "lat": 36.838,
+      "lng": -2.46,
+      "airports": [
+        "LEI"
+      ],
+      "generated": true
+    },
+    {
+      "name": "카스테욘",
+      "aliases": [
+        "castellon de la plana",
+        "카스테욘"
+      ],
+      "nameEn": "Castellon de la Plana",
+      "country": "ES",
+      "region": "Castellon de la Plana",
+      "lat": 39.986,
+      "lng": -0.049,
+      "airports": [
+        "VLC"
+      ],
+      "generated": true
+    },
+    {
+      "name": "부르고스",
+      "aliases": [
+        "burgos",
+        "부르고스"
+      ],
+      "nameEn": "Burgos",
+      "country": "ES",
+      "region": "Burgos",
+      "lat": 42.341,
+      "lng": -3.702,
+      "airports": [
+        "BIO"
+      ],
+      "generated": true
+    },
+    {
+      "name": "산탄데르",
+      "aliases": [
+        "santander",
+        "산탄데르"
+      ],
+      "nameEn": "Santander",
+      "country": "ES",
+      "region": "Santander",
+      "lat": 43.466,
+      "lng": -3.805,
+      "airports": [
+        "SDR",
+        "BIO"
+      ],
+      "generated": true
+    },
+    {
+      "name": "알바세테",
+      "aliases": [
+        "albacete",
+        "알바세테"
+      ],
+      "nameEn": "Albacete",
+      "country": "ES",
+      "region": "Albacete",
+      "lat": 38.994,
+      "lng": -1.856,
+      "airports": [
+        "VLC"
+      ],
+      "generated": true
+    },
+    {
+      "name": "마르베야",
+      "aliases": [
+        "marbella",
+        "마르베야"
+      ],
+      "nameEn": "Marbella",
+      "country": "ES",
+      "region": "Marbella",
+      "lat": 36.515,
+      "lng": -4.886,
+      "airports": [
+        "AGP"
+      ],
+      "generated": true
+    },
+    {
+      "name": "로그로뇨",
+      "aliases": [
+        "logrono",
+        "로그로뇨"
+      ],
+      "nameEn": "Logrono",
+      "country": "ES",
+      "region": "Logrono",
+      "lat": 42.466,
+      "lng": -2.451,
+      "airports": [
+        "BIO"
+      ],
+      "generated": true
+    },
+    {
+      "name": "바다호스",
+      "aliases": [
+        "badajoz",
+        "바다호스"
+      ],
+      "nameEn": "Badajoz",
+      "country": "ES",
+      "region": "Badajoz",
+      "lat": 38.878,
+      "lng": -6.971,
+      "airports": [
+        "BJZ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "살라망카",
+      "aliases": [
+        "salamanca",
+        "살라망카"
+      ],
+      "nameEn": "Salamanca",
+      "country": "ES",
+      "region": "Salamanca",
+      "lat": 40.969,
+      "lng": -5.664,
+      "airports": [
+        "MAD"
+      ],
+      "generated": true
+    },
+    {
+      "name": "우엘바",
+      "aliases": [
+        "huelva",
+        "우엘바"
+      ],
+      "nameEn": "Huelva",
+      "country": "ES",
+      "region": "Huelva",
+      "lat": 37.266,
+      "lng": -6.94,
+      "airports": [
+        "SVQ",
+        "FAO"
+      ],
+      "generated": true
+    },
+    {
+      "name": "타라고나",
+      "aliases": [
+        "tarragona",
+        "타라고나"
+      ],
+      "nameEn": "Tarragona",
+      "country": "ES",
+      "region": "Tarragona",
+      "lat": 41.119,
+      "lng": 1.245,
+      "airports": [
+        "REU",
+        "BCN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "예이다",
+      "aliases": [
+        "lleida",
+        "예이다"
+      ],
+      "nameEn": "Lleida",
+      "country": "ES",
+      "region": "Lleida",
+      "lat": 41.617,
+      "lng": 0.622,
+      "airports": [
+        "BCN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "레온",
+      "aliases": [
+        "leon",
+        "레온"
+      ],
+      "nameEn": "Leon",
+      "country": "ES",
+      "region": "Leon",
+      "lat": 42.6,
+      "lng": -5.57,
+      "airports": [
+        "OVD"
+      ],
+      "generated": true
+    },
+    {
+      "name": "알헤시라스",
+      "aliases": [
+        "algeciras",
+        "알헤시라스"
+      ],
+      "nameEn": "Algeciras",
+      "country": "ES",
+      "region": "Algeciras",
+      "lat": 36.133,
+      "lng": -5.45,
+      "airports": [
+        "AGP",
+        "GIB"
+      ],
+      "generated": true
+    },
+    {
+      "name": "카디스",
+      "aliases": [
+        "cadiz",
+        "카디스"
+      ],
+      "nameEn": "Cadiz",
+      "country": "ES",
+      "region": "Cadiz",
+      "lat": 36.527,
+      "lng": -6.289,
+      "airports": [
+        "XRY"
+      ],
+      "generated": true
+    },
+    {
+      "name": "하엔",
+      "aliases": [
+        "jaen",
+        "하엔"
+      ],
+      "nameEn": "Jaen",
+      "country": "ES",
+      "region": "Jaen",
+      "lat": 37.769,
+      "lng": -3.79,
+      "airports": [
+        "GRX"
+      ],
+      "generated": true
+    },
+    {
+      "name": "오우렌세",
+      "aliases": [
+        "ourense",
+        "오우렌세"
+      ],
+      "nameEn": "Ourense",
+      "country": "ES",
+      "region": "Ourense",
+      "lat": 42.337,
+      "lng": -7.864,
+      "airports": [
+        "VGO",
+        "SCQ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "지로나",
+      "aliases": [
+        "girona",
+        "지로나"
+      ],
+      "nameEn": "Girona",
+      "country": "ES",
+      "region": "Girona",
+      "lat": 41.983,
+      "lng": 2.825,
+      "airports": [
+        "GRO",
+        "BCN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "탐페레",
+      "aliases": [
+        "tampere",
+        "탐페레"
+      ],
+      "nameEn": "Tampere",
+      "country": "FI",
+      "region": "Tampere",
+      "lat": 61.499,
+      "lng": 23.787,
+      "airports": [
+        "TMP",
+        "HEL"
+      ],
+      "generated": true
+    },
+    {
+      "name": "오울루",
+      "aliases": [
+        "oulu",
+        "오울루"
+      ],
+      "nameEn": "Oulu",
+      "country": "FI",
+      "region": "Oulu",
+      "lat": 65.012,
+      "lng": 25.468,
+      "airports": [
+        "OUL"
+      ],
+      "generated": true
+    },
+    {
+      "name": "위바스퀼레",
+      "aliases": [
+        "jyvaskyla",
+        "위바스퀼레"
+      ],
+      "nameEn": "Jyvaskyla",
+      "country": "FI",
+      "region": "Jyvaskyla",
+      "lat": 62.242,
+      "lng": 25.721,
+      "airports": [
+        "JYV"
+      ],
+      "generated": true
+    },
+    {
+      "name": "쿠오피오",
+      "aliases": [
+        "kuopio",
+        "쿠오피오"
+      ],
+      "nameEn": "Kuopio",
+      "country": "FI",
+      "region": "Kuopio",
+      "lat": 62.892,
+      "lng": 27.677,
+      "airports": [
+        "KUO"
+      ],
+      "generated": true
+    },
+    {
+      "name": "라흐티",
+      "aliases": [
+        "lahti",
+        "라흐티"
+      ],
+      "nameEn": "Lahti",
+      "country": "FI",
+      "region": "Lahti",
+      "lat": 60.983,
+      "lng": 25.662,
+      "airports": [
+        "HEL"
+      ],
+      "generated": true
+    },
+    {
+      "name": "낭트",
+      "aliases": [
+        "nantes",
+        "낭트"
+      ],
+      "nameEn": "Nantes",
+      "country": "FR",
+      "region": "Nantes",
+      "lat": 47.217,
+      "lng": -1.553,
+      "airports": [
+        "NTE"
+      ],
+      "generated": true
+    },
+    {
+      "name": "몽펠리에",
+      "aliases": [
+        "montpellier",
+        "몽펠리에"
+      ],
+      "nameEn": "Montpellier",
+      "country": "FR",
+      "region": "Montpellier",
+      "lat": 43.611,
+      "lng": 3.876,
+      "airports": [
+        "MPL"
+      ],
+      "generated": true
+    },
+    {
+      "name": "릴",
+      "aliases": [
+        "lille",
+        "릴"
+      ],
+      "nameEn": "Lille",
+      "country": "FR",
+      "region": "Lille",
+      "lat": 50.634,
+      "lng": 3.055,
+      "airports": [
+        "LIL",
+        "BRU"
+      ],
+      "generated": true
+    },
+    {
+      "name": "렌",
+      "aliases": [
+        "rennes",
+        "렌"
+      ],
+      "nameEn": "Rennes",
+      "country": "FR",
+      "region": "Rennes",
+      "lat": 48.111,
+      "lng": -1.674,
+      "airports": [
+        "RNS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "랭스",
+      "aliases": [
+        "reims",
+        "랭스"
+      ],
+      "nameEn": "Reims",
+      "country": "FR",
+      "region": "Reims",
+      "lat": 49.265,
+      "lng": 4.029,
+      "airports": [
+        "CDG"
+      ],
+      "generated": true
+    },
+    {
+      "name": "르아브르",
+      "aliases": [
+        "le havre",
+        "르아브르"
+      ],
+      "nameEn": "Le Havre",
+      "country": "FR",
+      "region": "Le Havre",
+      "lat": 49.493,
+      "lng": 0.108,
+      "airports": [
+        "CDG"
+      ],
+      "generated": true
+    },
+    {
+      "name": "생테티엔",
+      "aliases": [
+        "saint-etienne",
+        "생테티엔"
+      ],
+      "nameEn": "Saint-Etienne",
+      "country": "FR",
+      "region": "Saint-Etienne",
+      "lat": 45.434,
+      "lng": 4.39,
+      "airports": [
+        "LYS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "툴롱",
+      "aliases": [
+        "toulon",
+        "툴롱"
+      ],
+      "nameEn": "Toulon",
+      "country": "FR",
+      "region": "Toulon",
+      "lat": 43.124,
+      "lng": 5.928,
+      "airports": [
+        "TLN",
+        "MRS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "앙제",
+      "aliases": [
+        "angers",
+        "앙제"
+      ],
+      "nameEn": "Angers",
+      "country": "FR",
+      "region": "Angers",
+      "lat": 47.472,
+      "lng": -0.552,
+      "airports": [
+        "NTE"
+      ],
+      "generated": true
+    },
+    {
+      "name": "디종",
+      "aliases": [
+        "dijon",
+        "디종"
+      ],
+      "nameEn": "Dijon",
+      "country": "FR",
+      "region": "Dijon",
+      "lat": 47.313,
+      "lng": 5.014,
+      "airports": [
+        "LYS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "그르노블",
+      "aliases": [
+        "grenoble",
+        "그르노블"
+      ],
+      "nameEn": "Grenoble",
+      "country": "FR",
+      "region": "Grenoble",
+      "lat": 45.179,
+      "lng": 5.715,
+      "airports": [
+        "GNB",
+        "LYS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "님",
+      "aliases": [
+        "nimes",
+        "님"
+      ],
+      "nameEn": "Nimes",
+      "country": "FR",
+      "region": "Nimes",
+      "lat": 43.837,
+      "lng": 4.358,
+      "airports": [
+        "FNI",
+        "MPL"
+      ],
+      "generated": true
+    },
+    {
+      "name": "클레르몽페랑",
+      "aliases": [
+        "clermont-ferrand",
+        "클레르몽페랑"
+      ],
+      "nameEn": "Clermont-Ferrand",
+      "country": "FR",
+      "region": "Clermont-Ferrand",
+      "lat": 45.78,
+      "lng": 3.087,
+      "airports": [
+        "CFE"
+      ],
+      "generated": true
+    },
+    {
+      "name": "엑상프로방스",
+      "aliases": [
+        "aix-en-provence",
+        "엑상프로방스"
+      ],
+      "nameEn": "Aix-en-Provence",
+      "country": "FR",
+      "region": "Aix-en-Provence",
+      "lat": 43.528,
+      "lng": 5.45,
+      "airports": [
+        "MRS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "브레스트",
+      "aliases": [
+        "brest",
+        "브레스트"
+      ],
+      "nameEn": "Brest",
+      "country": "FR",
+      "region": "Brest",
+      "lat": 48.39,
+      "lng": -4.486,
+      "airports": [
+        "BES"
+      ],
+      "generated": true
+    },
+    {
+      "name": "르망",
+      "aliases": [
+        "le mans",
+        "르망"
+      ],
+      "nameEn": "Le Mans",
+      "country": "FR",
+      "region": "Le Mans",
+      "lat": 48.002,
+      "lng": 0.203,
+      "airports": [
+        "NTE"
+      ],
+      "generated": true
+    },
+    {
+      "name": "아미앵",
+      "aliases": [
+        "amiens",
+        "아미앵"
+      ],
+      "nameEn": "Amiens",
+      "country": "FR",
+      "region": "Amiens",
+      "lat": 49.9,
+      "lng": 2.3,
+      "airports": [
+        "BVA",
+        "CDG"
+      ],
+      "generated": true
+    },
+    {
+      "name": "투르",
+      "aliases": [
+        "tours",
+        "투르"
+      ],
+      "nameEn": "Tours",
+      "country": "FR",
+      "region": "Tours",
+      "lat": 47.395,
+      "lng": 0.704,
+      "airports": [
+        "TUF",
+        "NTE"
+      ],
+      "generated": true
+    },
+    {
+      "name": "리모주",
+      "aliases": [
+        "limoges",
+        "리모주"
+      ],
+      "nameEn": "Limoges",
+      "country": "FR",
+      "region": "Limoges",
+      "lat": 45.834,
+      "lng": 1.248,
+      "airports": [
+        "LIG"
+      ],
+      "generated": true
+    },
+    {
+      "name": "브장송",
+      "aliases": [
+        "besancon",
+        "브장송"
+      ],
+      "nameEn": "Besancon",
+      "country": "FR",
+      "region": "Besancon",
+      "lat": 47.249,
+      "lng": 6.018,
+      "airports": [
+        "BSL",
+        "GVA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "메스",
+      "aliases": [
+        "metz",
+        "메스"
+      ],
+      "nameEn": "Metz",
+      "country": "FR",
+      "region": "Metz",
+      "lat": 49.119,
+      "lng": 6.173,
+      "airports": [
+        "ETZ",
+        "LUX"
+      ],
+      "generated": true
+    },
+    {
+      "name": "오를레앙",
+      "aliases": [
+        "orleans",
+        "오를레앙"
+      ],
+      "nameEn": "Orleans",
+      "country": "FR",
+      "region": "Orleans",
+      "lat": 47.903,
+      "lng": 1.904,
+      "airports": [
+        "ORY"
+      ],
+      "generated": true
+    },
+    {
+      "name": "루앙",
+      "aliases": [
+        "rouen",
+        "루앙"
+      ],
+      "nameEn": "Rouen",
+      "country": "FR",
+      "region": "Rouen",
+      "lat": 49.443,
+      "lng": 1.099,
+      "airports": [
+        "CDG",
+        "BVA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "뮐루즈",
+      "aliases": [
+        "mulhouse",
+        "뮐루즈"
+      ],
+      "nameEn": "Mulhouse",
+      "country": "FR",
+      "region": "Mulhouse",
+      "lat": 47.752,
+      "lng": 7.329,
+      "airports": [
+        "BSL"
+      ],
+      "generated": true
+    },
+    {
+      "name": "페르피냥",
+      "aliases": [
+        "perpignan",
+        "페르피냥"
+      ],
+      "nameEn": "Perpignan",
+      "country": "FR",
+      "region": "Perpignan",
+      "lat": 42.698,
+      "lng": 2.895,
+      "airports": [
+        "PGF"
+      ],
+      "generated": true
+    },
+    {
+      "name": "캉",
+      "aliases": [
+        "caen",
+        "캉"
+      ],
+      "nameEn": "Caen",
+      "country": "FR",
+      "region": "Caen",
+      "lat": 49.186,
+      "lng": -0.359,
+      "airports": [
+        "CFR"
+      ],
+      "generated": true
+    },
+    {
+      "name": "낭시",
+      "aliases": [
+        "nancy",
+        "낭시"
+      ],
+      "nameEn": "Nancy",
+      "country": "FR",
+      "region": "Nancy",
+      "lat": 48.684,
+      "lng": 6.185,
+      "airports": [
+        "ETZ",
+        "LUX"
+      ],
+      "generated": true
+    },
+    {
+      "name": "버밍엄",
+      "aliases": [
+        "birmingham",
+        "버밍엄"
+      ],
+      "nameEn": "Birmingham",
+      "country": "GB",
+      "region": "Birmingham",
+      "lat": 52.481,
+      "lng": -1.9,
+      "airports": [
+        "BHX"
+      ],
+      "generated": true
+    },
+    {
+      "name": "셰필드",
+      "aliases": [
+        "sheffield",
+        "셰필드"
+      ],
+      "nameEn": "Sheffield",
+      "country": "GB",
+      "region": "Sheffield",
+      "lat": 53.383,
+      "lng": -1.466,
+      "airports": [
+        "MAN",
+        "EMA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "리즈",
+      "aliases": [
+        "leeds",
+        "리즈"
+      ],
+      "nameEn": "Leeds",
+      "country": "GB",
+      "region": "Leeds",
+      "lat": 53.797,
+      "lng": -1.548,
+      "airports": [
+        "LBA",
+        "MAN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "브리스틀",
+      "aliases": [
+        "bristol",
+        "브리스틀"
+      ],
+      "nameEn": "Bristol",
+      "country": "GB",
+      "region": "Bristol",
+      "lat": 51.455,
+      "lng": -2.597,
+      "airports": [
+        "BRS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "카디프",
+      "aliases": [
+        "cardiff",
+        "카디프"
+      ],
+      "nameEn": "Cardiff",
+      "country": "GB",
+      "region": "Cardiff",
+      "lat": 51.48,
+      "lng": -3.18,
+      "airports": [
+        "CWL",
+        "BRS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "레스터",
+      "aliases": [
+        "leicester",
+        "레스터"
+      ],
+      "nameEn": "Leicester",
+      "country": "GB",
+      "region": "Leicester",
+      "lat": 52.639,
+      "lng": -1.132,
+      "airports": [
+        "EMA",
+        "BHX"
+      ],
+      "generated": true
+    },
+    {
+      "name": "벨파스트",
+      "aliases": [
+        "belfast",
+        "벨파스트"
+      ],
+      "nameEn": "Belfast",
+      "country": "GB",
+      "region": "Belfast",
+      "lat": 54.597,
+      "lng": -5.925,
+      "airports": [
+        "BFS",
+        "BHD"
+      ],
+      "generated": true
+    },
+    {
+      "name": "코번트리",
+      "aliases": [
+        "coventry",
+        "코번트리"
+      ],
+      "nameEn": "Coventry",
+      "country": "GB",
+      "region": "Coventry",
+      "lat": 52.407,
+      "lng": -1.512,
+      "airports": [
+        "BHX"
+      ],
+      "generated": true
+    },
+    {
+      "name": "노팅엄",
+      "aliases": [
+        "nottingham",
+        "노팅엄"
+      ],
+      "nameEn": "Nottingham",
+      "country": "GB",
+      "region": "Nottingham",
+      "lat": 52.954,
+      "lng": -1.151,
+      "airports": [
+        "EMA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "레딩",
+      "aliases": [
+        "reading",
+        "레딩"
+      ],
+      "nameEn": "Reading",
+      "country": "GB",
+      "region": "Reading",
+      "lat": 51.456,
+      "lng": -0.971,
+      "airports": [
+        "LHR"
+      ],
+      "generated": true
+    },
+    {
+      "name": "헐",
+      "aliases": [
+        "kingston upon hull",
+        "헐"
+      ],
+      "nameEn": "Kingston upon Hull",
+      "country": "GB",
+      "region": "Kingston upon Hull",
+      "lat": 53.745,
+      "lng": -0.335,
+      "airports": [
+        "LBA",
+        "HUY"
+      ],
+      "generated": true
+    },
+    {
+      "name": "프레스턴",
+      "aliases": [
+        "preston",
+        "프레스턴"
+      ],
+      "nameEn": "Preston",
+      "country": "GB",
+      "region": "Preston",
+      "lat": 53.763,
+      "lng": -2.704,
+      "airports": [
+        "MAN",
+        "LPL"
+      ],
+      "generated": true
+    },
+    {
+      "name": "스완지",
+      "aliases": [
+        "swansea",
+        "스완지"
+      ],
+      "nameEn": "Swansea",
+      "country": "GB",
+      "region": "Swansea",
+      "lat": 51.621,
+      "lng": -3.943,
+      "airports": [
+        "CWL"
+      ],
+      "generated": true
+    },
+    {
+      "name": "뉴캐슬",
+      "aliases": [
+        "newcastle upon tyne",
+        "뉴캐슬"
+      ],
+      "nameEn": "Newcastle upon Tyne",
+      "country": "GB",
+      "region": "Newcastle upon Tyne",
+      "lat": 54.973,
+      "lng": -1.614,
+      "airports": [
+        "NCL"
+      ],
+      "generated": true
+    },
+    {
+      "name": "사우스엔드온시",
+      "aliases": [
+        "southend-on-sea",
+        "사우스엔드온시"
+      ],
+      "nameEn": "Southend-on-Sea",
+      "country": "GB",
+      "region": "Southend-on-Sea",
+      "lat": 51.538,
+      "lng": 0.714,
+      "airports": [
+        "SEN",
+        "STN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "더비",
+      "aliases": [
+        "derby",
+        "더비"
+      ],
+      "nameEn": "Derby",
+      "country": "GB",
+      "region": "Derby",
+      "lat": 52.923,
+      "lng": -1.477,
+      "airports": [
+        "EMA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "사우샘프턴",
+      "aliases": [
+        "southampton",
+        "사우샘프턴"
+      ],
+      "nameEn": "Southampton",
+      "country": "GB",
+      "region": "Southampton",
+      "lat": 50.904,
+      "lng": -1.404,
+      "airports": [
+        "SOU",
+        "LHR"
+      ],
+      "generated": true
+    },
+    {
+      "name": "울버햄프턴",
+      "aliases": [
+        "wolverhampton",
+        "울버햄프턴"
+      ],
+      "nameEn": "Wolverhampton",
+      "country": "GB",
+      "region": "Wolverhampton",
+      "lat": 52.586,
+      "lng": -2.123,
+      "airports": [
+        "BHX"
+      ],
+      "generated": true
+    },
+    {
+      "name": "플리머스",
+      "aliases": [
+        "plymouth",
+        "플리머스"
+      ],
+      "nameEn": "Plymouth",
+      "country": "GB",
+      "region": "Plymouth",
+      "lat": 50.371,
+      "lng": -4.143,
+      "airports": [
+        "EXT",
+        "NQY"
+      ],
+      "generated": true
+    },
+    {
+      "name": "스토크온트렌트",
+      "aliases": [
+        "stoke-on-trent",
+        "스토크온트렌트"
+      ],
+      "nameEn": "Stoke-on-Trent",
+      "country": "GB",
+      "region": "Stoke-on-Trent",
+      "lat": 53.004,
+      "lng": -2.185,
+      "airports": [
+        "MAN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "밀턴케인스",
+      "aliases": [
+        "milton keynes",
+        "밀턴케인스"
+      ],
+      "nameEn": "Milton Keynes",
+      "country": "GB",
+      "region": "Milton Keynes",
+      "lat": 52.042,
+      "lng": -0.756,
+      "airports": [
+        "LTN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "노샘프턴",
+      "aliases": [
+        "northampton",
+        "노샘프턴"
+      ],
+      "nameEn": "Northampton",
+      "country": "GB",
+      "region": "Northampton",
+      "lat": 52.25,
+      "lng": -0.883,
+      "airports": [
+        "LTN",
+        "BHX"
+      ],
+      "generated": true
+    },
+    {
+      "name": "루턴",
+      "aliases": [
+        "luton",
+        "루턴"
+      ],
+      "nameEn": "Luton",
+      "country": "GB",
+      "region": "Luton",
+      "lat": 51.88,
+      "lng": -0.417,
+      "airports": [
+        "LTN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "포츠머스",
+      "aliases": [
+        "portsmouth",
+        "포츠머스"
+      ],
+      "nameEn": "Portsmouth",
+      "country": "GB",
+      "region": "Portsmouth",
+      "lat": 50.799,
+      "lng": -1.091,
+      "airports": [
+        "SOU"
+      ],
+      "generated": true
+    },
+    {
+      "name": "스윈던",
+      "aliases": [
+        "swindon",
+        "스윈던"
+      ],
+      "nameEn": "Swindon",
+      "country": "GB",
+      "region": "Swindon",
+      "lat": 51.558,
+      "lng": -1.781,
+      "airports": [
+        "BRS",
+        "LHR"
+      ],
+      "generated": true
+    },
+    {
+      "name": "애버딘",
+      "aliases": [
+        "aberdeen",
+        "애버딘"
+      ],
+      "nameEn": "Aberdeen",
+      "country": "GB",
+      "region": "Aberdeen",
+      "lat": 57.144,
+      "lng": -2.098,
+      "airports": [
+        "ABZ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "입스위치",
+      "aliases": [
+        "ipswich",
+        "입스위치"
+      ],
+      "nameEn": "Ipswich",
+      "country": "GB",
+      "region": "Ipswich",
+      "lat": 52.059,
+      "lng": 1.155,
+      "airports": [
+        "STN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "선덜랜드",
+      "aliases": [
+        "sunderland",
+        "선덜랜드"
+      ],
+      "nameEn": "Sunderland",
+      "country": "GB",
+      "region": "Sunderland",
+      "lat": 54.905,
+      "lng": -1.382,
+      "airports": [
+        "NCL"
+      ],
+      "generated": true
+    },
+    {
+      "name": "본머스",
+      "aliases": [
+        "bournemouth",
+        "본머스"
+      ],
+      "nameEn": "Bournemouth",
+      "country": "GB",
+      "region": "Bournemouth",
+      "lat": 50.721,
+      "lng": -1.879,
+      "airports": [
+        "BOH",
+        "SOU"
+      ],
+      "generated": true
+    },
+    {
+      "name": "피터버러",
+      "aliases": [
+        "peterborough",
+        "피터버러"
+      ],
+      "nameEn": "Peterborough",
+      "country": "GB",
+      "region": "Peterborough",
+      "lat": 52.574,
+      "lng": -0.248,
+      "airports": [
+        "STN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "뉴포트",
+      "aliases": [
+        "newport",
+        "뉴포트"
+      ],
+      "nameEn": "Newport",
+      "country": "GB",
+      "region": "Newport",
+      "lat": 51.588,
+      "lng": -2.998,
+      "airports": [
+        "CWL",
+        "BRS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "던디",
+      "aliases": [
+        "dundee",
+        "던디"
+      ],
+      "nameEn": "Dundee",
+      "country": "GB",
+      "region": "Dundee",
+      "lat": 56.469,
+      "lng": -2.975,
+      "airports": [
+        "EDI"
+      ],
+      "generated": true
+    },
+    {
+      "name": "블랙풀",
+      "aliases": [
+        "blackpool",
+        "블랙풀"
+      ],
+      "nameEn": "Blackpool",
+      "country": "GB",
+      "region": "Blackpool",
+      "lat": 53.817,
+      "lng": -3.05,
+      "airports": [
+        "MAN",
+        "LPL"
+      ],
+      "generated": true
+    },
+    {
+      "name": "노리치",
+      "aliases": [
+        "norwich",
+        "노리치"
+      ],
+      "nameEn": "Norwich",
+      "country": "GB",
+      "region": "Norwich",
+      "lat": 52.628,
+      "lng": 1.298,
+      "airports": [
+        "NWI",
+        "STN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "미들즈브러",
+      "aliases": [
+        "middlesbrough",
+        "미들즈브러"
+      ],
+      "nameEn": "Middlesbrough",
+      "country": "GB",
+      "region": "Middlesbrough",
+      "lat": 54.576,
+      "lng": -1.235,
+      "airports": [
+        "NCL",
+        "MME"
+      ],
+      "generated": true
+    },
+    {
+      "name": "볼턴",
+      "aliases": [
+        "bolton",
+        "볼턴"
+      ],
+      "nameEn": "Bolton",
+      "country": "GB",
+      "region": "Bolton",
+      "lat": 53.583,
+      "lng": -2.433,
+      "airports": [
+        "MAN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "글로스터",
+      "aliases": [
+        "gloucester",
+        "글로스터"
+      ],
+      "nameEn": "Gloucester",
+      "country": "GB",
+      "region": "Gloucester",
+      "lat": 51.866,
+      "lng": -2.243,
+      "airports": [
+        "BRS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "엑서터",
+      "aliases": [
+        "exeter",
+        "엑서터"
+      ],
+      "nameEn": "Exeter",
+      "country": "GB",
+      "region": "Exeter",
+      "lat": 50.724,
+      "lng": -3.527,
+      "airports": [
+        "EXT"
+      ],
+      "generated": true
+    },
+    {
+      "name": "콜체스터",
+      "aliases": [
+        "colchester",
+        "콜체스터"
+      ],
+      "nameEn": "Colchester",
+      "country": "GB",
+      "region": "Colchester",
+      "lat": 51.889,
+      "lng": 0.904,
+      "airports": [
+        "STN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "크롤리",
+      "aliases": [
+        "crawley",
+        "크롤리"
+      ],
+      "nameEn": "Crawley",
+      "country": "GB",
+      "region": "Crawley",
+      "lat": 51.113,
+      "lng": -0.183,
+      "airports": [
+        "LGW"
+      ],
+      "generated": true
+    },
+    {
+      "name": "동커스터",
+      "aliases": [
+        "doncaster",
+        "동커스터"
+      ],
+      "nameEn": "Doncaster",
+      "country": "GB",
+      "region": "Doncaster",
+      "lat": 53.523,
+      "lng": -1.131,
+      "airports": [
+        "MAN",
+        "LBA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "첼름스퍼드",
+      "aliases": [
+        "chelmsford",
+        "첼름스퍼드"
+      ],
+      "nameEn": "Chelmsford",
+      "country": "GB",
+      "region": "Chelmsford",
+      "lat": 51.736,
+      "lng": 0.47,
+      "airports": [
+        "STN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "링컨",
+      "aliases": [
+        "lincoln",
+        "링컨"
+      ],
+      "nameEn": "Lincoln",
+      "country": "GB",
+      "region": "Lincoln",
+      "lat": 53.227,
+      "lng": -0.538,
+      "airports": [
+        "EMA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "우스터",
+      "aliases": [
+        "worcester",
+        "우스터"
+      ],
+      "nameEn": "Worcester",
+      "country": "GB",
+      "region": "Worcester",
+      "lat": 52.189,
+      "lng": -2.22,
+      "airports": [
+        "BHX"
+      ],
+      "generated": true
+    },
+    {
+      "name": "인버네스",
+      "aliases": [
+        "inverness",
+        "인버네스"
+      ],
+      "nameEn": "Inverness",
+      "country": "GB",
+      "region": "Inverness",
+      "lat": 57.478,
+      "lng": -4.225,
+      "airports": [
+        "INV"
+      ],
+      "generated": true
+    },
+    {
+      "name": "파트라",
+      "aliases": [
+        "patras",
+        "파트라"
+      ],
+      "nameEn": "Patras",
+      "country": "GR",
+      "region": "Patras",
+      "lat": 38.246,
+      "lng": 21.735,
+      "airports": [
+        "ATH",
+        "GPA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "라리사",
+      "aliases": [
+        "larissa",
+        "라리사"
+      ],
+      "nameEn": "Larissa",
+      "country": "GR",
+      "region": "Larissa",
+      "lat": 39.629,
+      "lng": 22.421,
+      "airports": [
+        "SKG",
+        "VOL"
+      ],
+      "generated": true
+    },
+    {
+      "name": "리예카",
+      "aliases": [
+        "rijeka",
+        "리예카"
+      ],
+      "nameEn": "Rijeka",
+      "country": "HR",
+      "region": "Rijeka",
+      "lat": 45.327,
+      "lng": 14.442,
+      "airports": [
+        "RJK",
+        "ZAG"
+      ],
+      "generated": true
+    },
+    {
+      "name": "데브레첸",
+      "aliases": [
+        "debrecen",
+        "데브레첸"
+      ],
+      "nameEn": "Debrecen",
+      "country": "HU",
+      "region": "Debrecen",
+      "lat": 47.532,
+      "lng": 21.624,
+      "airports": [
+        "DEB",
+        "BUD"
+      ],
+      "generated": true
+    },
+    {
+      "name": "세게드",
+      "aliases": [
+        "szeged",
+        "세게드"
+      ],
+      "nameEn": "Szeged",
+      "country": "HU",
+      "region": "Szeged",
+      "lat": 46.253,
+      "lng": 20.148,
+      "airports": [
+        "BUD"
+      ],
+      "generated": true
+    },
+    {
+      "name": "미슈콜츠",
+      "aliases": [
+        "miskolc",
+        "미슈콜츠"
+      ],
+      "nameEn": "Miskolc",
+      "country": "HU",
+      "region": "Miskolc",
+      "lat": 48.103,
+      "lng": 20.778,
+      "airports": [
+        "BUD",
+        "KSC"
+      ],
+      "generated": true
+    },
+    {
+      "name": "페치",
+      "aliases": [
+        "pecs",
+        "페치"
+      ],
+      "nameEn": "Pecs",
+      "country": "HU",
+      "region": "Pecs",
+      "lat": 46.076,
+      "lng": 18.228,
+      "airports": [
+        "BUD"
+      ],
+      "generated": true
+    },
+    {
+      "name": "죄르",
+      "aliases": [
+        "gyor",
+        "죄르"
+      ],
+      "nameEn": "Gyor",
+      "country": "HU",
+      "region": "Gyor",
+      "lat": 47.683,
+      "lng": 17.635,
+      "airports": [
+        "VIE",
+        "BTS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "니레지하저",
+      "aliases": [
+        "nyiregyhaza",
+        "니레지하저"
+      ],
+      "nameEn": "Nyiregyhaza",
+      "country": "HU",
+      "region": "Nyiregyhaza",
+      "lat": 47.955,
+      "lng": 21.717,
+      "airports": [
+        "DEB"
+      ],
+      "generated": true
+    },
+    {
+      "name": "케치케메트",
+      "aliases": [
+        "kecskemet",
+        "케치케메트"
+      ],
+      "nameEn": "Kecskemet",
+      "country": "HU",
+      "region": "Kecskemet",
+      "lat": 46.906,
+      "lng": 19.691,
+      "airports": [
+        "BUD"
+      ],
+      "generated": true
+    },
+    {
+      "name": "세케슈페헤르바르",
+      "aliases": [
+        "szekesfehervar",
+        "세케슈페헤르바르"
+      ],
+      "nameEn": "Szekesfehervar",
+      "country": "HU",
+      "region": "Szekesfehervar",
+      "lat": 47.19,
+      "lng": 18.41,
+      "airports": [
+        "BUD"
+      ],
+      "generated": true
+    },
+    {
+      "name": "리머릭",
+      "aliases": [
+        "limerick",
+        "리머릭"
+      ],
+      "nameEn": "Limerick",
+      "country": "IE",
+      "region": "Limerick",
+      "lat": 52.665,
+      "lng": -8.623,
+      "airports": [
+        "SNN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "제노바",
+      "aliases": [
+        "genoa",
+        "제노바"
+      ],
+      "nameEn": "Genoa",
+      "country": "IT",
+      "region": "Genoa",
+      "lat": 44.405,
+      "lng": 8.944,
+      "airports": [
+        "GOA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "바리",
+      "aliases": [
+        "bari",
+        "바리"
+      ],
+      "nameEn": "Bari",
+      "country": "IT",
+      "region": "Bari",
+      "lat": 41.121,
+      "lng": 16.87,
+      "airports": [
+        "BRI"
+      ],
+      "generated": true
+    },
+    {
+      "name": "메시나",
+      "aliases": [
+        "messina",
+        "메시나"
+      ],
+      "nameEn": "Messina",
+      "country": "IT",
+      "region": "Messina",
+      "lat": 38.194,
+      "lng": 15.553,
+      "airports": [
+        "REG",
+        "CTA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "트리에스테",
+      "aliases": [
+        "trieste",
+        "트리에스테"
+      ],
+      "nameEn": "Trieste",
+      "country": "IT",
+      "region": "Trieste",
+      "lat": 45.65,
+      "lng": 13.777,
+      "airports": [
+        "TRS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "파도바",
+      "aliases": [
+        "padua",
+        "파도바"
+      ],
+      "nameEn": "Padua",
+      "country": "IT",
+      "region": "Padua",
+      "lat": 45.408,
+      "lng": 11.886,
+      "airports": [
+        "VCE"
+      ],
+      "generated": true
+    },
+    {
+      "name": "브레시아",
+      "aliases": [
+        "brescia",
+        "브레시아"
+      ],
+      "nameEn": "Brescia",
+      "country": "IT",
+      "region": "Brescia",
+      "lat": 45.536,
+      "lng": 10.215,
+      "airports": [
+        "BGY",
+        "VRN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "타란토",
+      "aliases": [
+        "taranto",
+        "타란토"
+      ],
+      "nameEn": "Taranto",
+      "country": "IT",
+      "region": "Taranto",
+      "lat": 40.464,
+      "lng": 17.247,
+      "airports": [
+        "BRI",
+        "BDS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "파르마",
+      "aliases": [
+        "parma",
+        "파르마"
+      ],
+      "nameEn": "Parma",
+      "country": "IT",
+      "region": "Parma",
+      "lat": 44.799,
+      "lng": 10.326,
+      "airports": [
+        "BLQ",
+        "PMF"
+      ],
+      "generated": true
+    },
+    {
+      "name": "프라토",
+      "aliases": [
+        "prato",
+        "프라토"
+      ],
+      "nameEn": "Prato",
+      "country": "IT",
+      "region": "Prato",
+      "lat": 43.88,
+      "lng": 11.097,
+      "airports": [
+        "FLR"
+      ],
+      "generated": true
+    },
+    {
+      "name": "모데나",
+      "aliases": [
+        "modena",
+        "모데나"
+      ],
+      "nameEn": "Modena",
+      "country": "IT",
+      "region": "Modena",
+      "lat": 44.648,
+      "lng": 10.925,
+      "airports": [
+        "BLQ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "레조넬에밀리아",
+      "aliases": [
+        "reggio emilia",
+        "레조넬에밀리아"
+      ],
+      "nameEn": "Reggio Emilia",
+      "country": "IT",
+      "region": "Reggio Emilia",
+      "lat": 44.698,
+      "lng": 10.631,
+      "airports": [
+        "BLQ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "리보르노",
+      "aliases": [
+        "livorno",
+        "리보르노"
+      ],
+      "nameEn": "Livorno",
+      "country": "IT",
+      "region": "Livorno",
+      "lat": 43.544,
+      "lng": 10.326,
+      "airports": [
+        "PSA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "칼리아리",
+      "aliases": [
+        "cagliari",
+        "칼리아리"
+      ],
+      "nameEn": "Cagliari",
+      "country": "IT",
+      "region": "Cagliari",
+      "lat": 39.23,
+      "lng": 9.119,
+      "airports": [
+        "CAG"
+      ],
+      "generated": true
+    },
+    {
+      "name": "리미니",
+      "aliases": [
+        "rimini",
+        "리미니"
+      ],
+      "nameEn": "Rimini",
+      "country": "IT",
+      "region": "Rimini",
+      "lat": 44.057,
+      "lng": 12.565,
+      "airports": [
+        "RMI",
+        "BLQ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "포자",
+      "aliases": [
+        "foggia",
+        "포자"
+      ],
+      "nameEn": "Foggia",
+      "country": "IT",
+      "region": "Foggia",
+      "lat": 41.458,
+      "lng": 15.552,
+      "airports": [
+        "BRI"
+      ],
+      "generated": true
+    },
+    {
+      "name": "페라라",
+      "aliases": [
+        "ferrara",
+        "페라라"
+      ],
+      "nameEn": "Ferrara",
+      "country": "IT",
+      "region": "Ferrara",
+      "lat": 44.838,
+      "lng": 11.621,
+      "airports": [
+        "BLQ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "살레르노",
+      "aliases": [
+        "salerno",
+        "살레르노"
+      ],
+      "nameEn": "Salerno",
+      "country": "IT",
+      "region": "Salerno",
+      "lat": 40.675,
+      "lng": 14.793,
+      "airports": [
+        "NAP"
+      ],
+      "generated": true
+    },
+    {
+      "name": "시라쿠사",
+      "aliases": [
+        "syracuse",
+        "시라쿠사"
+      ],
+      "nameEn": "Syracuse",
+      "country": "IT",
+      "region": "Syracuse",
+      "lat": 37.075,
+      "lng": 15.287,
+      "airports": [
+        "CTA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "베르가모",
+      "aliases": [
+        "bergamo",
+        "베르가모"
+      ],
+      "nameEn": "Bergamo",
+      "country": "IT",
+      "region": "Bergamo",
+      "lat": 45.696,
+      "lng": 9.667,
+      "airports": [
+        "BGY"
+      ],
+      "generated": true
+    },
+    {
+      "name": "트렌토",
+      "aliases": [
+        "trento",
+        "트렌토"
+      ],
+      "nameEn": "Trento",
+      "country": "IT",
+      "region": "Trento",
+      "lat": 46.068,
+      "lng": 11.121,
+      "airports": [
+        "VRN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "페루자",
+      "aliases": [
+        "perugia",
+        "페루자"
+      ],
+      "nameEn": "Perugia",
+      "country": "IT",
+      "region": "Perugia",
+      "lat": 43.112,
+      "lng": 12.389,
+      "airports": [
+        "PEG",
+        "FCO"
+      ],
+      "generated": true
+    },
+    {
+      "name": "페스카라",
+      "aliases": [
+        "pescara",
+        "페스카라"
+      ],
+      "nameEn": "Pescara",
+      "country": "IT",
+      "region": "Pescara",
+      "lat": 42.458,
+      "lng": 14.203,
+      "airports": [
+        "PSR"
+      ],
+      "generated": true
+    },
+    {
+      "name": "비첸차",
+      "aliases": [
+        "vicenza",
+        "비첸차"
+      ],
+      "nameEn": "Vicenza",
+      "country": "IT",
+      "region": "Vicenza",
+      "lat": 45.547,
+      "lng": 11.547,
+      "airports": [
+        "VCE",
+        "VRN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "볼차노",
+      "aliases": [
+        "bolzano",
+        "볼차노"
+      ],
+      "nameEn": "Bolzano",
+      "country": "IT",
+      "region": "Bolzano",
+      "lat": 46.491,
+      "lng": 11.34,
+      "airports": [
+        "VRN",
+        "INN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "피아첸차",
+      "aliases": [
+        "piacenza",
+        "피아첸차"
+      ],
+      "nameEn": "Piacenza",
+      "country": "IT",
+      "region": "Piacenza",
+      "lat": 45.052,
+      "lng": 9.693,
+      "airports": [
+        "LIN",
+        "BGY"
+      ],
+      "generated": true
+    },
+    {
+      "name": "노바라",
+      "aliases": [
+        "novara",
+        "노바라"
+      ],
+      "nameEn": "Novara",
+      "country": "IT",
+      "region": "Novara",
+      "lat": 45.447,
+      "lng": 8.621,
+      "airports": [
+        "MXP"
+      ],
+      "generated": true
+    },
+    {
+      "name": "아레초",
+      "aliases": [
+        "arezzo",
+        "아레초"
+      ],
+      "nameEn": "Arezzo",
+      "country": "IT",
+      "region": "Arezzo",
+      "lat": 43.463,
+      "lng": 11.881,
+      "airports": [
+        "FLR"
+      ],
+      "generated": true
+    },
+    {
+      "name": "우디네",
+      "aliases": [
+        "udine",
+        "우디네"
+      ],
+      "nameEn": "Udine",
+      "country": "IT",
+      "region": "Udine",
+      "lat": 46.069,
+      "lng": 13.237,
+      "airports": [
+        "TRS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "클라이페다",
+      "aliases": [
+        "klaipeda",
+        "클라이페다"
+      ],
+      "nameEn": "Klaipeda",
+      "country": "LT",
+      "region": "Klaipeda",
+      "lat": 55.707,
+      "lng": 21.139,
+      "airports": [
+        "PLQ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "티라스폴",
+      "aliases": [
+        "tiraspol",
+        "티라스폴"
+      ],
+      "nameEn": "Tiraspol",
+      "country": "MD",
+      "region": "Tiraspol",
+      "lat": 46.843,
+      "lng": 29.628,
+      "airports": [
+        "RMO"
+      ],
+      "generated": true
+    },
+    {
+      "name": "벨치",
+      "aliases": [
+        "balti",
+        "벨치"
+      ],
+      "nameEn": "Balti",
+      "country": "MD",
+      "region": "Balti",
+      "lat": 47.763,
+      "lng": 27.928,
+      "airports": [
+        "RMO"
+      ],
+      "generated": true
+    },
+    {
+      "name": "흐로닝언",
+      "aliases": [
+        "groningen",
+        "흐로닝언"
+      ],
+      "nameEn": "Groningen",
+      "country": "NL",
+      "region": "Groningen",
+      "lat": 53.219,
+      "lng": 6.567,
+      "airports": [
+        "GRQ",
+        "AMS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "에인트호번",
+      "aliases": [
+        "eindhoven",
+        "에인트호번"
+      ],
+      "nameEn": "Eindhoven",
+      "country": "NL",
+      "region": "Eindhoven",
+      "lat": 51.441,
+      "lng": 5.478,
+      "airports": [
+        "EIN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "틸뷔르흐",
+      "aliases": [
+        "tilburg",
+        "틸뷔르흐"
+      ],
+      "nameEn": "Tilburg",
+      "country": "NL",
+      "region": "Tilburg",
+      "lat": 51.556,
+      "lng": 5.091,
+      "airports": [
+        "EIN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "브레다",
+      "aliases": [
+        "breda",
+        "브레다"
+      ],
+      "nameEn": "Breda",
+      "country": "NL",
+      "region": "Breda",
+      "lat": 51.587,
+      "lng": 4.776,
+      "airports": [
+        "EIN",
+        "RTM"
+      ],
+      "generated": true
+    },
+    {
+      "name": "네이메헌",
+      "aliases": [
+        "nijmegen",
+        "네이메헌"
+      ],
+      "nameEn": "Nijmegen",
+      "country": "NL",
+      "region": "Nijmegen",
+      "lat": 51.843,
+      "lng": 5.853,
+      "airports": [
+        "EIN",
+        "AMS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "알메러",
+      "aliases": [
+        "almere",
+        "알메러"
+      ],
+      "nameEn": "Almere",
+      "country": "NL",
+      "region": "Almere",
+      "lat": 52.37,
+      "lng": 5.214,
+      "airports": [
+        "AMS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "하를럼",
+      "aliases": [
+        "haarlem",
+        "하를럼"
+      ],
+      "nameEn": "Haarlem",
+      "country": "NL",
+      "region": "Haarlem",
+      "lat": 52.381,
+      "lng": 4.637,
+      "airports": [
+        "AMS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "아른험",
+      "aliases": [
+        "arnhem",
+        "아른험"
+      ],
+      "nameEn": "Arnhem",
+      "country": "NL",
+      "region": "Arnhem",
+      "lat": 51.98,
+      "lng": 5.911,
+      "airports": [
+        "AMS",
+        "EIN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "스헤르토헨보스",
+      "aliases": [
+        "'s-hertogenbosch",
+        "스헤르토헨보스"
+      ],
+      "nameEn": "'s-Hertogenbosch",
+      "country": "NL",
+      "region": "'s-Hertogenbosch",
+      "lat": 51.699,
+      "lng": 5.304,
+      "airports": [
+        "EIN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "엔스헤데",
+      "aliases": [
+        "enschede",
+        "엔스헤데"
+      ],
+      "nameEn": "Enschede",
+      "country": "NL",
+      "region": "Enschede",
+      "lat": 52.218,
+      "lng": 6.896,
+      "airports": [
+        "AMS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "아메르스포르트",
+      "aliases": [
+        "amersfoort",
+        "아메르스포르트"
+      ],
+      "nameEn": "Amersfoort",
+      "country": "NL",
+      "region": "Amersfoort",
+      "lat": 52.155,
+      "lng": 5.388,
+      "airports": [
+        "AMS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "아펠도른",
+      "aliases": [
+        "apeldoorn",
+        "아펠도른"
+      ],
+      "nameEn": "Apeldoorn",
+      "country": "NL",
+      "region": "Apeldoorn",
+      "lat": 52.21,
+      "lng": 5.969,
+      "airports": [
+        "AMS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "즈볼러",
+      "aliases": [
+        "zwolle",
+        "즈볼러"
+      ],
+      "nameEn": "Zwolle",
+      "country": "NL",
+      "region": "Zwolle",
+      "lat": 52.513,
+      "lng": 6.094,
+      "airports": [
+        "AMS",
+        "GRQ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "레이우아르던",
+      "aliases": [
+        "leeuwarden",
+        "레이우아르던"
+      ],
+      "nameEn": "Leeuwarden",
+      "country": "NL",
+      "region": "Leeuwarden",
+      "lat": 53.203,
+      "lng": 5.81,
+      "airports": [
+        "GRQ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "마스트리흐트",
+      "aliases": [
+        "maastricht",
+        "마스트리흐트"
+      ],
+      "nameEn": "Maastricht",
+      "country": "NL",
+      "region": "Maastricht",
+      "lat": 50.848,
+      "lng": 5.689,
+      "airports": [
+        "MST",
+        "EIN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "레이던",
+      "aliases": [
+        "leiden",
+        "레이던"
+      ],
+      "nameEn": "Leiden",
+      "country": "NL",
+      "region": "Leiden",
+      "lat": 52.158,
+      "lng": 4.493,
+      "airports": [
+        "AMS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "도르드레흐트",
+      "aliases": [
+        "dordrecht",
+        "도르드레흐트"
+      ],
+      "nameEn": "Dordrecht",
+      "country": "NL",
+      "region": "Dordrecht",
+      "lat": 51.81,
+      "lng": 4.674,
+      "airports": [
+        "RTM"
+      ],
+      "generated": true
+    },
+    {
+      "name": "벤로",
+      "aliases": [
+        "venlo",
+        "벤로"
+      ],
+      "nameEn": "Venlo",
+      "country": "NL",
+      "region": "Venlo",
+      "lat": 51.37,
+      "lng": 6.168,
+      "airports": [
+        "EIN",
+        "DUS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "트론헤임",
+      "aliases": [
+        "trondheim",
+        "트론헤임"
+      ],
+      "nameEn": "Trondheim",
+      "country": "NO",
+      "region": "Trondheim",
+      "lat": 63.431,
+      "lng": 10.395,
+      "airports": [
+        "TRD"
+      ],
+      "generated": true
+    },
+    {
+      "name": "크리스티안산",
+      "aliases": [
+        "kristiansand",
+        "크리스티안산"
+      ],
+      "nameEn": "Kristiansand",
+      "country": "NO",
+      "region": "Kristiansand",
+      "lat": 58.147,
+      "lng": 7.996,
+      "airports": [
+        "KRS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "드람멘",
+      "aliases": [
+        "drammen",
+        "드람멘"
+      ],
+      "nameEn": "Drammen",
+      "country": "NO",
+      "region": "Drammen",
+      "lat": 59.744,
+      "lng": 10.204,
+      "airports": [
+        "OSL"
+      ],
+      "generated": true
+    },
+    {
+      "name": "우치",
+      "aliases": [
+        "lodz",
+        "우치"
+      ],
+      "nameEn": "Lodz",
+      "country": "PL",
+      "region": "Lodz",
+      "lat": 51.771,
+      "lng": 19.474,
+      "airports": [
+        "WAW"
+      ],
+      "generated": true
+    },
+    {
+      "name": "슈체친",
+      "aliases": [
+        "szczecin",
+        "슈체친"
+      ],
+      "nameEn": "Szczecin",
+      "country": "PL",
+      "region": "Szczecin",
+      "lat": 53.429,
+      "lng": 14.553,
+      "airports": [
+        "SZZ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "루블린",
+      "aliases": [
+        "lublin",
+        "루블린"
+      ],
+      "nameEn": "Lublin",
+      "country": "PL",
+      "region": "Lublin",
+      "lat": 51.251,
+      "lng": 22.57,
+      "airports": [
+        "LUZ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "비드고슈치",
+      "aliases": [
+        "bydgoszcz",
+        "비드고슈치"
+      ],
+      "nameEn": "Bydgoszcz",
+      "country": "PL",
+      "region": "Bydgoszcz",
+      "lat": 53.123,
+      "lng": 18.008,
+      "airports": [
+        "BZG"
+      ],
+      "generated": true
+    },
+    {
+      "name": "비아위스토크",
+      "aliases": [
+        "bialystok",
+        "비아위스토크"
+      ],
+      "nameEn": "Bialystok",
+      "country": "PL",
+      "region": "Bialystok",
+      "lat": 53.133,
+      "lng": 23.164,
+      "airports": [
+        "WAW"
+      ],
+      "generated": true
+    },
+    {
+      "name": "카토비체",
+      "aliases": [
+        "katowice",
+        "카토비체"
+      ],
+      "nameEn": "Katowice",
+      "country": "PL",
+      "region": "Katowice",
+      "lat": 50.26,
+      "lng": 19.022,
+      "airports": [
+        "KTW",
+        "KRK"
+      ],
+      "generated": true
+    },
+    {
+      "name": "그디니아",
+      "aliases": [
+        "gdynia",
+        "그디니아"
+      ],
+      "nameEn": "Gdynia",
+      "country": "PL",
+      "region": "Gdynia",
+      "lat": 54.519,
+      "lng": 18.532,
+      "airports": [
+        "GDN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "쳉스토호바",
+      "aliases": [
+        "czestochowa",
+        "쳉스토호바"
+      ],
+      "nameEn": "Czestochowa",
+      "country": "PL",
+      "region": "Czestochowa",
+      "lat": 50.797,
+      "lng": 19.124,
+      "airports": [
+        "KTW"
+      ],
+      "generated": true
+    },
+    {
+      "name": "라돔",
+      "aliases": [
+        "radom",
+        "라돔"
+      ],
+      "nameEn": "Radom",
+      "country": "PL",
+      "region": "Radom",
+      "lat": 51.403,
+      "lng": 21.147,
+      "airports": [
+        "WAW"
+      ],
+      "generated": true
+    },
+    {
+      "name": "제슈프",
+      "aliases": [
+        "rzeszow",
+        "제슈프"
+      ],
+      "nameEn": "Rzeszow",
+      "country": "PL",
+      "region": "Rzeszow",
+      "lat": 50.041,
+      "lng": 21.999,
+      "airports": [
+        "RZE"
+      ],
+      "generated": true
+    },
+    {
+      "name": "토룬",
+      "aliases": [
+        "torun",
+        "토룬"
+      ],
+      "nameEn": "Torun",
+      "country": "PL",
+      "region": "Torun",
+      "lat": 53.014,
+      "lng": 18.598,
+      "airports": [
+        "BZG",
+        "GDN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "키엘체",
+      "aliases": [
+        "kielce",
+        "키엘체"
+      ],
+      "nameEn": "Kielce",
+      "country": "PL",
+      "region": "Kielce",
+      "lat": 50.87,
+      "lng": 20.628,
+      "airports": [
+        "KRK"
+      ],
+      "generated": true
+    },
+    {
+      "name": "비엘스코비아와",
+      "aliases": [
+        "bielsko-biala",
+        "비엘스코비아와"
+      ],
+      "nameEn": "Bielsko-Biala",
+      "country": "PL",
+      "region": "Bielsko-Biala",
+      "lat": 49.822,
+      "lng": 19.047,
+      "airports": [
+        "KRK",
+        "KTW"
+      ],
+      "generated": true
+    },
+    {
+      "name": "올슈틴",
+      "aliases": [
+        "olsztyn",
+        "올슈틴"
+      ],
+      "nameEn": "Olsztyn",
+      "country": "PL",
+      "region": "Olsztyn",
+      "lat": 53.784,
+      "lng": 20.493,
+      "airports": [
+        "GDN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "오폴레",
+      "aliases": [
+        "opole",
+        "오폴레"
+      ],
+      "nameEn": "Opole",
+      "country": "PL",
+      "region": "Opole",
+      "lat": 50.671,
+      "lng": 17.926,
+      "airports": [
+        "KTW",
+        "WRO"
+      ],
+      "generated": true
+    },
+    {
+      "name": "브라가",
+      "aliases": [
+        "braga",
+        "브라가"
+      ],
+      "nameEn": "Braga",
+      "country": "PT",
+      "region": "Braga",
+      "lat": 41.551,
+      "lng": -8.423,
+      "airports": [
+        "OPO"
+      ],
+      "generated": true
+    },
+    {
+      "name": "레이리아",
+      "aliases": [
+        "leiria",
+        "레이리아"
+      ],
+      "nameEn": "Leiria",
+      "country": "PT",
+      "region": "Leiria",
+      "lat": 39.744,
+      "lng": -8.807,
+      "airports": [
+        "LIS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "세투발",
+      "aliases": [
+        "setubal",
+        "세투발"
+      ],
+      "nameEn": "Setubal",
+      "country": "PT",
+      "region": "Setubal",
+      "lat": 38.524,
+      "lng": -8.888,
+      "airports": [
+        "LIS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "비제우",
+      "aliases": [
+        "viseu",
+        "비제우"
+      ],
+      "nameEn": "Viseu",
+      "country": "PT",
+      "region": "Viseu",
+      "lat": 40.662,
+      "lng": -7.909,
+      "airports": [
+        "OPO"
+      ],
+      "generated": true
+    },
+    {
+      "name": "이아시",
+      "aliases": [
+        "iasi",
+        "이아시"
+      ],
+      "nameEn": "Iasi",
+      "country": "RO",
+      "region": "Iasi",
+      "lat": 47.167,
+      "lng": 27.6,
+      "airports": [
+        "IAS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "콘스탄차",
+      "aliases": [
+        "constanta",
+        "콘스탄차"
+      ],
+      "nameEn": "Constanta",
+      "country": "RO",
+      "region": "Constanta",
+      "lat": 44.181,
+      "lng": 28.634,
+      "airports": [
+        "CND",
+        "OTP"
+      ],
+      "generated": true
+    },
+    {
+      "name": "티미쇼아라",
+      "aliases": [
+        "timisoara",
+        "티미쇼아라"
+      ],
+      "nameEn": "Timisoara",
+      "country": "RO",
+      "region": "Timisoara",
+      "lat": 45.754,
+      "lng": 21.226,
+      "airports": [
+        "TSR"
+      ],
+      "generated": true
+    },
+    {
+      "name": "크라이오바",
+      "aliases": [
+        "craiova",
+        "크라이오바"
+      ],
+      "nameEn": "Craiova",
+      "country": "RO",
+      "region": "Craiova",
+      "lat": 44.317,
+      "lng": 23.8,
+      "airports": [
+        "CRA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "갈라치",
+      "aliases": [
+        "galati",
+        "갈라치"
+      ],
+      "nameEn": "Galati",
+      "country": "RO",
+      "region": "Galati",
+      "lat": 45.437,
+      "lng": 28.05,
+      "airports": [
+        "OTP"
+      ],
+      "generated": true
+    },
+    {
+      "name": "트르구무레슈",
+      "aliases": [
+        "targu mures",
+        "트르구무레슈"
+      ],
+      "nameEn": "Targu Mures",
+      "country": "RO",
+      "region": "Targu Mures",
+      "lat": 46.542,
+      "lng": 24.558,
+      "airports": [
+        "TGM",
+        "CLJ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "오라데아",
+      "aliases": [
+        "oradea",
+        "오라데아"
+      ],
+      "nameEn": "Oradea",
+      "country": "RO",
+      "region": "Oradea",
+      "lat": 47.046,
+      "lng": 21.918,
+      "airports": [
+        "OMR",
+        "DEB"
+      ],
+      "generated": true
+    },
+    {
+      "name": "플로이에슈티",
+      "aliases": [
+        "ploiesti",
+        "플로이에슈티"
+      ],
+      "nameEn": "Ploiesti",
+      "country": "RO",
+      "region": "Ploiesti",
+      "lat": 44.95,
+      "lng": 26.017,
+      "airports": [
+        "OTP"
+      ],
+      "generated": true
+    },
+    {
+      "name": "아라드",
+      "aliases": [
+        "arad",
+        "아라드"
+      ],
+      "nameEn": "Arad",
+      "country": "RO",
+      "region": "Arad",
+      "lat": 46.183,
+      "lng": 21.317,
+      "airports": [
+        "TSR"
+      ],
+      "generated": true
+    },
+    {
+      "name": "브러일라",
+      "aliases": [
+        "braila",
+        "브러일라"
+      ],
+      "nameEn": "Braila",
+      "country": "RO",
+      "region": "Braila",
+      "lat": 45.272,
+      "lng": 27.974,
+      "airports": [
+        "OTP"
+      ],
+      "generated": true
+    },
+    {
+      "name": "피테슈티",
+      "aliases": [
+        "pitesti",
+        "피테슈티"
+      ],
+      "nameEn": "Pitesti",
+      "country": "RO",
+      "region": "Pitesti",
+      "lat": 44.85,
+      "lng": 24.867,
+      "airports": [
+        "OTP"
+      ],
+      "generated": true
+    },
+    {
+      "name": "바커우",
+      "aliases": [
+        "bacau",
+        "바커우"
+      ],
+      "nameEn": "Bacau",
+      "country": "RO",
+      "region": "Bacau",
+      "lat": 46.567,
+      "lng": 26.914,
+      "airports": [
+        "BCM"
+      ],
+      "generated": true
+    },
+    {
+      "name": "시비우",
+      "aliases": [
+        "sibiu",
+        "시비우"
+      ],
+      "nameEn": "Sibiu",
+      "country": "RO",
+      "region": "Sibiu",
+      "lat": 45.8,
+      "lng": 24.15,
+      "airports": [
+        "SBZ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "사투마레",
+      "aliases": [
+        "satu mare",
+        "사투마레"
+      ],
+      "nameEn": "Satu Mare",
+      "country": "RO",
+      "region": "Satu Mare",
+      "lat": 47.799,
+      "lng": 22.863,
+      "airports": [
+        "SUJ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "바이아마레",
+      "aliases": [
+        "baia mare",
+        "바이아마레"
+      ],
+      "nameEn": "Baia Mare",
+      "country": "RO",
+      "region": "Baia Mare",
+      "lat": 47.657,
+      "lng": 23.568,
+      "airports": [
+        "BAY",
+        "CLJ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "니시",
+      "aliases": [
+        "nis",
+        "니시"
+      ],
+      "nameEn": "Nis",
+      "country": "RS",
+      "region": "Nis",
+      "lat": 43.325,
+      "lng": 21.903,
+      "airports": [
+        "INI"
+      ],
+      "generated": true
+    },
+    {
+      "name": "크라구예바츠",
+      "aliases": [
+        "kragujevac",
+        "크라구예바츠"
+      ],
+      "nameEn": "Kragujevac",
+      "country": "RS",
+      "region": "Kragujevac",
+      "lat": 44.017,
+      "lng": 20.917,
+      "airports": [
+        "BEG"
+      ],
+      "generated": true
+    },
+    {
+      "name": "차차크",
+      "aliases": [
+        "cacak",
+        "차차크"
+      ],
+      "nameEn": "Cacak",
+      "country": "RS",
+      "region": "Cacak",
+      "lat": 43.891,
+      "lng": 20.35,
+      "airports": [
+        "BEG"
+      ],
+      "generated": true
+    },
+    {
+      "name": "수보티차",
+      "aliases": [
+        "subotica",
+        "수보티차"
+      ],
+      "nameEn": "Subotica",
+      "country": "RS",
+      "region": "Subotica",
+      "lat": 46.1,
+      "lng": 19.667,
+      "airports": [
+        "BEG",
+        "BUD"
+      ],
+      "generated": true
+    },
+    {
+      "name": "니즈니노브고로드",
+      "aliases": [
+        "nizhny novgorod",
+        "니즈니노브고로드"
+      ],
+      "nameEn": "Nizhny Novgorod",
+      "country": "RU",
+      "region": "Nizhny Novgorod Oblast",
+      "lat": 56.329,
+      "lng": 44.002,
+      "airports": [
+        "GOJ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "사마라",
+      "aliases": [
+        "samara",
+        "사마라"
+      ],
+      "nameEn": "Samara",
+      "country": "RU",
+      "region": "Samara Oblast",
+      "lat": 53.208,
+      "lng": 50.136,
+      "airports": [
+        "KUF"
+      ],
+      "generated": true
+    },
+    {
+      "name": "우파",
+      "aliases": [
+        "ufa",
+        "우파"
+      ],
+      "nameEn": "Ufa",
+      "country": "RU",
+      "region": "Bashkortostan",
+      "lat": 54.743,
+      "lng": 55.968,
+      "airports": [
+        "UFA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "보로네시",
+      "aliases": [
+        "voronezh",
+        "보로네시"
+      ],
+      "nameEn": "Voronezh",
+      "country": "RU",
+      "region": "Voronezh Oblast",
+      "lat": 51.668,
+      "lng": 39.192,
+      "airports": [
+        "VOZ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "볼고그라드",
+      "aliases": [
+        "volgograd",
+        "볼고그라드"
+      ],
+      "nameEn": "Volgograd",
+      "country": "RU",
+      "region": "Volgograd Oblast",
+      "lat": 48.714,
+      "lng": 44.498,
+      "airports": [
+        "VOG"
+      ],
+      "generated": true
+    },
+    {
+      "name": "페름",
+      "aliases": [
+        "perm",
+        "페름"
+      ],
+      "nameEn": "Perm",
+      "country": "RU",
+      "region": "Perm Krai",
+      "lat": 58.011,
+      "lng": 56.25,
+      "airports": [
+        "PEE"
+      ],
+      "generated": true
+    },
+    {
+      "name": "크라스노다르",
+      "aliases": [
+        "krasnodar",
+        "크라스노다르"
+      ],
+      "nameEn": "Krasnodar",
+      "country": "RU",
+      "region": "Krasnodar Krai",
+      "lat": 45.045,
+      "lng": 38.982,
+      "airports": [
+        "KRR"
+      ],
+      "generated": true
+    },
+    {
+      "name": "사라토프",
+      "aliases": [
+        "saratov",
+        "사라토프"
+      ],
+      "nameEn": "Saratov",
+      "country": "RU",
+      "region": "Saratov Oblast",
+      "lat": 51.541,
+      "lng": 45.99,
+      "airports": [
+        "GSV"
+      ],
+      "generated": true
+    },
+    {
+      "name": "톨리야티",
+      "aliases": [
+        "tolyatti",
+        "톨리야티"
+      ],
+      "nameEn": "Tolyatti",
+      "country": "RU",
+      "region": "Samara Oblast",
+      "lat": 53.53,
+      "lng": 49.346,
+      "airports": [
+        "KUF"
+      ],
+      "generated": true
+    },
+    {
+      "name": "이젭스크",
+      "aliases": [
+        "izhevsk",
+        "이젭스크"
+      ],
+      "nameEn": "Izhevsk",
+      "country": "RU",
+      "region": "Udmurtia",
+      "lat": 56.852,
+      "lng": 53.199,
+      "airports": [
+        "IJK"
+      ],
+      "generated": true
+    },
+    {
+      "name": "울리야놉스크",
+      "aliases": [
+        "ulyanovsk",
+        "울리야놉스크"
+      ],
+      "nameEn": "Ulyanovsk",
+      "country": "RU",
+      "region": "Ulyanovsk Oblast",
+      "lat": 54.328,
+      "lng": 48.387,
+      "airports": [
+        "ULV"
+      ],
+      "generated": true
+    },
+    {
+      "name": "야로슬라블",
+      "aliases": [
+        "yaroslavl",
+        "야로슬라블"
+      ],
+      "nameEn": "Yaroslavl",
+      "country": "RU",
+      "region": "Yaroslavl Oblast",
+      "lat": 57.63,
+      "lng": 39.874,
+      "airports": [
+        "IAR"
+      ],
+      "generated": true
+    },
+    {
+      "name": "마하치칼라",
+      "aliases": [
+        "makhachkala",
+        "마하치칼라"
+      ],
+      "nameEn": "Makhachkala",
+      "country": "RU",
+      "region": "Dagestan",
+      "lat": 42.978,
+      "lng": 47.5,
+      "airports": [
+        "MCX"
+      ],
+      "generated": true
+    },
+    {
+      "name": "오렌부르크",
+      "aliases": [
+        "orenburg",
+        "오렌부르크"
+      ],
+      "nameEn": "Orenburg",
+      "country": "RU",
+      "region": "Orenburg Oblast",
+      "lat": 51.767,
+      "lng": 55.099,
+      "airports": [
+        "REN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "랴잔",
+      "aliases": [
+        "ryazan",
+        "랴잔"
+      ],
+      "nameEn": "Ryazan",
+      "country": "RU",
+      "region": "Ryazan Oblast",
+      "lat": 54.627,
+      "lng": 39.704,
+      "airports": [
+        "DME"
+      ],
+      "generated": true
+    },
+    {
+      "name": "아스트라한",
+      "aliases": [
+        "astrakhan",
+        "아스트라한"
+      ],
+      "nameEn": "Astrakhan",
+      "country": "RU",
+      "region": "Astrakhan Oblast",
+      "lat": 46.35,
+      "lng": 48.041,
+      "airports": [
+        "ASF"
+      ],
+      "generated": true
+    },
+    {
+      "name": "펜자",
+      "aliases": [
+        "penza",
+        "펜자"
+      ],
+      "nameEn": "Penza",
+      "country": "RU",
+      "region": "Penza Oblast",
+      "lat": 53.196,
+      "lng": 45.011,
+      "airports": [
+        "PEZ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "나베레즈니예첼니",
+      "aliases": [
+        "naberezhnye chelny",
+        "나베레즈니예첼니"
+      ],
+      "nameEn": "Naberezhnye Chelny",
+      "country": "RU",
+      "region": "Tatarstan",
+      "lat": 55.737,
+      "lng": 52.42,
+      "airports": [
+        "NBC"
+      ],
+      "generated": true
+    },
+    {
+      "name": "리페츠크",
+      "aliases": [
+        "lipetsk",
+        "리페츠크"
+      ],
+      "nameEn": "Lipetsk",
+      "country": "RU",
+      "region": "Lipetsk Oblast",
+      "lat": 52.588,
+      "lng": 39.551,
+      "airports": [
+        "LPK",
+        "VOZ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "키로프",
+      "aliases": [
+        "kirov",
+        "키로프"
+      ],
+      "nameEn": "Kirov",
+      "country": "RU",
+      "region": "Kirov Oblast",
+      "lat": 58.598,
+      "lng": 49.658,
+      "airports": [
+        "KVX"
+      ],
+      "generated": true
+    },
+    {
+      "name": "체복사리",
+      "aliases": [
+        "cheboksary",
+        "체복사리"
+      ],
+      "nameEn": "Cheboksary",
+      "country": "RU",
+      "region": "Chuvashia",
+      "lat": 56.132,
+      "lng": 47.246,
+      "airports": [
+        "CSY"
+      ],
+      "generated": true
+    },
+    {
+      "name": "툴라",
+      "aliases": [
+        "tula",
+        "툴라"
+      ],
+      "nameEn": "Tula",
+      "country": "RU",
+      "region": "Tula Oblast",
+      "lat": 54.196,
+      "lng": 37.618,
+      "airports": [
+        "VKO",
+        "DME"
+      ],
+      "generated": true
+    },
+    {
+      "name": "스타브로폴",
+      "aliases": [
+        "stavropol",
+        "스타브로폴"
+      ],
+      "nameEn": "Stavropol",
+      "country": "RU",
+      "region": "Stavropol Krai",
+      "lat": 45.034,
+      "lng": 41.964,
+      "airports": [
+        "STW"
+      ],
+      "generated": true
+    },
+    {
+      "name": "브랸스크",
+      "aliases": [
+        "bryansk",
+        "브랸스크"
+      ],
+      "nameEn": "Bryansk",
+      "country": "RU",
+      "region": "Bryansk Oblast",
+      "lat": 53.271,
+      "lng": 34.321,
+      "airports": [
+        "BZK"
+      ],
+      "generated": true
+    },
+    {
+      "name": "트베리",
+      "aliases": [
+        "tver",
+        "트베리"
+      ],
+      "nameEn": "Tver",
+      "country": "RU",
+      "region": "Tver Oblast",
+      "lat": 56.858,
+      "lng": 35.901,
+      "airports": [
+        "SVO"
+      ],
+      "generated": true
+    },
+    {
+      "name": "이바노보",
+      "aliases": [
+        "ivanovo",
+        "이바노보"
+      ],
+      "nameEn": "Ivanovo",
+      "country": "RU",
+      "region": "Ivanovo Oblast",
+      "lat": 57.0,
+      "lng": 40.973,
+      "airports": [
+        "IWA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "블라디미르",
+      "aliases": [
+        "vladimir",
+        "블라디미르"
+      ],
+      "nameEn": "Vladimir",
+      "country": "RU",
+      "region": "Vladimir Oblast",
+      "lat": 56.139,
+      "lng": 40.4,
+      "airports": [
+        "DME"
+      ],
+      "generated": true
+    },
+    {
+      "name": "아르한겔스크",
+      "aliases": [
+        "arkhangelsk",
+        "아르한겔스크"
+      ],
+      "nameEn": "Arkhangelsk",
+      "country": "RU",
+      "region": "Arkhangelsk Oblast",
+      "lat": 64.546,
+      "lng": 40.552,
+      "airports": [
+        "ARH"
+      ],
+      "generated": true
+    },
+    {
+      "name": "칼루가",
+      "aliases": [
+        "kaluga",
+        "칼루가"
+      ],
+      "nameEn": "Kaluga",
+      "country": "RU",
+      "region": "Kaluga Oblast",
+      "lat": 54.531,
+      "lng": 36.27,
+      "airports": [
+        "KLF",
+        "VKO"
+      ],
+      "generated": true
+    },
+    {
+      "name": "스몰렌스크",
+      "aliases": [
+        "smolensk",
+        "스몰렌스크"
+      ],
+      "nameEn": "Smolensk",
+      "country": "RU",
+      "region": "Smolensk Oblast",
+      "lat": 54.778,
+      "lng": 32.051,
+      "airports": [
+        "VTB"
+      ],
+      "generated": true
+    },
+    {
+      "name": "소치",
+      "aliases": [
+        "sochi",
+        "소치"
+      ],
+      "nameEn": "Sochi",
+      "country": "RU",
+      "region": "Krasnodar Krai",
+      "lat": 43.597,
+      "lng": 39.725,
+      "airports": [
+        "AER"
+      ],
+      "generated": true
+    },
+    {
+      "name": "사란스크",
+      "aliases": [
+        "saransk",
+        "사란스크"
+      ],
+      "nameEn": "Saransk",
+      "country": "RU",
+      "region": "Mordovia",
+      "lat": 54.185,
+      "lng": 45.172,
+      "airports": [
+        "SKX"
+      ],
+      "generated": true
+    },
+    {
+      "name": "체레포베츠",
+      "aliases": [
+        "cherepovets",
+        "체레포베츠"
+      ],
+      "nameEn": "Cherepovets",
+      "country": "RU",
+      "region": "Vologda Oblast",
+      "lat": 59.133,
+      "lng": 37.9,
+      "airports": [
+        "CEE"
+      ],
+      "generated": true
+    },
+    {
+      "name": "볼로그다",
+      "aliases": [
+        "vologda",
+        "볼로그다"
+      ],
+      "nameEn": "Vologda",
+      "country": "RU",
+      "region": "Vologda Oblast",
+      "lat": 59.224,
+      "lng": 39.884,
+      "airports": [
+        "VGD"
+      ],
+      "generated": true
+    },
+    {
+      "name": "블라디캅카스",
+      "aliases": [
+        "vladikavkaz",
+        "블라디캅카스"
+      ],
+      "nameEn": "Vladikavkaz",
+      "country": "RU",
+      "region": "North Ossetia",
+      "lat": 43.041,
+      "lng": 44.67,
+      "airports": [
+        "OGZ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "오룔",
+      "aliases": [
+        "oryol",
+        "오룔"
+      ],
+      "nameEn": "Oryol",
+      "country": "RU",
+      "region": "Oryol Oblast",
+      "lat": 52.969,
+      "lng": 36.079,
+      "airports": [
+        "VOZ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "그로즈니",
+      "aliases": [
+        "grozny",
+        "그로즈니"
+      ],
+      "nameEn": "Grozny",
+      "country": "RU",
+      "region": "Chechnya",
+      "lat": 43.312,
+      "lng": 45.689,
+      "airports": [
+        "GRV"
+      ],
+      "generated": true
+    },
+    {
+      "name": "무르만스크",
+      "aliases": [
+        "murmansk",
+        "무르만스크"
+      ],
+      "nameEn": "Murmansk",
+      "country": "RU",
+      "region": "Murmansk Oblast",
+      "lat": 68.968,
+      "lng": 33.099,
+      "airports": [
+        "MMK"
+      ],
+      "generated": true
+    },
+    {
+      "name": "탐보프",
+      "aliases": [
+        "tambov",
+        "탐보프"
+      ],
+      "nameEn": "Tambov",
+      "country": "RU",
+      "region": "Tambov Oblast",
+      "lat": 52.736,
+      "lng": 41.441,
+      "airports": [
+        "TBW"
+      ],
+      "generated": true
+    },
+    {
+      "name": "페트로자보츠크",
+      "aliases": [
+        "petrozavodsk",
+        "페트로자보츠크"
+      ],
+      "nameEn": "Petrozavodsk",
+      "country": "RU",
+      "region": "Karelia",
+      "lat": 61.785,
+      "lng": 34.347,
+      "airports": [
+        "PES"
+      ],
+      "generated": true
+    },
+    {
+      "name": "타간로크",
+      "aliases": [
+        "taganrog",
+        "타간로크"
+      ],
+      "nameEn": "Taganrog",
+      "country": "RU",
+      "region": "Rostov Oblast",
+      "lat": 47.236,
+      "lng": 38.905,
+      "airports": [
+        "ROV"
+      ],
+      "generated": true
+    },
+    {
+      "name": "코스트로마",
+      "aliases": [
+        "kostroma",
+        "코스트로마"
+      ],
+      "nameEn": "Kostroma",
+      "country": "RU",
+      "region": "Kostroma Oblast",
+      "lat": 57.766,
+      "lng": 40.928,
+      "airports": [
+        "KMW"
+      ],
+      "generated": true
+    },
+    {
+      "name": "요시카르올라",
+      "aliases": [
+        "yoshkar-ola",
+        "요시카르올라"
+      ],
+      "nameEn": "Yoshkar-Ola",
+      "country": "RU",
+      "region": "Mari El",
+      "lat": 56.639,
+      "lng": 47.891,
+      "airports": [
+        "JOK"
+      ],
+      "generated": true
+    },
+    {
+      "name": "식팁카르",
+      "aliases": [
+        "syktyvkar",
+        "식팁카르"
+      ],
+      "nameEn": "Syktyvkar",
+      "country": "RU",
+      "region": "Komi",
+      "lat": 61.664,
+      "lng": 50.816,
+      "airports": [
+        "SCW"
+      ],
+      "generated": true
+    },
+    {
+      "name": "노보로시스크",
+      "aliases": [
+        "novorossiysk",
+        "노보로시스크"
+      ],
+      "nameEn": "Novorossiysk",
+      "country": "RU",
+      "region": "Krasnodar Krai",
+      "lat": 44.732,
+      "lng": 37.762,
+      "airports": [
+        "GDZ",
+        "KRR"
+      ],
+      "generated": true
+    },
+    {
+      "name": "날치크",
+      "aliases": [
+        "nalchik",
+        "날치크"
+      ],
+      "nameEn": "Nalchik",
+      "country": "RU",
+      "region": "Kabardino-Balkaria",
+      "lat": 43.498,
+      "lng": 43.619,
+      "airports": [
+        "NAL"
+      ],
+      "generated": true
+    },
+    {
+      "name": "스타리오스콜",
+      "aliases": [
+        "stary oskol",
+        "스타리오스콜"
+      ],
+      "nameEn": "Stary Oskol",
+      "country": "RU",
+      "region": "Belgorod Oblast",
+      "lat": 51.303,
+      "lng": 37.846,
+      "airports": [
+        "VOZ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "벨리키노브고로드",
+      "aliases": [
+        "veliky novgorod",
+        "벨리키노브고로드"
+      ],
+      "nameEn": "Veliky Novgorod",
+      "country": "RU",
+      "region": "Novgorod Oblast",
+      "lat": 58.521,
+      "lng": 31.271,
+      "airports": [
+        "LED"
+      ],
+      "generated": true
+    },
+    {
+      "name": "샤흐티",
+      "aliases": [
+        "shakhty",
+        "샤흐티"
+      ],
+      "nameEn": "Shakhty",
+      "country": "RU",
+      "region": "Rostov Oblast",
+      "lat": 47.719,
+      "lng": 40.216,
+      "airports": [
+        "ROV"
+      ],
+      "generated": true
+    },
+    {
+      "name": "프스코프",
+      "aliases": [
+        "pskov",
+        "프스코프"
+      ],
+      "nameEn": "Pskov",
+      "country": "RU",
+      "region": "Pskov Oblast",
+      "lat": 57.819,
+      "lng": 28.332,
+      "airports": [
+        "PKV"
+      ],
+      "generated": true
+    },
+    {
+      "name": "노보체르카스크",
+      "aliases": [
+        "novocherkassk",
+        "노보체르카스크"
+      ],
+      "nameEn": "Novocherkassk",
+      "country": "RU",
+      "region": "Rostov Oblast",
+      "lat": 47.422,
+      "lng": 40.094,
+      "airports": [
+        "ROV"
+      ],
+      "generated": true
+    },
+    {
+      "name": "볼고돈스크",
+      "aliases": [
+        "volgodonsk",
+        "볼고돈스크"
+      ],
+      "nameEn": "Volgodonsk",
+      "country": "RU",
+      "region": "Rostov Oblast",
+      "lat": 47.511,
+      "lng": 42.153,
+      "airports": [
+        "ROV"
+      ],
+      "generated": true
+    },
+    {
+      "name": "퍄티고르스크",
+      "aliases": [
+        "pyatigorsk",
+        "퍄티고르스크"
+      ],
+      "nameEn": "Pyatigorsk",
+      "country": "RU",
+      "region": "Stavropol Krai",
+      "lat": 44.05,
+      "lng": 43.05,
+      "airports": [
+        "MRV"
+      ],
+      "generated": true
+    },
+    {
+      "name": "마이코프",
+      "aliases": [
+        "maykop",
+        "마이코프"
+      ],
+      "nameEn": "Maykop",
+      "country": "RU",
+      "region": "Adygea",
+      "lat": 44.608,
+      "lng": 40.102,
+      "airports": [
+        "KRR"
+      ],
+      "generated": true
+    },
+    {
+      "name": "키슬로보츠크",
+      "aliases": [
+        "kislovodsk",
+        "키슬로보츠크"
+      ],
+      "nameEn": "Kislovodsk",
+      "country": "RU",
+      "region": "Stavropol Krai",
+      "lat": 43.913,
+      "lng": 42.721,
+      "airports": [
+        "MRV"
+      ],
+      "generated": true
+    },
+    {
+      "name": "세르기예프포사트",
+      "aliases": [
+        "sergiyev posad",
+        "세르기예프포사트"
+      ],
+      "nameEn": "Sergiyev Posad",
+      "country": "RU",
+      "region": "Moscow Oblast",
+      "lat": 56.312,
+      "lng": 38.139,
+      "airports": [
+        "SVO"
+      ],
+      "generated": true
+    },
+    {
+      "name": "콜롬나",
+      "aliases": [
+        "kolomna",
+        "콜롬나"
+      ],
+      "nameEn": "Kolomna",
+      "country": "RU",
+      "region": "Moscow Oblast",
+      "lat": 55.071,
+      "lng": 38.784,
+      "airports": [
+        "DME"
+      ],
+      "generated": true
+    },
+    {
+      "name": "옐리스타",
+      "aliases": [
+        "elista",
+        "옐리스타"
+      ],
+      "nameEn": "Elista",
+      "country": "RU",
+      "region": "Kalmykia",
+      "lat": 46.308,
+      "lng": 44.255,
+      "airports": [
+        "ESL"
+      ],
+      "generated": true
+    },
+    {
+      "name": "데르벤트",
+      "aliases": [
+        "derbent",
+        "데르벤트"
+      ],
+      "nameEn": "Derbent",
+      "country": "RU",
+      "region": "Dagestan",
+      "lat": 42.066,
+      "lng": 48.288,
+      "airports": [
+        "MCX"
+      ],
+      "generated": true
+    },
+    {
+      "name": "웁살라",
+      "aliases": [
+        "uppsala",
+        "웁살라"
+      ],
+      "nameEn": "Uppsala",
+      "country": "SE",
+      "region": "Uppsala",
+      "lat": 59.859,
+      "lng": 17.639,
+      "airports": [
+        "ARN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "린셰핑",
+      "aliases": [
+        "linkoping",
+        "린셰핑"
+      ],
+      "nameEn": "Linkoping",
+      "country": "SE",
+      "region": "Linkoping",
+      "lat": 58.411,
+      "lng": 15.622,
+      "airports": [
+        "ARN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "외레브로",
+      "aliases": [
+        "orebro",
+        "외레브로"
+      ],
+      "nameEn": "Orebro",
+      "country": "SE",
+      "region": "Orebro",
+      "lat": 59.274,
+      "lng": 15.207,
+      "airports": [
+        "ARN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "우메오",
+      "aliases": [
+        "umea",
+        "우메오"
+      ],
+      "nameEn": "Umea",
+      "country": "SE",
+      "region": "Umea",
+      "lat": 63.828,
+      "lng": 20.26,
+      "airports": [
+        "UME"
+      ],
+      "generated": true
+    },
+    {
+      "name": "베스테로스",
+      "aliases": [
+        "vasteras",
+        "베스테로스"
+      ],
+      "nameEn": "Vasteras",
+      "country": "SE",
+      "region": "Vasteras",
+      "lat": 59.616,
+      "lng": 16.553,
+      "airports": [
+        "ARN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "옌셰핑",
+      "aliases": [
+        "jonkoping",
+        "옌셰핑"
+      ],
+      "nameEn": "Jonkoping",
+      "country": "SE",
+      "region": "Jonkoping",
+      "lat": 57.781,
+      "lng": 14.156,
+      "airports": [
+        "GOT"
+      ],
+      "generated": true
+    },
+    {
+      "name": "헬싱보리",
+      "aliases": [
+        "helsingborg",
+        "헬싱보리"
+      ],
+      "nameEn": "Helsingborg",
+      "country": "SE",
+      "region": "Helsingborg",
+      "lat": 56.047,
+      "lng": 12.694,
+      "airports": [
+        "CPH"
+      ],
+      "generated": true
+    },
+    {
+      "name": "코시체",
+      "aliases": [
+        "kosice",
+        "코시체"
+      ],
+      "nameEn": "Kosice",
+      "country": "SK",
+      "region": "Kosice",
+      "lat": 48.714,
+      "lng": 21.258,
+      "airports": [
+        "KSC"
+      ],
+      "generated": true
+    },
+    {
+      "name": "앙카라",
+      "aliases": [
+        "ankara",
+        "앙카라"
+      ],
+      "nameEn": "Ankara",
+      "country": "TR",
+      "region": "Ankara",
+      "lat": 39.92,
+      "lng": 32.854,
+      "airports": [
+        "ESB"
+      ],
+      "generated": true
+    },
+    {
+      "name": "부르사",
+      "aliases": [
+        "bursa",
+        "부르사"
+      ],
+      "nameEn": "Bursa",
+      "country": "TR",
+      "region": "Bursa",
+      "lat": 40.196,
+      "lng": 29.06,
+      "airports": [
+        "IST",
+        "SAW"
+      ],
+      "generated": true
+    },
+    {
+      "name": "가지안테프",
+      "aliases": [
+        "gaziantep",
+        "가지안테프"
+      ],
+      "nameEn": "Gaziantep",
+      "country": "TR",
+      "region": "Gaziantep",
+      "lat": 37.059,
+      "lng": 37.383,
+      "airports": [
+        "GZT"
+      ],
+      "generated": true
+    },
+    {
+      "name": "디야르바키르",
+      "aliases": [
+        "diyarbakir",
+        "디야르바키르"
+      ],
+      "nameEn": "Diyarbakir",
+      "country": "TR",
+      "region": "Diyarbakir",
+      "lat": 37.914,
+      "lng": 40.217,
+      "airports": [
+        "DIY"
+      ],
+      "generated": true
+    },
+    {
+      "name": "아다나",
+      "aliases": [
+        "adana",
+        "아다나"
+      ],
+      "nameEn": "Adana",
+      "country": "TR",
+      "region": "Adana",
+      "lat": 36.986,
+      "lng": 35.325,
+      "airports": [
+        "COV"
+      ],
+      "generated": true
+    },
+    {
+      "name": "카이세리",
+      "aliases": [
+        "kayseri",
+        "카이세리"
+      ],
+      "nameEn": "Kayseri",
+      "country": "TR",
+      "region": "Kayseri",
+      "lat": 38.732,
+      "lng": 35.485,
+      "airports": [
+        "ASR"
+      ],
+      "generated": true
+    },
+    {
+      "name": "코니아",
+      "aliases": [
+        "konya",
+        "코니아"
+      ],
+      "nameEn": "Konya",
+      "country": "TR",
+      "region": "Konya",
+      "lat": 37.871,
+      "lng": 32.485,
+      "airports": [
+        "KYA"
+      ],
+      "generated": true
+    },
+    {
+      "name": "에스키셰히르",
+      "aliases": [
+        "eskisehir",
+        "에스키셰히르"
+      ],
+      "nameEn": "Eskisehir",
+      "country": "TR",
+      "region": "Eskisehir",
+      "lat": 39.777,
+      "lng": 30.521,
+      "airports": [
+        "AOE"
+      ],
+      "generated": true
+    },
+    {
+      "name": "에르주룸",
+      "aliases": [
+        "erzurum",
+        "에르주룸"
+      ],
+      "nameEn": "Erzurum",
+      "country": "TR",
+      "region": "Erzurum",
+      "lat": 39.909,
+      "lng": 41.277,
+      "airports": [
+        "ERZ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "말라티아",
+      "aliases": [
+        "malatya",
+        "말라티아"
+      ],
+      "nameEn": "Malatya",
+      "country": "TR",
+      "region": "Malatya",
+      "lat": 38.35,
+      "lng": 38.317,
+      "airports": [
+        "MLX"
+      ],
+      "generated": true
+    },
+    {
+      "name": "메르신",
+      "aliases": [
+        "mersin",
+        "메르신"
+      ],
+      "nameEn": "Mersin",
+      "country": "TR",
+      "region": "Mersin",
+      "lat": 36.812,
+      "lng": 34.639,
+      "airports": [
+        "COV"
+      ],
+      "generated": true
+    },
+    {
+      "name": "반",
+      "aliases": [
+        "van",
+        "반"
+      ],
+      "nameEn": "Van",
+      "country": "TR",
+      "region": "Van",
+      "lat": 38.495,
+      "lng": 43.383,
+      "airports": [
+        "VAN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "바트만",
+      "aliases": [
+        "batman",
+        "바트만"
+      ],
+      "nameEn": "Batman",
+      "country": "TR",
+      "region": "Batman",
+      "lat": 37.887,
+      "lng": 41.132,
+      "airports": [
+        "BAL"
+      ],
+      "generated": true
+    },
+    {
+      "name": "샨리우르파",
+      "aliases": [
+        "sanliurfa",
+        "샨리우르파"
+      ],
+      "nameEn": "Sanliurfa",
+      "country": "TR",
+      "region": "Sanliurfa",
+      "lat": 37.167,
+      "lng": 38.794,
+      "airports": [
+        "GNY"
+      ],
+      "generated": true
+    },
+    {
+      "name": "엘라지",
+      "aliases": [
+        "elazig",
+        "엘라지"
+      ],
+      "nameEn": "Elazig",
+      "country": "TR",
+      "region": "Elazig",
+      "lat": 38.674,
+      "lng": 39.223,
+      "airports": [
+        "EZS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "안타키아",
+      "aliases": [
+        "antakya",
+        "안타키아"
+      ],
+      "nameEn": "Antakya",
+      "country": "TR",
+      "region": "Antakya",
+      "lat": 36.207,
+      "lng": 36.157,
+      "airports": [
+        "HTY"
+      ],
+      "generated": true
+    },
+    {
+      "name": "삼순",
+      "aliases": [
+        "samsun",
+        "삼순"
+      ],
+      "nameEn": "Samsun",
+      "country": "TR",
+      "region": "Samsun",
+      "lat": 41.28,
+      "lng": 36.336,
+      "airports": [
+        "SZF"
+      ],
+      "generated": true
+    },
+    {
+      "name": "카흐라만마라슈",
+      "aliases": [
+        "kahramanmaras",
+        "카흐라만마라슈"
+      ],
+      "nameEn": "Kahramanmaras",
+      "country": "TR",
+      "region": "Kahramanmaras",
+      "lat": 37.585,
+      "lng": 36.926,
+      "airports": [
+        "KCM"
+      ],
+      "generated": true
+    },
+    {
+      "name": "우샤크",
+      "aliases": [
+        "usak",
+        "우샤크"
+      ],
+      "nameEn": "Usak",
+      "country": "TR",
+      "region": "Usak",
+      "lat": 38.673,
+      "lng": 29.406,
+      "airports": [
+        "DNZ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "알라니아",
+      "aliases": [
+        "alanya",
+        "알라니아"
+      ],
+      "nameEn": "Alanya",
+      "country": "TR",
+      "region": "Alanya",
+      "lat": 36.544,
+      "lng": 32.0,
+      "airports": [
+        "GZP",
+        "AYT"
+      ],
+      "generated": true
+    },
+    {
+      "name": "데니즐리",
+      "aliases": [
+        "denizli",
+        "데니즐리"
+      ],
+      "nameEn": "Denizli",
+      "country": "TR",
+      "region": "Denizli",
+      "lat": 37.774,
+      "lng": 29.087,
+      "airports": [
+        "DNZ"
+      ],
+      "generated": true
+    },
+    {
+      "name": "시바스",
+      "aliases": [
+        "sivas",
+        "시바스"
+      ],
+      "nameEn": "Sivas",
+      "country": "TR",
+      "region": "Sivas",
+      "lat": 39.748,
+      "lng": 37.016,
+      "airports": [
+        "VAS"
+      ],
+      "generated": true
+    },
+    {
+      "name": "트라브존",
+      "aliases": [
+        "trabzon",
+        "트라브존"
+      ],
+      "nameEn": "Trabzon",
+      "country": "TR",
+      "region": "Trabzon",
+      "lat": 41.002,
+      "lng": 39.717,
+      "airports": [
+        "TZX"
+      ],
+      "generated": true
+    },
+    {
+      "name": "하르키우",
+      "aliases": [
+        "kharkiv",
+        "하르키우"
+      ],
+      "nameEn": "Kharkiv",
+      "country": "UA",
+      "region": "Kharkiv",
+      "lat": 49.982,
+      "lng": 36.255,
+      "airports": [
+        "HRK"
+      ],
+      "generated": true
+    },
+    {
+      "name": "드니프로",
+      "aliases": [
+        "dnipro",
+        "드니프로"
+      ],
+      "nameEn": "Dnipro",
+      "country": "UA",
+      "region": "Dnipro",
+      "lat": 48.467,
+      "lng": 35.041,
+      "airports": [
+        "DNK"
+      ],
+      "generated": true
+    },
+    {
+      "name": "자포리자",
+      "aliases": [
+        "zaporizhzhia",
+        "자포리자"
+      ],
+      "nameEn": "Zaporizhzhia",
+      "country": "UA",
+      "region": "Zaporizhzhia",
+      "lat": 47.852,
+      "lng": 35.117,
+      "airports": [
+        "DNK"
+      ],
+      "generated": true
+    },
+    {
+      "name": "빈니차",
+      "aliases": [
+        "vinnytsia",
+        "빈니차"
+      ],
+      "nameEn": "Vinnytsia",
+      "country": "UA",
+      "region": "Vinnytsia",
+      "lat": 49.232,
+      "lng": 28.469,
+      "airports": [
+        "VIN"
+      ],
+      "generated": true
+    },
+    {
+      "name": "체르니우치",
+      "aliases": [
+        "chernivtsi",
+        "체르니우치"
+      ],
+      "nameEn": "Chernivtsi",
+      "country": "UA",
+      "region": "Chernivtsi",
+      "lat": 48.29,
+      "lng": 25.932,
+      "airports": [
+        "CWC"
+      ],
+      "generated": true
+    },
+    {
+      "name": "이바노프란키우스크",
+      "aliases": [
+        "ivano-frankivsk",
+        "이바노프란키우스크"
+      ],
+      "nameEn": "Ivano-Frankivsk",
+      "country": "UA",
+      "region": "Ivano-Frankivsk",
+      "lat": 48.923,
+      "lng": 24.712,
+      "airports": [
+        "IFO"
+      ],
+      "generated": true
+    },
+    {
+      "name": "우지호로드",
+      "aliases": [
+        "uzhhorod",
+        "우지호로드"
+      ],
+      "nameEn": "Uzhhorod",
+      "country": "UA",
+      "region": "Uzhhorod",
+      "lat": 48.624,
+      "lng": 22.295,
+      "airports": [
+        "UDJ"
+      ],
+      "generated": true
     }
   ]
 }

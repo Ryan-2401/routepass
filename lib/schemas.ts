@@ -34,7 +34,16 @@ export const LegSchema = z.object({
 
 export const TripRequestSchema = z.object({
   cities: z
-    .array(z.object({ name: z.string().min(1).max(60), country: z.string().length(2).optional(), days: z.number().int().min(1).max(30).optional() }))
+    .array(
+      z.object({
+        name: z.string().min(1).max(60),
+        country: z.string().length(2).optional(),
+        days: z.number().int().min(1).max(30).optional(),
+        geo: z
+          .object({ nameEn: z.string().max(100), lat: z.number().min(-90).max(90), lng: z.number().min(-180).max(180), region: z.string().max(100).optional() })
+          .optional(),
+      }),
+    )
     .min(1)
     .max(8),
   startDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),

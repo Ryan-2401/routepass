@@ -4,6 +4,7 @@ import citiesData from "@/data/cities.json";
 import menuData from "@/data/city-menu.json";
 import countriesData from "@/data/countries.json";
 import bans from "@/data/travel-bans.json";
+import { geocodeCity, type GeoHit } from "@/lib/client/geocode";
 import type { TripRequest } from "@/lib/types";
 
 const INTERESTS = ["미술관", "역사", "현지 음식", "야경", "자연", "건축", "쇼핑", "덜 걷기"];
@@ -12,6 +13,24 @@ const CUSTOM = "__custom__";
 const COUNTRY_NAMES = countriesData.countries as Record<string, { ko: string }>;
 const MENU = menuData.menu as Record<string, string[]>;
 const CITY_EN = Object.fromEntries(citiesData.cities.map((c) => [`${c.country}:${c.name}`, c.nameEn]));
+const CITY_REGION = Object.fromEntries(citiesData.cities.map((c) => [`${c.country}:${c.name}`, c.region]));
+
+/** 고른 나라·도시가 외교부 여행금지(나라 전체 또는 지역)에 걸리는지 */
+function banNote(country: string, city: string, cityRegion?: string): { level: "block" | "warn"; text: string } | null {
+  if (!country) return null;
+  if (bans.bannedCountries.includes(country)) {
+    return {
+      level: "block",
+      text: `${COUNTRY_NAMES[country].ko}는 외교부 지정 여행금지 국가예요(지정 기간 ${bans.validUntil}까지). 허가 없이 가면 여권법 위반이 될 수 있어 이 나라가 들어간 일정은 만들지 않아요.`,
+    };
+  }
+  const region = cityRegion ?? CITY_REGION[`${country}:${city}`];
+  const r = bans.bannedRegions.find((b) => b.country === country && region && b.regions.includes(region));
+  if (!r) return null;
+  return r.scope === "whole"
+    ? { level: "block", text: `${city}은(는) 외교부 여행금지 지역(${r.text})이라 일정을 만들지 않아요.` }
+    : { level: "warn", text: `${city}이(가) 속한 지역에 여행금지 구역(${r.text})이 있어요. 숙소와 이동 경로가 그 구간에 들어가지 않는지 확인하세요.` };
+}
 
 /** 나라 목록(유럽): 자주 가는 나라 → 나머지 가나다순 */
 function countryOptions() {
@@ -34,7 +53,7 @@ function defaultStart() {
   return d.toISOString().slice(0, 10);
 }
 
-type Row = { country: string; city: string; custom: string; days: string };
+type Row = { country: string; city: string; custom: string; days: string; geo?: GeoHit; geoMsg?: string };
 const emptyRow = (): Row => ({ country: "", city: "", custom: "", days: "" });
 const won = (n: number) => (Number.isFinite(n) ? `${Math.round(n).toLocaleString("ko-KR")}원` : "");
 
@@ -49,6 +68,18 @@ export default function TripForm(props: { busy: boolean; onSubmit: (r: TripReque
   const { popular, rest } = useMemo(countryOptions, []);
 
   const update = (i: number, patch: Partial<Row>) => setRows((r) => r.map((x, k) => (k === i ? { ...x, ...patch } : x)));
+  const remove = (i: number) => setRows((r) => (r.length > 1 ? r.filter((_, k) => k !== i) : [emptyRow()]));
+  const [checking, setChecking] = useState(false);
+
+  /** 직접 입력한 도시를 고른 나라 안에서 찾아 결과를 줄 아래에 표시 */
+  async function lookup(i: number, row: Row): Promise<GeoHit | null> {
+    if (row.city !== CUSTOM || !row.custom.trim() || !row.country) return null;
+    update(i, { geoMsg: "찾는 중…", geo: undefined });
+    const hit = await geocodeCity(row.custom.trim(), row.country).catch(() => null);
+    update(i, hit ? { geo: hit, geoMsg: `찾음: ${hit.display.split(",").slice(0, 3).join(",")}` } : { geo: undefined, geoMsg: `${COUNTRY_NAMES[row.country].ko}에서 "${row.custom.trim()}"을(를) 찾지 못했어요. 철자나 영어 이름을 확인하세요.` });
+    return hit;
+  }
+
   const move = (i: number, dir: -1 | 1) =>
     setRows((r) => {
       const j = i + dir;
@@ -58,7 +89,7 @@ export default function TripForm(props: { busy: boolean; onSubmit: (r: TripReque
       return c;
     });
 
-  function submit(e: React.FormEvent) {
+  async function submit(e: React.FormEvent) {
     e.preventDefault();
     const filled = rows.filter((r) => r.country || r.city || r.custom.trim());
     const incomplete = filled.findIndex((r) => !r.country || !r.city || (r.city === CUSTOM && !r.custom.trim()));
@@ -69,11 +100,29 @@ export default function TripForm(props: { busy: boolean; onSubmit: (r: TripReque
     if (!Number.isFinite(b) || b < 100000) return setFormError("1인 총예산을 10만 원 이상 숫자로 적어 주세요.");
     if (!Number.isFinite(t) || t < 0) return setFormError("허용 범위는 0 이상의 숫자로 적어 주세요.");
     setFormError("");
+    // 직접 입력한 도시는 브라우저에서 먼저 찾음 (Nominatim 이용 정책: 초당 1회)
+    const geos: (GeoHit | undefined)[] = [];
+    setChecking(true);
+    for (const r of filled) {
+      if (r.city !== CUSTOM) {
+        geos.push(undefined);
+        continue;
+      }
+      const hit = r.geo ?? (await lookup(rows.indexOf(r), r));
+      if (!r.geo) await new Promise((res) => setTimeout(res, 1100));
+      if (!hit) {
+        setChecking(false);
+        return setFormError(`${rows.indexOf(r) + 1}번째 줄의 "${r.custom.trim()}"을(를) ${COUNTRY_NAMES[r.country].ko}에서 찾지 못했어요.`);
+      }
+      geos.push(hit);
+    }
+    setChecking(false);
     props.onSubmit({
-      cities: filled.map((r) => ({
+      cities: filled.map((r, k) => ({
         name: r.city === CUSTOM ? r.custom.trim() : r.city,
         country: r.country,
         days: r.days ? Math.max(1, Number(r.days)) : undefined,
+        geo: geos[k] ? { nameEn: geos[k]!.nameEn, lat: geos[k]!.lat, lng: geos[k]!.lng, region: geos[k]!.region } : undefined,
       })),
       startDate: start,
       budgetKRW: Math.round(b),
@@ -143,21 +192,30 @@ export default function TripForm(props: { busy: boolean; onSubmit: (r: TripReque
                   ▼
                 </button>
               </span>
-              {bans.bannedCountries.includes(r.country) ? (
-                <p className="ban-note" role="note">
-                  {COUNTRY_NAMES[r.country].ko}는 외교부 지정 여행금지 국가예요(지정 기간 {bans.validUntil}까지). 허가 없이 가면 여권법 위반이 될 수 있어 이 나라가
-                  들어간 일정은 만들지 않아요.
-                </p>
-              ) : null}
+              <button type="button" className="icon-btn remove-btn" aria-label={`${i + 1}번째 줄 삭제`} title="이 줄 삭제" onClick={() => remove(i)}>
+                ✕
+              </button>
+              {(() => {
+                const note = banNote(r.country, r.city === CUSTOM ? r.custom.trim() : r.city, r.city === CUSTOM ? r.geo?.region : undefined);
+                return note ? (
+                  <p className={`ban-note ${note.level}`} role="note">
+                    {note.text}
+                  </p>
+                ) : null;
+              })()}
               {r.city === CUSTOM ? (
-                <input
-                  type="text"
-                  className="custom-city"
-                  aria-label={`${i + 1}번째 도시 직접 입력`}
-                  placeholder={`${COUNTRY_NAMES[r.country]?.ko ?? ""}의 도시 이름 (영어도 가능)`}
-                  value={r.custom}
-                  onChange={(e) => update(i, { custom: e.target.value })}
-                />
+                <>
+                  <input
+                    type="text"
+                    className="custom-city"
+                    aria-label={`${i + 1}번째 도시 직접 입력`}
+                    placeholder={`${COUNTRY_NAMES[r.country]?.ko ?? ""}의 도시 이름 (한국어·영어)`}
+                    value={r.custom}
+                    onChange={(e) => update(i, { custom: e.target.value, geo: undefined, geoMsg: undefined })}
+                    onBlur={() => lookup(i, r)}
+                  />
+                  {r.geoMsg ? <p className={`geo-msg ${r.geo ? "ok" : ""}`}>{r.geoMsg}</p> : null}
+                </>
               ) : null}
             </div>
           );
@@ -229,8 +287,8 @@ export default function TripForm(props: { busy: boolean; onSubmit: (r: TripReque
           {formError}
         </p>
       ) : null}
-      <button className="primary" type="submit" disabled={props.busy}>
-        {props.busy ? "일정 만드는 중…" : "일정 만들기"}
+      <button className="primary" type="submit" disabled={props.busy || checking}>
+        {checking ? "직접 입력한 도시 찾는 중…" : props.busy ? "일정 만드는 중…" : "일정 만들기"}
       </button>
 
       <div className="key-status" aria-live="polite">
