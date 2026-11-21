@@ -76,7 +76,7 @@ export default function TripForm(props: { busy: boolean; onSubmit: (r: TripReque
     if (row.city !== CUSTOM || !row.custom.trim() || !row.country) return null;
     update(i, { geoMsg: "찾는 중…", geo: undefined });
     const hit = await geocodeCity(row.custom.trim(), row.country).catch(() => null);
-    update(i, hit ? { geo: hit, geoMsg: `찾음: ${hit.display.split(",").slice(0, 3).join(",")}` } : { geo: undefined, geoMsg: `${COUNTRY_NAMES[row.country].ko}에서 "${row.custom.trim()}"을(를) 찾지 못했어요. 철자나 영어 이름을 확인하세요.` });
+    update(i, hit ? { geo: hit, geoMsg: `찾음: ${hit.display.split(",").slice(0, 3).join(",")}${hit.viaAi ? ` (AI가 "${hit.viaAi}"로 바꿔 검색)` : ""}` } : { geo: undefined, geoMsg: `${COUNTRY_NAMES[row.country].ko}에서 "${row.custom.trim()}"을(를) 찾지 못했어요. 철자나 영어 이름을 확인하세요.` });
     return hit;
   }
 
