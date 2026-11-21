@@ -20,7 +20,11 @@ function defaultStart() {
 type Row = { name: string; days: string };
 
 export default function TripForm(props: { busy: boolean; onSubmit: (r: TripRequest) => void; keys: Record<string, boolean | string> | null }) {
-  const [rows, setRows] = useState<Row[]>(DEMO_CITIES.map((c) => ({ name: c.name, days: String(c.days) })));
+  const [rows, setRows] = useState<Row[]>([
+    { name: "", days: "" },
+    { name: "", days: "" },
+  ]);
+  const [formError, setFormError] = useState("");
   const [start, setStart] = useState(defaultStart);
   const [budget, setBudget] = useState<TripRequest["budget"]>("mid");
   const [interests, setInterests] = useState<string[]>(["미술관", "현지 음식"]);
@@ -41,6 +45,11 @@ export default function TripForm(props: { busy: boolean; onSubmit: (r: TripReque
     const cities = rows
       .filter((r) => r.name.trim())
       .map((r) => ({ name: r.name.trim(), days: r.days ? Math.max(1, Number(r.days)) : undefined }));
+    if (!cities.length) {
+      setFormError("방문할 도시를 하나 이상 입력하세요.");
+      return;
+    }
+    setFormError("");
     props.onSubmit({ cities, startDate: start, budget, interests, travelers });
   }
 
@@ -51,7 +60,7 @@ export default function TripForm(props: { busy: boolean; onSubmit: (r: TripReque
       <p className="brand-sub">방문할 도시를 순서대로 넣으면 일정, 이동 방법과 운행 여부, 출입국 조건을 함께 확인합니다. 출발과 도착은 인천입니다.</p>
 
       <div className="field">
-        <span className="label">방문 도시 (순서대로) · 박 수</span>
+        <span className="label">방문 도시 (순서대로) · 박 수 (비우면 3박)</span>
         {rows.map((r, i) => (
           <div className="city-row" key={i}>
             <span className="n">{i + 1}</span>
@@ -142,6 +151,11 @@ export default function TripForm(props: { busy: boolean; onSubmit: (r: TripReque
         <input id="trav" type="number" min={1} max={10} value={travelers} onChange={(e) => setTravelers(Math.max(1, Number(e.target.value)))} />
       </div>
 
+      {formError ? (
+        <p role="alert" style={{ color: "#ffd7d2", margin: "0 0 12px", fontSize: 14 }}>
+          {formError}
+        </p>
+      ) : null}
       <button className="primary" type="submit" disabled={props.busy}>
         {props.busy ? "일정 만드는 중…" : "일정 만들기"}
       </button>
