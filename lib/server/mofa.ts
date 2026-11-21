@@ -38,12 +38,17 @@ export async function mofaChecks(countries: string[]): Promise<EntryCheck[]> {
         out.push({ level: "info", country: c, title: `${countryName(c)}: 외교부 여행경보 없음`, detail: "실시간 조회 결과 발령된 경보가 없습니다.", sources: [{ title: "외교부 해외안전여행", url: "https://www.0404.go.kr" }] });
         continue;
       }
-      const level = w.level >= 4 ? "block" : w.level >= 2 ? "warn" : "info";
+      // "여행금지(일부)"처럼 일부 지역에만 걸린 4단계는 나라 전체를 막지 않고 경고로 표시
+      const partial = w.texts.some((t) => /일부/.test(t));
+      const level = w.level >= 4 && !partial ? "block" : w.level >= 2 ? "warn" : "info";
       out.push({
         level,
         country: c,
-        title: `${countryName(c)}: 외교부 여행경보 최고 ${w.level}단계 (실시간)`,
-        detail: `${w.texts.join(" / ").slice(0, 300)} — 지역마다 단계가 다를 수 있습니다.`,
+        title:
+          w.level >= 4 && partial
+            ? `${countryName(c)}: 일부 지역 여행금지(4단계) 포함 (외교부 실시간)`
+            : `${countryName(c)}: 외교부 여행경보 최고 ${w.level}단계 (실시간)`,
+        detail: `${w.texts.join(" / ").slice(0, 400)} — 방문 도시가 이 지역에 해당하는지 확인하세요. 지역마다 단계가 다릅니다.`,
         sources: [{ title: "외교부 해외안전여행", url: "https://www.0404.go.kr" }],
       });
     } catch (e) {
