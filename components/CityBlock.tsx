@@ -49,7 +49,7 @@ export default function CityBlock({ stay, demo, eat, onRetryEat }: { stay: CityS
           {eat?.pickedBy === "ai" ? <AiTag /> : null}
         </h5>
         {!eat || eat.status === "idle" || eat.status === "loading" ? (
-          <p className="muted small">OpenStreetMap에서 시내 중심 1.5km 안의 식당을 찾는 중…</p>
+          <p className="muted small">OpenStreetMap에서 시내 중심 근처 식당을 찾는 중…</p>
         ) : eat.status === "error" ? (
           <p className="small">
             {eat.error}{" "}

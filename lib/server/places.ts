@@ -5,58 +5,13 @@ import { z } from "zod";
 import { cached, DAY } from "@/lib/cache";
 import { env } from "@/lib/env";
 import { generateJson } from "@/lib/server/gemini";
+import { fetchRestaurants } from "@/lib/osm";
 import type { Restaurant } from "@/lib/types";
 
-interface OsmEl {
-  type: string;
-  id: number;
-  lat?: number;
-  lon?: number;
-  center?: { lat: number; lon: number };
-  tags?: Record<string, string>;
-}
-
-const OVERPASS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"];
-
-export async function osmRestaurants(lat: number, lng: number, radius = 1500): Promise<Restaurant[]> {
-  return cached(`osm:${lat.toFixed(3)}:${lng.toFixed(3)}:${radius}`, DAY, async () => {
-    const q = `[out:json][timeout:25];nwr["amenity"="restaurant"]["name"](around:${radius},${lat},${lng});out center 80;`;
-    let lastErr: unknown;
-    for (const url of OVERPASS) {
-      try {
-        const res = await fetch(url, {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded", "User-Agent": `RouteAI-student-project (${env.contactEmail})` },
-          body: "data=" + encodeURIComponent(q),
-          signal: AbortSignal.timeout(30000),
-        });
-        if (!res.ok) throw new Error(`Overpass ${res.status}`);
-        const data = (await res.json()) as { elements: OsmEl[] };
-        return data.elements
-          .map((e): Restaurant | null => {
-            const t = e.tags ?? {};
-            const la = e.lat ?? e.center?.lat;
-            const lo = e.lon ?? e.center?.lon;
-            if (la === undefined || lo === undefined || !t.name) return null;
-            const en = t["name:en"] && t["name:en"] !== t.name ? ` (${t["name:en"]})` : "";
-            return {
-              osmId: `${e.type}/${e.id}`,
-              name: t.name + en,
-              cuisine: t.cuisine?.replace(/;/g, ", "),
-              lat: la,
-              lng: lo,
-              openingHours: t.opening_hours,
-              website: t.website ?? t["contact:website"],
-              osmUrl: `https://www.openstreetmap.org/${e.type}/${e.id}`,
-            };
-          })
-          .filter((x): x is Restaurant => x !== null);
-      } catch (e) {
-        lastErr = e;
-      }
-    }
-    throw lastErr instanceof Error ? lastErr : new Error("Overpass 조회 실패");
-  });
+export async function osmRestaurants(lat: number, lng: number): Promise<Restaurant[]> {
+  return cached(`osm:${lat.toFixed(3)}:${lng.toFixed(3)}`, DAY, () =>
+    fetchRestaurants(lat, lng, { "User-Agent": `RouteAI-student-project (${env.contactEmail})` }),
+  );
 }
 
 const LOCAL_CUISINE: Record<string, string[]> = {
@@ -86,8 +41,9 @@ export async function recommendRestaurants(params: {
   cityName: string;
   foodThemes: string[];
   count: number;
+  pool?: Restaurant[]; // 브라우저가 미리 가져온 목록 (서버 IP가 지도 서버에 막힐 때 대비)
 }): Promise<{ picks: Restaurant[]; poolSize: number; pickedBy: "ai" | "rule" }> {
-  const pool = await osmRestaurants(params.lat, params.lng);
+  const pool = params.pool?.length ? params.pool : await osmRestaurants(params.lat, params.lng);
   if (!pool.length) return { picks: [], poolSize: 0, pickedBy: "rule" };
   if (!env.geminiKey) return { picks: heuristicPick(pool, params.country, params.count), poolSize: pool.length, pickedBy: "rule" };
 

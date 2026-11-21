@@ -11,6 +11,7 @@ import TripForm from "@/components/TripForm";
 import { AiTag } from "@/components/bits";
 import { api, ApiError, pool, type PlanResponse } from "@/lib/client/api";
 import { ROUTES } from "@/lib/incheon";
+import { fetchRestaurants } from "@/lib/osm";
 import { bestPaths, buildGraph, flightKey } from "@/lib/pathfind";
 import type { EntryCheck, FlightOption, Leg, TripRequest, VerifyResult } from "@/lib/types";
 
@@ -44,7 +45,9 @@ export default function Home() {
     setEat((e) => ({ ...e, [i]: { status: "loading" } }));
     const foodThemes = stay.days.flatMap((d) => d.items.filter((it) => it.kind === "food").map((it) => it.title));
     try {
-      const r = await api.places({ lat: stay.place.lat, lng: stay.place.lng, country: stay.place.country, cityName: stay.place.name, foodThemes, count: 3 });
+      // 식당 목록은 브라우저에서 직접 가져옴 (서버 IP는 지도 서버에서 자주 막힘). 실패하면 서버가 다시 시도.
+      const pool = await fetchRestaurants(stay.place.lat, stay.place.lng).catch(() => undefined);
+      const r = await api.places({ lat: stay.place.lat, lng: stay.place.lng, country: stay.place.country, cityName: stay.place.name, foodThemes, count: 3, pool: pool?.slice(0, 60) });
       if (run.current === id) setEat((e) => ({ ...e, [i]: { status: "done", ...r } }));
     } catch (err) {
       if (run.current === id) setEat((e) => ({ ...e, [i]: { status: "error", error: (err as Error).message } }));
@@ -113,7 +116,10 @@ export default function Home() {
     const eJob = pool(
       p.stays.map((_, i) => i),
       1,
-      (i) => loadEat(p, i, id).catch(() => void (eatFailed = true)),
+      async (i) => {
+        if (i > 0) await new Promise((r) => setTimeout(r, 1100)); // Nominatim 이용 정책: 초당 1회
+        await loadEat(p, i, id).catch(() => void (eatFailed = true));
+      },
     ).then(() => step("eat", eatFailed ? "fail" : "done"));
 
     await Promise.all([vJob, fJob, eJob]);

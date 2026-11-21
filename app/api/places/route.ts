@@ -11,6 +11,21 @@ const Body = z.object({
   cityName: z.string(),
   foodThemes: z.array(z.string()).max(12),
   count: z.number().int().min(1).max(6).default(3),
+  pool: z
+    .array(
+      z.object({
+        osmId: z.string(),
+        name: z.string(),
+        cuisine: z.string().optional(),
+        lat: z.number(),
+        lng: z.number(),
+        openingHours: z.string().optional(),
+        website: z.string().optional(),
+        osmUrl: z.string().url(),
+      }),
+    )
+    .max(80)
+    .optional(),
 });
 
 export async function POST(req: Request) {

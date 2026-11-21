@@ -28,7 +28,7 @@ export const api = {
     post<FlightSearchResult>("/api/flights", p),
   entry: (p: { stays: { name: string; country: string; region?: string; arrive: string; depart: string }[]; legs: { fromCountry: string; toCountry: string; mode: string }[]; transitCountries: string[] }) =>
     post<{ checks: EntryCheck[] }>("/api/entry", p),
-  places: (p: { lat: number; lng: number; country: string; cityName: string; foodThemes: string[]; count: number }) =>
+  places: (p: { lat: number; lng: number; country: string; cityName: string; foodThemes: string[]; count: number; pool?: Restaurant[] }) =>
     post<{ picks: Restaurant[]; poolSize: number; pickedBy: "ai" | "rule" }>("/api/places", p),
   status: async () => (await fetch("/api/status")).json() as Promise<Record<string, boolean | string>>,
 };
