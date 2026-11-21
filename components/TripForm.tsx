@@ -109,7 +109,7 @@ export default function TripForm(props: { busy: boolean; onSubmit: (r: TripReque
                   {rest.map((c) => {
                     const banned = bans.bannedCountries.includes(c);
                     return (
-                      <option key={c} value={c} disabled={banned}>
+                      <option key={c} value={c}>
                         {COUNTRY_NAMES[c].ko}
                         {banned ? " (여행금지)" : ""}
                       </option>
@@ -143,6 +143,12 @@ export default function TripForm(props: { busy: boolean; onSubmit: (r: TripReque
                   ▼
                 </button>
               </span>
+              {bans.bannedCountries.includes(r.country) ? (
+                <p className="ban-note" role="note">
+                  {COUNTRY_NAMES[r.country].ko}는 외교부 지정 여행금지 국가예요(지정 기간 {bans.validUntil}까지). 허가 없이 가면 여권법 위반이 될 수 있어 이 나라가
+                  들어간 일정은 만들지 않아요.
+                </p>
+              ) : null}
               {r.city === CUSTOM ? (
                 <input
                   type="text"

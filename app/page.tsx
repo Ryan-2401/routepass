@@ -10,6 +10,7 @@ import RouteLine from "@/components/RouteLine";
 import TripForm from "@/components/TripForm";
 import { AiTag } from "@/components/bits";
 import { api, ApiError, pool, type PlanResponse } from "@/lib/client/api";
+import bans from "@/data/travel-bans.json";
 import { ROUTES } from "@/lib/incheon";
 import { fetchRestaurants } from "@/lib/osm";
 import { bestPaths, buildGraph, flightKey } from "@/lib/pathfind";
@@ -211,6 +212,15 @@ export default function Home() {
           <div className="banner error" role="alert">
             <b>{error.kind === "blocked" ? "일정을 만들 수 없습니다" : error.kind === "demo-only" ? "데모 모드 제한" : "일정을 만들지 못했습니다"}</b>
             <div>{error.msg}</div>
+            {error.kind === "blocked" ? (
+              <div className="small" style={{ marginTop: 6 }}>
+                판단 근거:{" "}
+                <a href={bans.source.url} target="_blank" rel="noreferrer">
+                  {bans.source.title}
+                </a>{" "}
+                · AI가 아니라 외교부 여행금지 데이터로 판정했습니다. 특별한 사유가 있으면 외교부에 예외적 여권사용 허가를 신청해야 합니다.
+              </div>
+            ) : null}
           </div>
         ) : null}
 

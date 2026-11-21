@@ -237,10 +237,8 @@ export async function buildPlan(req: TripRequest): Promise<Plan & { hubSuggestio
     throw new PlanError(`도시를 찾지 못했습니다: ${missing.join(", ")}. 고른 나라에 있는 도시인지 확인하고, 직접 입력했다면 영어 이름으로 다시 넣어 보세요.`, "input");
   const resolved = places as Place[];
 
-  for (const p of resolved) {
-    const reason = banBlock(p);
-    if (reason) throw new PlanError(reason, "blocked");
-  }
+  const blocked = [...new Set(resolved.map(banBlock).filter((x): x is string => !!x))];
+  if (blocked.length) throw new PlanError(blocked.join(" "), "blocked");
 
   const { stays, legs } = skeleton(req, resolved);
   const gateways = [resolved[0], resolved[resolved.length - 1]]

@@ -2602,6 +2602,22 @@
       "airports": [
         "NCE"
       ]
+    },
+    {
+      "name": "오데사",
+      "aliases": [
+        "odesa",
+        "odessa",
+        "одеса"
+      ],
+      "nameEn": "Odesa",
+      "country": "UA",
+      "region": "Odesa Oblast",
+      "lat": 46.4825,
+      "lng": 30.7233,
+      "airports": [
+        "ODS"
+      ]
     }
   ]
 }
