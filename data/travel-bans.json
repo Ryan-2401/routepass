@@ -1,0 +1,11 @@
+{
+  "_note": "외교부 여행금지(4단계) 정보. 여행금지 국가·지역을 허가 없이 방문하면 여권법 위반이 될 수 있으므로 앱은 일정 생성 자체를 막습니다. 지역 단위 금지는 좌표만으로 30km 경계를 정확히 판정할 수 없어 '해당 주(州) 포함 시 경고'로 처리합니다.",
+  "validUntil": "2027-01-31",
+  "source": { "title": "외교부 – 2026년도 상반기 여행경보 정기 조정 (2026-07-10)", "url": "https://www.mofa.go.kr/www/brd/m_4076/view.do?seq=372324" },
+  "bannedCountries": ["SO", "AF", "IQ", "YE", "LY", "UA", "SD", "HT", "ML", "IR"],
+  "bannedRegions": [
+    { "country": "RU", "regions": ["Kursk Oblast"], "scope": "whole", "text": "쿠르스크주 전체" },
+    { "country": "RU", "regions": ["Rostov Oblast", "Belgorod Oblast", "Voronezh Oblast", "Bryansk Oblast"], "scope": "border30km", "text": "로스토프·벨고로드·보로네시·브랸스크 지역 내 우크라이나 국경 30km 구간" },
+    { "country": "BY", "regions": ["Brest Region", "Gomel Region"], "scope": "border30km", "text": "브레스트·고멜 지역 내 우크라이나 국경 30km 구간" }
+  ]
+}

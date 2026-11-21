@@ -1,0 +1,61 @@
+{
+  "_note": "대한민국 일반여권 기준 입국 규칙. confidence: verified=출처를 확인한 항목, baseline=널리 알려진 기준이지만 외교부(0404.go.kr) 재확인 필요, unknown=앱이 판단하지 않음. 규칙을 고칠 때는 source와 checked를 꼭 갱신하세요.",
+  "nationality": "KR",
+  "checked": "2026-11-21",
+  "groups": {
+    "SCHENGEN": {
+      "visaFree": true,
+      "maxStayDays": 90,
+      "windowDays": 180,
+      "summary": "쉥겐 지역 전체 합산 180일 중 90일까지 무비자",
+      "notes": [
+        "2026년 4월 10일부터 EES(출입국 시스템)가 여권 도장을 대체합니다. 첫 입국 때 지문·얼굴 등록이 있어 줄이 길 수 있습니다.",
+        "ETIAS(사전 여행허가)는 아직 운영 전이며 시작일이 정해지지 않았습니다. 출발 전 다시 확인하세요."
+      ],
+      "sources": [
+        { "title": "EU 집행위원회 – Entry/Exit System", "url": "https://home-affairs.ec.europa.eu/policies/schengen/smart-borders/entry-exit-system_en" },
+        { "title": "EU 집행위원회 – ETIAS", "url": "https://home-affairs.ec.europa.eu/policies/schengen/smart-borders/european-travel-information-authorisation-system_en" }
+      ],
+      "confidence": "verified"
+    }
+  },
+  "countries": {
+    "GB": {
+      "visaFree": true, "maxStayDays": 180,
+      "summary": "관광 목적 최대 6개월 무비자, 사전에 전자여행허가(ETA) 필요",
+      "requiresPreAuth": "UK ETA",
+      "confidence": "baseline"
+    },
+    "IE": { "visaFree": true, "maxStayDays": 90, "summary": "90일 무비자 (쉥겐과 별도 계산)", "confidence": "baseline" },
+    "TR": { "visaFree": true, "maxStayDays": 90, "windowDays": 180, "summary": "180일 중 90일 무비자", "confidence": "baseline" },
+    "RU": {
+      "visaFree": true, "maxStayDays": 60, "windowDays": 180, "windowMaxDays": 90,
+      "summary": "1회 최대 60일, 180일 중 합계 90일까지 무비자",
+      "notes": [
+        "2025년 6월 30일부터 무비자 외국인의 출입국 절차(사전 등록·생체정보 등록 등)가 단계적으로 바뀌었습니다. 출발 전 주한러시아대사관 안내를 확인하세요."
+      ],
+      "sources": [
+        { "title": "미국 의회도서관 – Russian Federation: New Border Crossing Rules Implemented (2025-11-13)", "url": "https://www.loc.gov/item/global-legal-monitor/2025-11-13/russian-federation-new-border-crossing-rules-implemented/" }
+      ],
+      "confidence": "baseline"
+    },
+    "BY": {
+      "visaFree": null,
+      "summary": "앱이 판단하지 않음 — 외교부·주한벨라루스대사관 확인 필요",
+      "notes": [
+        "벨라루스는 일부 국가 국민에게 2026년 12월 31일까지 한시적 무비자(1회 30일, 1년 합계 90일)를 적용 중입니다. 한국 국민 적용 여부와 2027년 이후 연장 여부를 반드시 확인하세요."
+      ],
+      "validUntil": "2026-12-31",
+      "sources": [
+        { "title": "불가리아 외교부 – 벨라루스 입국 안내 (한시적 무비자)", "url": "https://mfa.bg/en/embassyinfo/belarus" }
+      ],
+      "confidence": "unknown"
+    },
+    "KZ": { "visaFree": true, "maxStayDays": 30, "windowDays": 180, "windowMaxDays": 90, "summary": "1회 30일, 180일 중 90일 무비자", "confidence": "baseline" },
+    "UZ": { "visaFree": true, "maxStayDays": 30, "summary": "30일 무비자", "confidence": "baseline" },
+    "JP": { "visaFree": true, "maxStayDays": 90, "summary": "90일 무비자", "confidence": "baseline" },
+    "US": { "visaFree": true, "maxStayDays": 90, "summary": "90일 무비자, 사전에 ESTA 필요", "requiresPreAuth": "ESTA", "confidence": "baseline" },
+    "CA": { "visaFree": true, "maxStayDays": 180, "summary": "6개월 무비자, 항공 입국 시 eTA 필요", "requiresPreAuth": "eTA", "confidence": "baseline" },
+    "UA": { "visaFree": null, "summary": "외교부 여행금지 국가", "confidence": "verified" }
+  }
+}

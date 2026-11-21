@@ -1,0 +1,115 @@
+{
+  "_note": "출처로 확인한 교통편·국경 정보. 검색 키가 없을 때도 이 정보는 판정에 쓰입니다. status: operating | conditional | changed | suspended. 새 사례를 찾으면 여기에 추가하세요. 매칭 규칙: keywords가 후보 설명에 있으면 구간과 관계없이 적용, 없으면 나라 쌍·도시·수단이 맞을 때 적용.",
+  "entries": [
+    {
+      "id": "allegro",
+      "between": [
+        "FI",
+        "RU"
+      ],
+      "cities": [
+        "Helsinki",
+        "Saint Petersburg"
+      ],
+      "mode": "train",
+      "name": "알레그로 고속열차 (헬싱키–상트페테르부르크)",
+      "status": "suspended",
+      "since": "2022-03-28",
+      "summary": "2022년 3월 28일부터 운행 중단. 재개 일정 없음.",
+      "sources": [
+        {
+          "title": "VR – Allegro train service will be discontinued on Monday",
+          "url": "https://www.vr.fi/en/news/2022/03/25/allegro-train-service-will-be-discontinued-on-monday",
+          "date": "2022-03-25"
+        }
+      ],
+      "keywords": [
+        "allegro",
+        "알레그로"
+      ]
+    },
+    {
+      "id": "tallinn-spb-bus",
+      "between": [
+        "EE",
+        "RU"
+      ],
+      "cities": [
+        "Tallinn",
+        "Saint Petersburg"
+      ],
+      "mode": "bus",
+      "name": "탈린–상트페테르부르크 버스 (나르바–이반고로드 경유)",
+      "status": "conditional",
+      "summary": "매일 운행. 국경 차량 통행이 막혀 버스 두 대로 나눠 운행하고 국경은 걸어서 통과. 2026년 6월 15일부터 국경 운영시간 단축(출처마다 시간 표기가 다름).",
+      "sources": [
+        {
+          "title": "Baltic Shuttle – Daily bus Saint Petersburg — Tallinn",
+          "url": "https://www.balticshuttle.ee/en/routes/petersburg_tallinn"
+        },
+        {
+          "title": "Baltic Shuttle – Tallinn → St. Petersburg 국경 통과 안내 (2026)",
+          "url": "https://www.balticshuttle.ee/en/blog/crossing_border_estonia_russia"
+        },
+        {
+          "title": "Baltic Shuttle – 국경 운영시간 변경 공지",
+          "url": "https://www.balticshuttle.ee/en/news/narva_checkpoint_opening_hours_change"
+        }
+      ],
+      "excludeKeywords": [
+        "pskov",
+        "프스코프",
+        "allegro",
+        "알레그로"
+      ]
+    },
+    {
+      "id": "tallinn-pskov-bus",
+      "between": [
+        "EE",
+        "RU"
+      ],
+      "cities": [
+        "Tallinn",
+        "Pskov",
+        "Saint Petersburg"
+      ],
+      "mode": "bus",
+      "name": "탈린–프스코프 경유 상트페테르부르크 연결 버스",
+      "status": "suspended",
+      "since": "2026-07-01",
+      "summary": "2026년 7월 1일부터 운행 중단.",
+      "sources": [
+        {
+          "title": "Baltic Shuttle – Coach bus from Tallinn to St Petersburg via Pskov",
+          "url": "https://www.balticshuttle.ee/en/routes/tallinn_pskov_petersburg"
+        }
+      ],
+      "keywords": [
+        "pskov",
+        "프스코프"
+      ]
+    },
+    {
+      "id": "ru-by-land",
+      "between": [
+        "RU",
+        "BY"
+      ],
+      "mode": "land",
+      "name": "러시아–벨라루스 육로 국경",
+      "status": "conditional",
+      "summary": "외국인은 지정된 구간으로만 통과 가능(다른 경로는 국경 위반). 러시아·벨라루스 전자비자로는 이 국경에서 입국 거부. 체류 기간은 두 나라 중 처음 입국한 날부터 합산.",
+      "sources": [
+        {
+          "title": "벨라루스 외교부 – 러시아·벨라루스 비자 상호인정 협정",
+          "url": "https://www.mfa.gov.by/en/visa/viezd_vyezd/agreement/"
+        },
+        {
+          "title": "Russiable – How to Travel to Russia via Belarus in 2026",
+          "url": "https://russiable.com/visa-russia-belarus/"
+        }
+      ]
+    }
+  ]
+}

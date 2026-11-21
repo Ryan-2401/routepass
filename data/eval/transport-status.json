@@ -1,0 +1,26 @@
+{
+  "_note": "운행 상태 정답 세트. 출처로 직접 확인한 구간만 넣으세요. 보고서용 비교 실험(npm run experiment)에 쓰입니다. 20개 정도로 늘리는 것을 권장합니다 (운행 중 10, 중단·조건부 10).",
+  "cases": [
+    {
+      "id": "allegro",
+      "from": "헬싱키", "to": "상트페테르부르크",
+      "mode": "train", "description": "헬싱키–상트페테르부르크 고속열차", "operatorHint": "Allegro (VR)",
+      "expected": "suspended",
+      "source": "https://www.vr.fi/en/news/2022/03/25/allegro-train-service-will-be-discontinued-on-monday"
+    },
+    {
+      "id": "tallinn-pskov",
+      "from": "탈린", "to": "상트페테르부르크",
+      "mode": "bus", "description": "탈린–프스코프 버스 후 프스코프–상트페테르부르크 버스 환승", "operatorHint": "Baltic Shuttle route 950",
+      "expected": "suspended",
+      "source": "https://www.balticshuttle.ee/en/routes/tallinn_pskov_petersburg"
+    },
+    {
+      "id": "tallinn-spb-narva",
+      "from": "탈린", "to": "상트페테르부르크",
+      "mode": "bus", "description": "나르바–이반고로드 국경 도보 통과 버스", "operatorHint": "Baltic Shuttle",
+      "expected": "conditional",
+      "source": "https://www.balticshuttle.ee/en/routes/tallinn_petersburg"
+    }
+  ]
+}

@@ -1,0 +1,526 @@
+{
+  "_note": "자주 쓰는 도시의 좌표·공항 정보. 여기 없는 도시는 OpenStreetMap(Nominatim)으로 자동 검색합니다. region은 여행경보 지역 판정에 쓰는 주(州)·지역 이름입니다.",
+  "cities": [
+    {
+      "name": "서울",
+      "aliases": [
+        "seoul",
+        "인천",
+        "incheon"
+      ],
+      "nameEn": "Seoul",
+      "country": "KR",
+      "region": "Seoul",
+      "lat": 37.5665,
+      "lng": 126.978,
+      "airports": [
+        "ICN"
+      ]
+    },
+    {
+      "name": "모스크바",
+      "aliases": [
+        "moscow",
+        "москва"
+      ],
+      "nameEn": "Moscow",
+      "country": "RU",
+      "region": "Moscow",
+      "lat": 55.7558,
+      "lng": 37.6173,
+      "airports": [
+        "SVO",
+        "DME",
+        "VKO"
+      ],
+      "cityCode": "MOW"
+    },
+    {
+      "name": "상트페테르부르크",
+      "aliases": [
+        "상트",
+        "saint petersburg",
+        "st petersburg",
+        "st. petersburg",
+        "санкт-петербург"
+      ],
+      "nameEn": "Saint Petersburg",
+      "country": "RU",
+      "region": "Saint Petersburg",
+      "lat": 59.9343,
+      "lng": 30.3351,
+      "airports": [
+        "LED"
+      ],
+      "cityCode": "LED"
+    },
+    {
+      "name": "쿠르스크",
+      "aliases": [
+        "kursk",
+        "курск"
+      ],
+      "nameEn": "Kursk",
+      "country": "RU",
+      "region": "Kursk Oblast",
+      "lat": 51.7304,
+      "lng": 36.1926,
+      "airports": []
+    },
+    {
+      "name": "벨고로드",
+      "aliases": [
+        "belgorod",
+        "белгород"
+      ],
+      "nameEn": "Belgorod",
+      "country": "RU",
+      "region": "Belgorod Oblast",
+      "lat": 50.5997,
+      "lng": 36.5983,
+      "airports": []
+    },
+    {
+      "name": "로스토프나도누",
+      "aliases": [
+        "rostov-on-don",
+        "rostov",
+        "ростов-на-дону"
+      ],
+      "nameEn": "Rostov-on-Don",
+      "country": "RU",
+      "region": "Rostov Oblast",
+      "lat": 47.2357,
+      "lng": 39.7015,
+      "airports": [
+        "ROV"
+      ]
+    },
+    {
+      "name": "카잔",
+      "aliases": [
+        "kazan",
+        "казань"
+      ],
+      "nameEn": "Kazan",
+      "country": "RU",
+      "region": "Tatarstan",
+      "lat": 55.7961,
+      "lng": 49.1064,
+      "airports": [
+        "KZN"
+      ]
+    },
+    {
+      "name": "블라디보스토크",
+      "aliases": [
+        "vladivostok"
+      ],
+      "nameEn": "Vladivostok",
+      "country": "RU",
+      "region": "Primorsky Krai",
+      "lat": 43.1155,
+      "lng": 131.8855,
+      "airports": [
+        "VVO"
+      ]
+    },
+    {
+      "name": "민스크",
+      "aliases": [
+        "minsk",
+        "минск"
+      ],
+      "nameEn": "Minsk",
+      "country": "BY",
+      "region": "Minsk",
+      "lat": 53.9006,
+      "lng": 27.559,
+      "airports": [
+        "MSQ"
+      ]
+    },
+    {
+      "name": "브레스트",
+      "aliases": [
+        "brest",
+        "брест"
+      ],
+      "nameEn": "Brest",
+      "country": "BY",
+      "region": "Brest Region",
+      "lat": 52.0976,
+      "lng": 23.7341,
+      "airports": []
+    },
+    {
+      "name": "고멜",
+      "aliases": [
+        "gomel",
+        "homel",
+        "гомель"
+      ],
+      "nameEn": "Gomel",
+      "country": "BY",
+      "region": "Gomel Region",
+      "lat": 52.4345,
+      "lng": 30.9754,
+      "airports": []
+    },
+    {
+      "name": "탈린",
+      "aliases": [
+        "tallinn"
+      ],
+      "nameEn": "Tallinn",
+      "country": "EE",
+      "region": "Harju County",
+      "lat": 59.437,
+      "lng": 24.7536,
+      "airports": [
+        "TLL"
+      ]
+    },
+    {
+      "name": "나르바",
+      "aliases": [
+        "narva"
+      ],
+      "nameEn": "Narva",
+      "country": "EE",
+      "region": "Ida-Viru County",
+      "lat": 59.3797,
+      "lng": 28.1791,
+      "airports": []
+    },
+    {
+      "name": "헬싱키",
+      "aliases": [
+        "helsinki"
+      ],
+      "nameEn": "Helsinki",
+      "country": "FI",
+      "region": "Uusimaa",
+      "lat": 60.1699,
+      "lng": 24.9384,
+      "airports": [
+        "HEL"
+      ]
+    },
+    {
+      "name": "리가",
+      "aliases": [
+        "riga"
+      ],
+      "nameEn": "Riga",
+      "country": "LV",
+      "region": "Riga",
+      "lat": 56.9496,
+      "lng": 24.1052,
+      "airports": [
+        "RIX"
+      ]
+    },
+    {
+      "name": "빌뉴스",
+      "aliases": [
+        "vilnius"
+      ],
+      "nameEn": "Vilnius",
+      "country": "LT",
+      "region": "Vilnius County",
+      "lat": 54.6872,
+      "lng": 25.2797,
+      "airports": [
+        "VNO"
+      ]
+    },
+    {
+      "name": "바르샤바",
+      "aliases": [
+        "warsaw",
+        "warszawa"
+      ],
+      "nameEn": "Warsaw",
+      "country": "PL",
+      "region": "Masovian Voivodeship",
+      "lat": 52.2297,
+      "lng": 21.0122,
+      "airports": [
+        "WAW"
+      ]
+    },
+    {
+      "name": "스톡홀름",
+      "aliases": [
+        "stockholm"
+      ],
+      "nameEn": "Stockholm",
+      "country": "SE",
+      "region": "Stockholm County",
+      "lat": 59.3293,
+      "lng": 18.0686,
+      "airports": [
+        "ARN"
+      ]
+    },
+    {
+      "name": "베를린",
+      "aliases": [
+        "berlin"
+      ],
+      "nameEn": "Berlin",
+      "country": "DE",
+      "region": "Berlin",
+      "lat": 52.52,
+      "lng": 13.405,
+      "airports": [
+        "BER"
+      ]
+    },
+    {
+      "name": "프라하",
+      "aliases": [
+        "prague",
+        "praha"
+      ],
+      "nameEn": "Prague",
+      "country": "CZ",
+      "region": "Prague",
+      "lat": 50.0755,
+      "lng": 14.4378,
+      "airports": [
+        "PRG"
+      ]
+    },
+    {
+      "name": "빈",
+      "aliases": [
+        "vienna",
+        "wien",
+        "비엔나"
+      ],
+      "nameEn": "Vienna",
+      "country": "AT",
+      "region": "Vienna",
+      "lat": 48.2082,
+      "lng": 16.3738,
+      "airports": [
+        "VIE"
+      ]
+    },
+    {
+      "name": "부다페스트",
+      "aliases": [
+        "budapest"
+      ],
+      "nameEn": "Budapest",
+      "country": "HU",
+      "region": "Budapest",
+      "lat": 47.4979,
+      "lng": 19.0402,
+      "airports": [
+        "BUD"
+      ]
+    },
+    {
+      "name": "파리",
+      "aliases": [
+        "paris"
+      ],
+      "nameEn": "Paris",
+      "country": "FR",
+      "region": "Île-de-France",
+      "lat": 48.8566,
+      "lng": 2.3522,
+      "airports": [
+        "CDG",
+        "ORY"
+      ],
+      "cityCode": "PAR"
+    },
+    {
+      "name": "런던",
+      "aliases": [
+        "london"
+      ],
+      "nameEn": "London",
+      "country": "GB",
+      "region": "England",
+      "lat": 51.5074,
+      "lng": -0.1278,
+      "airports": [
+        "LHR",
+        "LGW",
+        "STN"
+      ],
+      "cityCode": "LON"
+    },
+    {
+      "name": "로마",
+      "aliases": [
+        "rome",
+        "roma"
+      ],
+      "nameEn": "Rome",
+      "country": "IT",
+      "region": "Lazio",
+      "lat": 41.9028,
+      "lng": 12.4964,
+      "airports": [
+        "FCO"
+      ],
+      "cityCode": "ROM"
+    },
+    {
+      "name": "바르셀로나",
+      "aliases": [
+        "barcelona"
+      ],
+      "nameEn": "Barcelona",
+      "country": "ES",
+      "region": "Catalonia",
+      "lat": 41.3874,
+      "lng": 2.1686,
+      "airports": [
+        "BCN"
+      ]
+    },
+    {
+      "name": "이스탄불",
+      "aliases": [
+        "istanbul"
+      ],
+      "nameEn": "Istanbul",
+      "country": "TR",
+      "region": "Istanbul",
+      "lat": 41.0082,
+      "lng": 28.9784,
+      "airports": [
+        "IST",
+        "SAW"
+      ],
+      "cityCode": "IST"
+    },
+    {
+      "name": "알마티",
+      "aliases": [
+        "almaty"
+      ],
+      "nameEn": "Almaty",
+      "country": "KZ",
+      "region": "Almaty",
+      "lat": 43.222,
+      "lng": 76.8512,
+      "airports": [
+        "ALA"
+      ]
+    },
+    {
+      "name": "타슈켄트",
+      "aliases": [
+        "tashkent"
+      ],
+      "nameEn": "Tashkent",
+      "country": "UZ",
+      "region": "Tashkent",
+      "lat": 41.2995,
+      "lng": 69.2401,
+      "airports": [
+        "TAS"
+      ]
+    },
+    {
+      "name": "두바이",
+      "aliases": [
+        "dubai"
+      ],
+      "nameEn": "Dubai",
+      "country": "AE",
+      "region": "Dubai",
+      "lat": 25.2048,
+      "lng": 55.2708,
+      "airports": [
+        "DXB"
+      ]
+    },
+    {
+      "name": "도쿄",
+      "aliases": [
+        "tokyo"
+      ],
+      "nameEn": "Tokyo",
+      "country": "JP",
+      "region": "Tokyo",
+      "lat": 35.6762,
+      "lng": 139.6503,
+      "airports": [
+        "NRT",
+        "HND"
+      ],
+      "cityCode": "TYO"
+    },
+    {
+      "name": "오사카",
+      "aliases": [
+        "osaka"
+      ],
+      "nameEn": "Osaka",
+      "country": "JP",
+      "region": "Osaka",
+      "lat": 34.6937,
+      "lng": 135.5023,
+      "airports": [
+        "KIX"
+      ],
+      "cityCode": "OSA"
+    },
+    {
+      "name": "방콕",
+      "aliases": [
+        "bangkok"
+      ],
+      "nameEn": "Bangkok",
+      "country": "TH",
+      "region": "Bangkok",
+      "lat": 13.7563,
+      "lng": 100.5018,
+      "airports": [
+        "BKK",
+        "DMK"
+      ],
+      "cityCode": "BKK"
+    },
+    {
+      "name": "키이우",
+      "aliases": [
+        "kyiv",
+        "kiev",
+        "київ"
+      ],
+      "nameEn": "Kyiv",
+      "country": "UA",
+      "region": "Kyiv",
+      "lat": 50.4501,
+      "lng": 30.5234,
+      "airports": [
+        "KBP"
+      ]
+    },
+    {
+      "name": "리비우",
+      "aliases": [
+        "lviv",
+        "львів"
+      ],
+      "nameEn": "Lviv",
+      "country": "UA",
+      "region": "Lviv Oblast",
+      "lat": 49.8397,
+      "lng": 24.0297,
+      "airports": [
+        "LWO"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "_note": "GEMINI_API_KEY가 없을 때 보여주는 예시 여정입니다. AI가 만든 결과가 아니라 개발자가 작성한 샘플이며, 금액은 화면 시연용 대략값입니다. 실시간 검증·식당 검색은 데모 모드에서도 실제로 동작합니다.",
+  "cities": [
+    {
+      "name": "모스크바",
+      "summary": "크렘린과 붉은광장을 중심으로 첫날은 가볍게, 둘째 날은 미술관과 공원, 셋째 날은 지하철역 투어로 도시를 넓게 봅니다.",
+      "days": [
+        { "theme": "도착과 도심 첫인상", "items": [
+          { "slot": "오후", "title": "공항에서 시내 이동, 숙소 체크인", "kind": "move" },
+          { "slot": "저녁", "title": "붉은광장 야경 산책", "kind": "sight" },
+          { "slot": "저녁", "title": "러시아 가정식 (보르시, 펠메니)", "kind": "food" }
+        ]},
+        { "theme": "크렘린과 붉은광장", "items": [
+          { "slot": "오전", "title": "크렘린 (무기고 박물관은 시간 지정 입장)", "kind": "sight" },
+          { "slot": "점심", "title": "조지아 요리 (하차푸리, 힌칼리)", "kind": "food" },
+          { "slot": "오후", "title": "성 바실리 대성당, 자랴댜 공원", "kind": "sight" },
+          { "slot": "저녁", "title": "아르바트 거리 산책과 저녁 식사", "kind": "food" }
+        ]},
+        { "theme": "미술관과 지하철역", "items": [
+          { "slot": "오전", "title": "트레티야코프 미술관", "kind": "sight" },
+          { "slot": "점심", "title": "블리니(러시아식 팬케이크)", "kind": "food" },
+          { "slot": "오후", "title": "고리키 공원, 지하철역 투어 (콤소몰스카야·마야콥스카야)", "kind": "sight" },
+          { "slot": "저녁", "title": "현지 식당에서 샤실릭", "kind": "food" }
+        ]}
+      ]
+    },
+    {
+      "name": "상트페테르부르크",
+      "summary": "에르미타주 하루, 운하와 성당 하루, 근교 페테르고프 하루로 나눕니다. 겨울에는 페테르고프 분수가 꺼져 있으니 실내 위주로 바꾸세요.",
+      "days": [
+        { "theme": "넵스키 대로", "items": [
+          { "slot": "오후", "title": "모스크바역 도착 후 넵스키 대로 산책", "kind": "sight" },
+          { "slot": "저녁", "title": "피의 구세주 성당 야경", "kind": "sight" },
+          { "slot": "저녁", "title": "러시아식 만두와 수프", "kind": "food" }
+        ]},
+        { "theme": "에르미타주", "items": [
+          { "slot": "오전", "title": "에르미타주 미술관 (겨울궁전)", "kind": "sight" },
+          { "slot": "점심", "title": "카페에서 가벼운 점심", "kind": "food" },
+          { "slot": "오후", "title": "궁전광장, 성 이삭 대성당 전망대", "kind": "sight" },
+          { "slot": "저녁", "title": "해산물 요리", "kind": "food" }
+        ]},
+        { "theme": "운하와 요새", "items": [
+          { "slot": "오전", "title": "페트로파블롭스크 요새", "kind": "sight" },
+          { "slot": "점심", "title": "우즈베크 요리 (플롭)", "kind": "food" },
+          { "slot": "오후", "title": "운하 보트 투어 (계절 운영)", "kind": "sight" },
+          { "slot": "저녁", "title": "마린스키 극장 공연 (예매 필요)", "kind": "sight" }
+        ]}
+      ]
+    },
+    {
+      "name": "탈린",
+      "summary": "도보로 다닐 수 있는 구시가지 중심 일정입니다. 국경을 도보로 넘는 이동 다음 날이라 첫날은 여유 있게 잡았습니다.",
+      "days": [
+        { "theme": "구시가지", "items": [
+          { "slot": "오후", "title": "탈린 구시가지 (시청 광장)", "kind": "sight" },
+          { "slot": "저녁", "title": "톰페아 언덕 전망대", "kind": "sight" },
+          { "slot": "저녁", "title": "에스토니아 전통 요리", "kind": "food" }
+        ]},
+        { "theme": "카드리오르그와 텔리스키비", "items": [
+          { "slot": "오전", "title": "카드리오르그 공원과 궁전", "kind": "sight" },
+          { "slot": "점심", "title": "북유럽식 브런치", "kind": "food" },
+          { "slot": "오후", "title": "텔리스키비 크리에이티브 시티", "kind": "sight" },
+          { "slot": "저녁", "title": "발트해 생선 요리", "kind": "food" }
+        ]}
+      ]
+    },
+    {
+      "name": "헬싱키",
+      "summary": "페리로 도착해 항구 주변부터 보고, 둘째 날은 수오멘린나 요새와 디자인 지구를 돕니다. 출국일은 공항 이동만 남겨 둡니다.",
+      "days": [
+        { "theme": "항구와 시내", "items": [
+          { "slot": "오후", "title": "마켓 광장, 헬싱키 대성당 (원로원 광장)", "kind": "sight" },
+          { "slot": "저녁", "title": "핀란드식 연어 수프", "kind": "food" }
+        ]},
+        { "theme": "수오멘린나와 디자인 지구", "items": [
+          { "slot": "오전", "title": "수오멘린나 요새 (페리 이동)", "kind": "sight" },
+          { "slot": "점심", "title": "카페에서 시나몬 롤", "kind": "food" },
+          { "slot": "오후", "title": "템펠리아우키오 암석 교회, 오디 도서관", "kind": "sight" },
+          { "slot": "저녁", "title": "핀란드 사우나 체험 후 저녁", "kind": "food" }
+        ]}
+      ]
+    }
+  ],
+  "legs": [
+    { "index": 0, "hubSuggestions": ["IST", "ALA"], "candidates": [
+      { "mode": "flight", "description": "인천 → 환승 → 모스크바. 노선표 기준 인천–모스크바 직항은 운휴라 환승이 필요합니다.", "estDurationMin": 960, "estPriceKRW": 900000, "notes": "환승 허브와 운항 여부 확인 필요" }
+    ]},
+    { "index": 1, "candidates": [
+      { "mode": "train", "description": "고속열차로 모스크바 레닌그라드역 → 상트페테르부르크 모스크바역", "operatorHint": "Sapsan (RZD)", "estDurationMin": 240, "estPriceKRW": 90000 },
+      { "mode": "train", "description": "야간열차 (침대칸)", "operatorHint": "RZD", "estDurationMin": 540, "estPriceKRW": 110000 }
+    ]},
+    { "index": 2, "candidates": [
+      { "mode": "bus", "description": "상트페테르부르크 → 이반고로드, 국경 도보 통과 → 나르바 → 탈린 (버스 두 대 연결)", "operatorHint": "Baltic Shuttle / Lux Express", "estDurationMin": 450, "estPriceKRW": 55000, "borderCrossing": true },
+      { "mode": "train", "description": "알레그로 열차로 헬싱키 이동 후 페리로 탈린", "operatorHint": "Allegro (VR)", "estDurationMin": 420, "estPriceKRW": 150000, "borderCrossing": true, "notes": "운행 여부 확인 필요" },
+      { "mode": "bus", "description": "프스코프 경유 연결 버스로 탈린", "operatorHint": "Baltic Shuttle", "estDurationMin": 720, "estPriceKRW": 60000, "borderCrossing": true, "notes": "운행 여부 확인 필요" }
+    ]},
+    { "index": 3, "candidates": [
+      { "mode": "ferry", "description": "탈린 항구 → 헬싱키 항구 페리", "operatorHint": "Tallink / Viking Line / Eckerö Line", "estDurationMin": 130, "estPriceKRW": 50000, "borderCrossing": false }
+    ]},
+    { "index": 4, "hubSuggestions": [], "candidates": [
+      { "mode": "flight", "description": "헬싱키 → 인천 (노선표에 직항 운항 중)", "estDurationMin": 780, "estPriceKRW": 850000 }
+    ]}
+  ],
+  "tips": [
+    "러시아에서는 한국에서 발급한 해외결제 카드가 대부분 되지 않는다고 알려져 있습니다. 출발 전 결제 수단을 따로 확인하세요.",
+    "상트페테르부르크 → 탈린 구간은 국경을 걸어서 건너므로 짐을 직접 들고 이동할 수 있게 꾸리세요.",
+    "에스토니아에 들어가는 순간부터 쉥겐 체류일이 시작됩니다. 첫 입국 때 EES 등록이 있습니다.",
+    "겨울에는 해가 짧아 오후 4시 전후로 어두워집니다. 야외 일정은 오전에 배치하세요."
+  ]
+}

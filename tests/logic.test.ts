@@ -1,0 +1,122 @@
+// 핵심 규칙 테스트: npm test
+import { describe, expect, it } from "vitest";
+import { maxDaysInWindow, runEntryChecks } from "@/lib/entry";
+import { gatewayInfo } from "@/lib/incheon";
+import { bestPaths, buildGraph, flightKey } from "@/lib/pathfind";
+import { allocateNights, banBlock } from "@/lib/server/planner";
+import { findLocalCity } from "@/lib/server/resolve";
+import { matchKnowledgeBase } from "@/lib/server/verify";
+import type { FlightOption, Leg, TransportCandidate } from "@/lib/types";
+
+const city = (n: string) => findLocalCity(n)!;
+const cand = (id: string, mode: TransportCandidate["mode"], description: string, extra: Partial<TransportCandidate> = {}): TransportCandidate => ({ id, mode, description, ...extra });
+const leg = (index: number, a: string, b: string, candidates: TransportCandidate[]): Leg => ({ index, from: city(a), to: city(b), date: "2027-01-10", distanceKm: 500, candidates });
+const fo = (id: string, price: number, dur = 600): FlightOption => ({ id, source: "travelpayouts", priceKRW: price, durationMin: dur, stops: 0, via: [], segments: [], airlines: ["X"], cached: true, fetchedAt: "" });
+
+describe("체류일 배분", () => {
+  it("입력한 박 수를 그대로 쓴다", () => {
+    expect(allocateNights({ cities: [{ name: "a", days: 3 }, { name: "b", days: 2 }], startDate: "2027-01-01", budget: "mid", interests: [], travelers: 1 })).toEqual([3, 2]);
+  });
+  it("비운 도시는 전체 일수에서 나눈다", () => {
+    expect(allocateNights({ cities: [{ name: "a", days: 4 }, { name: "b" }, { name: "c" }], totalDays: 9, startDate: "2027-01-01", budget: "mid", interests: [], travelers: 1 })).toEqual([4, 3, 2]);
+  });
+});
+
+describe("여행금지", () => {
+  it("우크라이나 도시는 일정 생성을 막는다", () => {
+    expect(banBlock({ name: "키이우", nameEn: "Kyiv", country: "UA", lat: 50.45, lng: 30.52, airports: [] })).toMatch(/여행금지/);
+  });
+  it("쿠르스크주는 막고, 민스크는 통과", () => {
+    expect(banBlock(city("쿠르스크"))).toMatch(/여행금지 지역/);
+    expect(banBlock(city("민스크"))).toBeNull();
+  });
+});
+
+describe("인천 노선표", () => {
+  it("모스크바는 직항 운휴, 헬싱키는 운항", () => {
+    const m = gatewayInfo(city("모스크바"));
+    expect(m.hasDirect).toBe(false);
+    expect(m.suspendedDirect).toBe(true);
+    expect(m.nearest[0].iata).toBe("HEL");
+    expect(gatewayInfo(city("헬싱키")).hasDirect).toBe(true);
+  });
+});
+
+describe("운행 지식베이스 매칭", () => {
+  it("알레그로는 어느 구간에서 나와도 운행 중단", () => {
+    const l = leg(2, "상트페테르부르크", "탈린", [cand("a", "train", "알레그로 열차로 헬싱키 경유", { operatorHint: "Allegro (VR)" })]);
+    expect(matchKnowledgeBase(l, l.candidates[0])?.status).toBe("suspended");
+  });
+  it("프스코프 경유 버스는 중단, 나르바 경유 버스는 조건부", () => {
+    const l = leg(2, "상트페테르부르크", "탈린", [cand("p", "bus", "프스코프 경유 연결 버스"), cand("n", "bus", "이반고로드 도보 국경 통과 후 나르바", { operatorHint: "Lux Express" })]);
+    expect(matchKnowledgeBase(l, l.candidates[0])?.id).toBe("tallinn-pskov-bus");
+    expect(matchKnowledgeBase(l, l.candidates[1])?.status).toBe("conditional");
+  });
+  it("탈린–헬싱키 페리는 지식베이스에 없음", () => {
+    const l = leg(3, "탈린", "헬싱키", [cand("f", "ferry", "탈린 항구 → 헬싱키 항구")]);
+    expect(matchKnowledgeBase(l, l.candidates[0])).toBeNull();
+  });
+});
+
+describe("최저가 경로 (다익스트라)", () => {
+  const legs = [
+    leg(0, "서울", "모스크바", [cand("L0-0", "flight", "환승편")]),
+    leg(1, "모스크바", "상트페테르부르크", [cand("L1-0", "train", "고속열차", { estPriceKRW: 90000, estDurationMin: 240 }), cand("L1-1", "train", "야간열차", { estPriceKRW: 60000, estDurationMin: 540 })]),
+    leg(2, "상트페테르부르크", "서울", [cand("L2-0", "flight", "귀국")]),
+  ];
+  const flights = {
+    [flightKey(0)]: [fo("d1", 900000, 900)],
+    [flightKey(0, "IST", "a")]: [fo("h1", 400000, 700)],
+    [flightKey(0, "IST", "b")]: [fo("h2", 300000, 200)],
+    [flightKey(2)]: [fo("r1", 800000, 800)],
+  };
+  it("별도 발권 조합이 더 싸면 최저가 경로로 고른다", () => {
+    const paths = bestPaths(buildGraph({ legs, flights, hubs: { 0: ["IST"] }, verify: {} }), legs.length);
+    const price = paths.find((p) => p.objective === "price")!;
+    expect(price.totalKRW).toBe(400000 + 300000 + 60000 + 800000);
+    expect(price.selfTransfers).toBe(1);
+  });
+  it("운행 중단 수단은 경로에서 뺀다", () => {
+    const verify = { "L1-1": { legIndex: 1, candidateId: "L1-1", status: "suspended" as const, summary: "", sources: [], method: "knowledge-base" as const, checkedAt: "" } };
+    const paths = bestPaths(buildGraph({ legs, flights, hubs: { 0: ["IST"] }, verify }), legs.length);
+    expect(paths.find((p) => p.objective === "price")!.edges.some((e) => e.ref === "L1-1")).toBe(false);
+  });
+  it("최단 시간은 직항을 고른다", () => {
+    const paths = bestPaths(buildGraph({ legs, flights, hubs: { 0: ["IST"] }, verify: {} }), legs.length);
+    expect(paths.find((p) => p.objective === "time")!.edges[0].ref).toBe("d1");
+  });
+});
+
+describe("출입국 규칙", () => {
+  const stays = [
+    { name: "모스크바", country: "RU", region: "Moscow", arrive: "2027-01-10", depart: "2027-01-13" },
+    { name: "상트페테르부르크", country: "RU", region: "Saint Petersburg", arrive: "2027-01-13", depart: "2027-01-16" },
+    { name: "탈린", country: "EE", arrive: "2027-01-16", depart: "2027-01-18" },
+    { name: "헬싱키", country: "FI", arrive: "2027-01-18", depart: "2027-01-20" },
+  ];
+  it("쉥겐 체류일은 입국일·출국일 포함 합산", () => {
+    const c = runEntryChecks(stays, []);
+    expect(c.find((x) => x.title.startsWith("쉥겐"))?.title).toBe("쉥겐 지역 체류 5일 / 90일");
+  });
+  it("러시아 연속 체류는 하나의 입국으로 계산", () => {
+    const c = runEntryChecks(stays, []);
+    expect(c.find((x) => x.title.startsWith("러시아 체류"))?.title).toBe("러시아 체류 7일 / 1회 60일");
+  });
+  it("쉥겐 90일 초과는 불가", () => {
+    const long = [{ name: "파리", country: "FR", arrive: "2027-01-01", depart: "2027-04-15" }];
+    expect(runEntryChecks(long, []).find((x) => x.title.startsWith("쉥겐"))?.level).toBe("block");
+  });
+  it("러시아–벨라루스 육로는 경고, 브레스트는 국경 30km 경고", () => {
+    const s = [
+      { name: "모스크바", country: "RU", region: "Moscow", arrive: "2027-01-10", depart: "2027-01-13" },
+      { name: "브레스트", country: "BY", region: "Brest Region", arrive: "2027-01-13", depart: "2027-01-15" },
+    ];
+    const c = runEntryChecks(s, [{ fromCountry: "RU", toCountry: "BY", mode: "train" }]);
+    expect(c.some((x) => x.title === "러시아–벨라루스 육로 이동" && x.level === "warn")).toBe(true);
+    expect(c.some((x) => x.title.includes("브레스트") && x.level === "warn")).toBe(true);
+    expect(c.some((x) => x.title.includes("벨라루스: 규칙 유효기간"))).toBe(true);
+  });
+  it("180일 창 계산", () => {
+    expect(maxDaysInWindow(["2027-01-01", "2027-01-02", "2027-08-01"], 180)).toBe(2);
+  });
+});
