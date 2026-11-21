@@ -16,10 +16,11 @@ export interface Place {
 
 /** 사용자 입력 */
 export interface TripRequest {
-  cities: { name: string; days?: number }[]; // 방문 순서대로
+  cities: { name: string; country?: ISO2; days?: number }[]; // 방문 순서대로 (country: 화면에서 고른 나라)
   startDate: string; // YYYY-MM-DD (인천 출발일)
   totalDays?: number; // 도시별 일수를 비웠을 때 AI가 나눌 전체 일수
-  budget: "low" | "mid" | "high";
+  budgetKRW: number; // 1인 총예산 (항공·교통·숙박·식비 포함)
+  budgetToleranceKRW: number; // 허용 범위 ±
   interests: string[];
   travelers: number;
 }
@@ -67,6 +68,7 @@ export interface CityStay {
   nights: number;
   summary: string;
   days: DayPlan[];
+  estDailyCostKRW?: number; // AI 추정: 1인 하루 숙박·식사·입장료
 }
 
 export interface GatewayInfo {

@@ -27,10 +27,10 @@ function fromRow(r: CityRow): Place {
   };
 }
 
-export function findLocalCity(input: string): Place | null {
+export function findLocalCity(input: string, country?: string): Place | null {
   const q = norm(input);
   const row = citiesData.cities.find(
-    (c) => norm(c.name) === q || norm(c.nameEn) === q || c.aliases.some((a) => norm(a) === q),
+    (c) => (!country || c.country === country) && (norm(c.name) === q || norm(c.nameEn) === q || c.aliases.some((a) => norm(a) === q)),
   );
   return row ? fromRow(row) : null;
 }
@@ -45,10 +45,10 @@ interface NominatimHit {
   address?: { country_code?: string; state?: string; region?: string; city?: string };
 }
 
-async function nominatim(input: string): Promise<Place | null> {
-  const url =
-    "https://nominatim.openstreetmap.org/search?" +
-    new URLSearchParams({ q: input, format: "jsonv2", addressdetails: "1", limit: "1", "accept-language": "en" });
+async function nominatim(input: string, country?: string): Promise<Place | null> {
+  const params: Record<string, string> = { q: input, format: "jsonv2", addressdetails: "1", limit: "1", "accept-language": "en" };
+  if (country) params.countrycodes = country.toLowerCase(); // 고른 나라 안에서만 검색
+  const url = "https://nominatim.openstreetmap.org/search?" + new URLSearchParams(params);
   const res = await fetch(url, {
     headers: { "User-Agent": `RouteAI-student-project (${env.contactEmail})` },
     signal: AbortSignal.timeout(8000),
@@ -105,12 +105,12 @@ export async function nearbyAirports(lat: number, lng: number, maxKm = 150): Pro
   }
 }
 
-export async function resolveCity(input: string): Promise<Place | null> {
-  const local = findLocalCity(input);
+export async function resolveCity(input: string, country?: string): Promise<Place | null> {
+  const local = findLocalCity(input, country);
   if (local) return local;
-  return cached(`resolve:${norm(input)}`, DAY, async () => {
-    const p = await nominatim(input).catch(() => null);
-    if (!p) return null;
+  return cached(`resolve:${country ?? ""}:${norm(input)}`, DAY, async () => {
+    const p = await nominatim(input, country).catch(() => null);
+    if (!p || (country && p.country !== country)) return null;
     p.airports = await nearbyAirports(p.lat, p.lng);
     return p;
   });

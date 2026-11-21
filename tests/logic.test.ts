@@ -15,10 +15,10 @@ const fo = (id: string, price: number, dur = 600): FlightOption => ({ id, source
 
 describe("체류일 배분", () => {
   it("입력한 박 수를 그대로 쓴다", () => {
-    expect(allocateNights({ cities: [{ name: "a", days: 3 }, { name: "b", days: 2 }], startDate: "2027-01-01", budget: "mid", interests: [], travelers: 1 })).toEqual([3, 2]);
+    expect(allocateNights({ cities: [{ name: "a", days: 3 }, { name: "b", days: 2 }], startDate: "2027-01-01", budgetKRW: 3000000, budgetToleranceKRW: 300000, interests: [], travelers: 1 })).toEqual([3, 2]);
   });
   it("비운 도시는 전체 일수에서 나눈다", () => {
-    expect(allocateNights({ cities: [{ name: "a", days: 4 }, { name: "b" }, { name: "c" }], totalDays: 9, startDate: "2027-01-01", budget: "mid", interests: [], travelers: 1 })).toEqual([4, 3, 2]);
+    expect(allocateNights({ cities: [{ name: "a", days: 4 }, { name: "b" }, { name: "c" }], totalDays: 9, startDate: "2027-01-01", budgetKRW: 3000000, budgetToleranceKRW: 300000, interests: [], travelers: 1 })).toEqual([4, 3, 2]);
   });
 });
 
@@ -29,6 +29,14 @@ describe("여행금지", () => {
   it("쿠르스크주는 막고, 민스크는 통과", () => {
     expect(banBlock(city("쿠르스크"))).toMatch(/여행금지 지역/);
     expect(banBlock(city("민스크"))).toBeNull();
+  });
+});
+
+describe("나라를 고른 도시 찾기", () => {
+  it("고른 나라와 맞을 때만 찾는다", () => {
+    expect(findLocalCity("파리", "FR")?.nameEn).toBe("Paris");
+    expect(findLocalCity("파리", "IT")).toBeNull();
+    expect(findLocalCity("로마", "IT")?.airports).toContain("FCO");
   });
 });
 

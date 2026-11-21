@@ -33,10 +33,14 @@ export const LegSchema = z.object({
 });
 
 export const TripRequestSchema = z.object({
-  cities: z.array(z.object({ name: z.string().min(1).max(60), days: z.number().int().min(1).max(30).optional() })).min(1).max(8),
+  cities: z
+    .array(z.object({ name: z.string().min(1).max(60), country: z.string().length(2).optional(), days: z.number().int().min(1).max(30).optional() }))
+    .min(1)
+    .max(8),
   startDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   totalDays: z.number().int().min(1).max(60).optional(),
-  budget: z.enum(["low", "mid", "high"]),
+  budgetKRW: z.number().int().min(100000).max(100000000),
+  budgetToleranceKRW: z.number().int().min(0).max(50000000),
   interests: z.array(z.string().max(30)).max(10),
   travelers: z.number().int().min(1).max(10),
 });
