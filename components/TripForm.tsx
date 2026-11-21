@@ -13,9 +13,9 @@ const COUNTRY_NAMES = countriesData.countries as Record<string, { ko: string }>;
 const MENU = menuData.menu as Record<string, string[]>;
 const CITY_EN = Object.fromEntries(citiesData.cities.map((c) => [`${c.country}:${c.name}`, c.nameEn]));
 
-/** 나라 목록: 자주 가는 나라 → 나머지 가나다순. 여행금지 국가는 고를 수 없게 표시 */
+/** 나라 목록(유럽): 자주 가는 나라 → 나머지 가나다순 */
 function countryOptions() {
-  const all = Object.keys(COUNTRY_NAMES).filter((c) => c !== "KR");
+  const all = Object.keys(MENU);
   const popular = menuData.popular.filter((c) => all.includes(c));
   const rest = all.filter((c) => !popular.includes(c)).sort((a, b) => COUNTRY_NAMES[a].ko.localeCompare(COUNTRY_NAMES[b].ko, "ko"));
   return { popular, rest };
@@ -87,7 +87,7 @@ export default function TripForm(props: { busy: boolean; onSubmit: (r: TripReque
   return (
     <form onSubmit={submit}>
       <h1 className="brand">RoutePass</h1>
-      <p className="brand-sub">방문할 나라와 도시를 순서대로 고르면 일정, 이동 방법과 운행 여부, 출입국 조건, 예산을 함께 확인합니다. 출발과 도착은 인천입니다.</p>
+      <p className="brand-sub">유럽 여행 플래너. 나라와 도시를 순서대로 고르면 일정, 이동 방법과 운행 여부, 출입국 조건, 예산을 함께 확인합니다. 출발과 도착은 인천입니다.</p>
 
       <div className="field">
         <span className="label">방문 순서 · 나라 · 도시 · 박 수 (비우면 3박)</span>
@@ -105,7 +105,7 @@ export default function TripForm(props: { busy: boolean; onSubmit: (r: TripReque
                     </option>
                   ))}
                 </optgroup>
-                <optgroup label="전체 (가나다순)">
+                <optgroup label="유럽 전체 (가나다순)">
                   {rest.map((c) => {
                     const banned = bans.bannedCountries.includes(c);
                     return (

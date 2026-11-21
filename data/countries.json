@@ -1,84 +1,373 @@
 {
-  "_note": "schengen: 2026년 기준 쉥겐 가입 29개국. zone: 체류일을 함께 계산해야 하는 묶음(예: 러시아-벨라루스 연합국가).",
+  "_note": "schengen: 2026년 기준 쉥겐 가입 29개국. zone: 체류일을 함께 계산해야 하는 묶음(예: 러시아-벨라루스 연합국가). 모나코는 쉥겐 가입국은 아니지만 프랑스를 통해서만 드나들어 쉥겐 체류로 계산합니다.",
   "countries": {
-    "KR": { "ko": "대한민국", "en": "South Korea" },
-    "AT": { "ko": "오스트리아", "en": "Austria", "schengen": true },
-    "BE": { "ko": "벨기에", "en": "Belgium", "schengen": true },
-    "BG": { "ko": "불가리아", "en": "Bulgaria", "schengen": true },
-    "HR": { "ko": "크로아티아", "en": "Croatia", "schengen": true },
-    "CZ": { "ko": "체코", "en": "Czechia", "schengen": true },
-    "DK": { "ko": "덴마크", "en": "Denmark", "schengen": true },
-    "EE": { "ko": "에스토니아", "en": "Estonia", "schengen": true },
-    "FI": { "ko": "핀란드", "en": "Finland", "schengen": true },
-    "FR": { "ko": "프랑스", "en": "France", "schengen": true },
-    "DE": { "ko": "독일", "en": "Germany", "schengen": true },
-    "GR": { "ko": "그리스", "en": "Greece", "schengen": true },
-    "HU": { "ko": "헝가리", "en": "Hungary", "schengen": true },
-    "IS": { "ko": "아이슬란드", "en": "Iceland", "schengen": true },
-    "IT": { "ko": "이탈리아", "en": "Italy", "schengen": true },
-    "LV": { "ko": "라트비아", "en": "Latvia", "schengen": true },
-    "LI": { "ko": "리히텐슈타인", "en": "Liechtenstein", "schengen": true },
-    "LT": { "ko": "리투아니아", "en": "Lithuania", "schengen": true },
-    "LU": { "ko": "룩셈부르크", "en": "Luxembourg", "schengen": true },
-    "MT": { "ko": "몰타", "en": "Malta", "schengen": true },
-    "NL": { "ko": "네덜란드", "en": "Netherlands", "schengen": true },
-    "NO": { "ko": "노르웨이", "en": "Norway", "schengen": true },
-    "PL": { "ko": "폴란드", "en": "Poland", "schengen": true },
-    "PT": { "ko": "포르투갈", "en": "Portugal", "schengen": true },
-    "RO": { "ko": "루마니아", "en": "Romania", "schengen": true },
-    "SK": { "ko": "슬로바키아", "en": "Slovakia", "schengen": true },
-    "SI": { "ko": "슬로베니아", "en": "Slovenia", "schengen": true },
-    "ES": { "ko": "스페인", "en": "Spain", "schengen": true },
-    "SE": { "ko": "스웨덴", "en": "Sweden", "schengen": true },
-    "CH": { "ko": "스위스", "en": "Switzerland", "schengen": true },
-    "GB": { "ko": "영국", "en": "United Kingdom" },
-    "IE": { "ko": "아일랜드", "en": "Ireland" },
-    "CY": { "ko": "키프로스", "en": "Cyprus" },
-    "RS": { "ko": "세르비아", "en": "Serbia" },
-    "TR": { "ko": "튀르키예", "en": "Türkiye" },
-    "UA": { "ko": "우크라이나", "en": "Ukraine" },
-    "MD": { "ko": "몰도바", "en": "Moldova" },
-    "GE": { "ko": "조지아", "en": "Georgia" },
-    "AM": { "ko": "아르메니아", "en": "Armenia" },
-    "AZ": { "ko": "아제르바이잔", "en": "Azerbaijan" },
-    "RU": { "ko": "러시아", "en": "Russia", "zone": "RU-BY" },
-    "BY": { "ko": "벨라루스", "en": "Belarus", "zone": "RU-BY" },
-    "KZ": { "ko": "카자흐스탄", "en": "Kazakhstan" },
-    "UZ": { "ko": "우즈베키스탄", "en": "Uzbekistan" },
-    "MN": { "ko": "몽골", "en": "Mongolia" },
-    "AE": { "ko": "아랍에미리트", "en": "United Arab Emirates" },
-    "IL": { "ko": "이스라엘", "en": "Israel" },
-    "IN": { "ko": "인도", "en": "India" },
-    "JP": { "ko": "일본", "en": "Japan" },
-    "CN": { "ko": "중국", "en": "China" },
-    "HK": { "ko": "홍콩", "en": "Hong Kong" },
-    "MO": { "ko": "마카오", "en": "Macao" },
-    "TW": { "ko": "대만", "en": "Taiwan" },
-    "VN": { "ko": "베트남", "en": "Vietnam" },
-    "PH": { "ko": "필리핀", "en": "Philippines" },
-    "TH": { "ko": "태국", "en": "Thailand" },
-    "MY": { "ko": "말레이시아", "en": "Malaysia" },
-    "ID": { "ko": "인도네시아", "en": "Indonesia" },
-    "LA": { "ko": "라오스", "en": "Laos" },
-    "SG": { "ko": "싱가포르", "en": "Singapore" },
-    "KH": { "ko": "캄보디아", "en": "Cambodia" },
-    "MM": { "ko": "미얀마", "en": "Myanmar" },
-    "GU": { "ko": "괌(미국령)", "en": "Guam" },
-    "MP": { "ko": "북마리아나제도(미국령)", "en": "Northern Mariana Islands" },
-    "AU": { "ko": "호주", "en": "Australia" },
-    "NZ": { "ko": "뉴질랜드", "en": "New Zealand" },
-    "US": { "ko": "미국", "en": "United States" },
-    "CA": { "ko": "캐나다", "en": "Canada" },
-    "MX": { "ko": "멕시코", "en": "Mexico" },
-    "ET": { "ko": "에티오피아", "en": "Ethiopia" },
-    "SO": { "ko": "소말리아", "en": "Somalia" },
-    "AF": { "ko": "아프가니스탄", "en": "Afghanistan" },
-    "IQ": { "ko": "이라크", "en": "Iraq" },
-    "YE": { "ko": "예멘", "en": "Yemen" },
-    "LY": { "ko": "리비아", "en": "Libya" },
-    "SD": { "ko": "수단", "en": "Sudan" },
-    "HT": { "ko": "아이티", "en": "Haiti" },
-    "ML": { "ko": "말리", "en": "Mali" },
-    "IR": { "ko": "이란", "en": "Iran" }
+    "KR": {
+      "ko": "대한민국",
+      "en": "South Korea"
+    },
+    "AT": {
+      "ko": "오스트리아",
+      "en": "Austria",
+      "schengen": true
+    },
+    "BE": {
+      "ko": "벨기에",
+      "en": "Belgium",
+      "schengen": true
+    },
+    "BG": {
+      "ko": "불가리아",
+      "en": "Bulgaria",
+      "schengen": true
+    },
+    "HR": {
+      "ko": "크로아티아",
+      "en": "Croatia",
+      "schengen": true
+    },
+    "CZ": {
+      "ko": "체코",
+      "en": "Czechia",
+      "schengen": true
+    },
+    "DK": {
+      "ko": "덴마크",
+      "en": "Denmark",
+      "schengen": true
+    },
+    "EE": {
+      "ko": "에스토니아",
+      "en": "Estonia",
+      "schengen": true
+    },
+    "FI": {
+      "ko": "핀란드",
+      "en": "Finland",
+      "schengen": true
+    },
+    "FR": {
+      "ko": "프랑스",
+      "en": "France",
+      "schengen": true
+    },
+    "DE": {
+      "ko": "독일",
+      "en": "Germany",
+      "schengen": true
+    },
+    "GR": {
+      "ko": "그리스",
+      "en": "Greece",
+      "schengen": true
+    },
+    "HU": {
+      "ko": "헝가리",
+      "en": "Hungary",
+      "schengen": true
+    },
+    "IS": {
+      "ko": "아이슬란드",
+      "en": "Iceland",
+      "schengen": true
+    },
+    "IT": {
+      "ko": "이탈리아",
+      "en": "Italy",
+      "schengen": true
+    },
+    "LV": {
+      "ko": "라트비아",
+      "en": "Latvia",
+      "schengen": true
+    },
+    "LI": {
+      "ko": "리히텐슈타인",
+      "en": "Liechtenstein",
+      "schengen": true
+    },
+    "LT": {
+      "ko": "리투아니아",
+      "en": "Lithuania",
+      "schengen": true
+    },
+    "LU": {
+      "ko": "룩셈부르크",
+      "en": "Luxembourg",
+      "schengen": true
+    },
+    "MT": {
+      "ko": "몰타",
+      "en": "Malta",
+      "schengen": true
+    },
+    "NL": {
+      "ko": "네덜란드",
+      "en": "Netherlands",
+      "schengen": true
+    },
+    "NO": {
+      "ko": "노르웨이",
+      "en": "Norway",
+      "schengen": true
+    },
+    "PL": {
+      "ko": "폴란드",
+      "en": "Poland",
+      "schengen": true
+    },
+    "PT": {
+      "ko": "포르투갈",
+      "en": "Portugal",
+      "schengen": true
+    },
+    "RO": {
+      "ko": "루마니아",
+      "en": "Romania",
+      "schengen": true
+    },
+    "SK": {
+      "ko": "슬로바키아",
+      "en": "Slovakia",
+      "schengen": true
+    },
+    "SI": {
+      "ko": "슬로베니아",
+      "en": "Slovenia",
+      "schengen": true
+    },
+    "ES": {
+      "ko": "스페인",
+      "en": "Spain",
+      "schengen": true
+    },
+    "SE": {
+      "ko": "스웨덴",
+      "en": "Sweden",
+      "schengen": true
+    },
+    "CH": {
+      "ko": "스위스",
+      "en": "Switzerland",
+      "schengen": true
+    },
+    "GB": {
+      "ko": "영국",
+      "en": "United Kingdom"
+    },
+    "IE": {
+      "ko": "아일랜드",
+      "en": "Ireland"
+    },
+    "CY": {
+      "ko": "키프로스",
+      "en": "Cyprus"
+    },
+    "RS": {
+      "ko": "세르비아",
+      "en": "Serbia"
+    },
+    "TR": {
+      "ko": "튀르키예",
+      "en": "Türkiye"
+    },
+    "UA": {
+      "ko": "우크라이나",
+      "en": "Ukraine"
+    },
+    "MD": {
+      "ko": "몰도바",
+      "en": "Moldova"
+    },
+    "GE": {
+      "ko": "조지아",
+      "en": "Georgia"
+    },
+    "AM": {
+      "ko": "아르메니아",
+      "en": "Armenia"
+    },
+    "AZ": {
+      "ko": "아제르바이잔",
+      "en": "Azerbaijan"
+    },
+    "RU": {
+      "ko": "러시아",
+      "en": "Russia",
+      "zone": "RU-BY"
+    },
+    "BY": {
+      "ko": "벨라루스",
+      "en": "Belarus",
+      "zone": "RU-BY"
+    },
+    "KZ": {
+      "ko": "카자흐스탄",
+      "en": "Kazakhstan"
+    },
+    "UZ": {
+      "ko": "우즈베키스탄",
+      "en": "Uzbekistan"
+    },
+    "MN": {
+      "ko": "몽골",
+      "en": "Mongolia"
+    },
+    "AE": {
+      "ko": "아랍에미리트",
+      "en": "United Arab Emirates"
+    },
+    "IL": {
+      "ko": "이스라엘",
+      "en": "Israel"
+    },
+    "IN": {
+      "ko": "인도",
+      "en": "India"
+    },
+    "JP": {
+      "ko": "일본",
+      "en": "Japan"
+    },
+    "CN": {
+      "ko": "중국",
+      "en": "China"
+    },
+    "HK": {
+      "ko": "홍콩",
+      "en": "Hong Kong"
+    },
+    "MO": {
+      "ko": "마카오",
+      "en": "Macao"
+    },
+    "TW": {
+      "ko": "대만",
+      "en": "Taiwan"
+    },
+    "VN": {
+      "ko": "베트남",
+      "en": "Vietnam"
+    },
+    "PH": {
+      "ko": "필리핀",
+      "en": "Philippines"
+    },
+    "TH": {
+      "ko": "태국",
+      "en": "Thailand"
+    },
+    "MY": {
+      "ko": "말레이시아",
+      "en": "Malaysia"
+    },
+    "ID": {
+      "ko": "인도네시아",
+      "en": "Indonesia"
+    },
+    "LA": {
+      "ko": "라오스",
+      "en": "Laos"
+    },
+    "SG": {
+      "ko": "싱가포르",
+      "en": "Singapore"
+    },
+    "KH": {
+      "ko": "캄보디아",
+      "en": "Cambodia"
+    },
+    "MM": {
+      "ko": "미얀마",
+      "en": "Myanmar"
+    },
+    "GU": {
+      "ko": "괌(미국령)",
+      "en": "Guam"
+    },
+    "MP": {
+      "ko": "북마리아나제도(미국령)",
+      "en": "Northern Mariana Islands"
+    },
+    "AU": {
+      "ko": "호주",
+      "en": "Australia"
+    },
+    "NZ": {
+      "ko": "뉴질랜드",
+      "en": "New Zealand"
+    },
+    "US": {
+      "ko": "미국",
+      "en": "United States"
+    },
+    "CA": {
+      "ko": "캐나다",
+      "en": "Canada"
+    },
+    "MX": {
+      "ko": "멕시코",
+      "en": "Mexico"
+    },
+    "ET": {
+      "ko": "에티오피아",
+      "en": "Ethiopia"
+    },
+    "SO": {
+      "ko": "소말리아",
+      "en": "Somalia"
+    },
+    "AF": {
+      "ko": "아프가니스탄",
+      "en": "Afghanistan"
+    },
+    "IQ": {
+      "ko": "이라크",
+      "en": "Iraq"
+    },
+    "YE": {
+      "ko": "예멘",
+      "en": "Yemen"
+    },
+    "LY": {
+      "ko": "리비아",
+      "en": "Libya"
+    },
+    "SD": {
+      "ko": "수단",
+      "en": "Sudan"
+    },
+    "HT": {
+      "ko": "아이티",
+      "en": "Haiti"
+    },
+    "ML": {
+      "ko": "말리",
+      "en": "Mali"
+    },
+    "IR": {
+      "ko": "이란",
+      "en": "Iran"
+    },
+    "MC": {
+      "ko": "모나코",
+      "en": "Monaco",
+      "schengen": true
+    },
+    "BA": {
+      "ko": "보스니아 헤르체고비나",
+      "en": "Bosnia and Herzegovina"
+    },
+    "ME": {
+      "ko": "몬테네그로",
+      "en": "Montenegro"
+    },
+    "MK": {
+      "ko": "북마케도니아",
+      "en": "North Macedonia"
+    },
+    "AL": {
+      "ko": "알바니아",
+      "en": "Albania"
+    }
   }
 }

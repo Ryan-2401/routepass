@@ -2,6 +2,7 @@
 import "server-only";
 import { z } from "zod";
 import demoPlan from "@/data/demo/plan.json";
+import cityMenu from "@/data/city-menu.json";
 import bans from "@/data/travel-bans.json";
 import { countryName } from "@/lib/countries";
 import { addDays } from "@/lib/dates";
@@ -104,7 +105,7 @@ function travelerLine(req: TripRequest) {
 
 /** 도시 하나의 일정만 만드는 짧은 프롬프트 (여러 도시를 동시에 요청해 빠르게) */
 function cityPrompt(req: TripRequest, s: CityStay, i: number, total: number): string {
-  return `당신은 한국인 여행자를 위한 여행 일정 설계자입니다. 전체 ${total}개 도시 중 ${i + 1}번째 도시의 일정만 만드세요.
+  return `당신은 한국인의 유럽 여행 일정 설계자입니다. 전체 ${total}개 도시 중 ${i + 1}번째 도시의 일정만 만드세요.
 ${travelerLine(req)}
 [도시] ${s.place.name} (${s.place.nameEn}, ${countryName(s.place.country)}) — ${s.arrive} 도착, ${s.depart} 출발, ${s.nights}박
 [일정 날짜 (이 날짜 그대로, 하나씩)] ${s.days.map((d) => d.date).join(", ")}
@@ -225,6 +226,10 @@ function applyDemo(stays: CityStay[], legs: Leg[]) {
 export async function buildPlan(req: TripRequest): Promise<Plan & { hubSuggestions: Record<number, string[]> }> {
   if (!req.cities.length) throw new PlanError("도시를 하나 이상 입력하세요.", "input");
   if (req.cities.length > 8) throw new PlanError("도시는 8개까지 넣을 수 있습니다.", "input");
+  // 이 앱은 유럽 전용: 화면의 나라 목록에 있는 나라만 받음
+  const europe = Object.keys(cityMenu.menu);
+  const outside = req.cities.filter((c) => !c.country || !europe.includes(c.country));
+  if (outside.length) throw new PlanError("이 앱은 유럽 여행 전용입니다. 나라 목록에서 유럽 나라를 골라 주세요.", "input");
 
   const places = await Promise.all(req.cities.map((c) => resolveCity(c.name, c.country)));
   const missing = req.cities.filter((_, i) => !places[i]).map((c) => (c.country ? `${c.name}(${countryName(c.country)})` : c.name));
@@ -247,7 +252,7 @@ export async function buildPlan(req: TripRequest): Promise<Plan & { hubSuggestio
   if (!env.geminiKey) {
     if (!isDemoRoute(resolved)) {
       throw new PlanError(
-        `데모 모드에서는 예시 여정(${DEMO_CITIES.join(" → ")})만 만들 수 있습니다. 다른 여정은 .env.local에 GEMINI_API_KEY를 넣어 주세요.`,
+        `AI 키가 없는 데모 모드에서는 예시 여정(${DEMO_CITIES.join(" → ")})만 만들 수 있습니다. 다른 여정은 GEMINI_API_KEY를 넣어 주세요.`,
         "demo-only",
       );
     }

@@ -40,6 +40,20 @@ describe("나라를 고른 도시 찾기", () => {
   });
 });
 
+describe("유럽 도시 목록", () => {
+  it("선택 목록의 모든 도시가 데이터에 있고 나라가 맞다", async () => {
+    const menu = (await import("@/data/city-menu.json")).menu as Record<string, string[]>;
+    for (const [country, names] of Object.entries(menu)) {
+      for (const n of names) expect(findLocalCity(n, country), `${country} ${n}`).not.toBeNull();
+    }
+  });
+  it("유럽 밖 도시는 목록에 없다", async () => {
+    const menu = (await import("@/data/city-menu.json")).menu as Record<string, string[]>;
+    expect(Object.keys(menu)).not.toContain("JP");
+    expect(Object.keys(menu)).not.toContain("US");
+  });
+});
+
 describe("인천 노선표", () => {
   it("모스크바는 직항 운휴, 헬싱키는 운항", () => {
     const m = gatewayInfo(city("모스크바"));
