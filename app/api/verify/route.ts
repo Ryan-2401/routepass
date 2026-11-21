@@ -4,7 +4,7 @@ import { CandidateSchema, LegSchema } from "@/lib/schemas";
 import { verifyCandidate } from "@/lib/server/verify";
 import type { Leg } from "@/lib/types";
 
-export const maxDuration = 60;
+export const maxDuration = 300;
 
 export async function POST(req: Request) {
   const body = await readBody(req, z.object({ leg: LegSchema, candidateId: z.string() }));

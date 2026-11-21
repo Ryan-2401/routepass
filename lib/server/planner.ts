@@ -89,56 +89,54 @@ type AiPlan = z.infer<typeof AiPlanSchema>;
 
 const BUDGET_KO = { low: "아끼는 편(배낭여행)", mid: "보통", high: "여유 있게" } as const;
 
-function buildPrompt(req: TripRequest, stays: CityStay[], legs: Leg[], hubs: string[]): string {
-  const stayLines = stays
-    .map(
-      (s, i) =>
-        `${i + 1}. ${s.place.name} (${s.place.nameEn}, ${countryName(s.place.country)}) — ${s.arrive} 도착, ${s.depart} 출발, ${s.nights}박. 일정 날짜: ${s.days
-          .map((d) => d.date)
-          .join(", ")}`,
-    )
-    .join("\n");
+const CitySchema = z.object({
+  summary: z.string(),
+  days: z.array(z.object({ date: z.string(), theme: z.string(), items: z.array(DayItemSchema).min(1) })),
+});
+const LegsSchema = AiPlanSchema.pick({ legs: true, tips: true });
+
+function travelerLine(req: TripRequest) {
+  return `[여행자] ${req.travelers}명, 예산: ${BUDGET_KO[req.budget]}, 관심사: ${req.interests.join(", ") || "특별히 없음"}`;
+}
+
+/** 도시 하나의 일정만 만드는 짧은 프롬프트 (여러 도시를 동시에 요청해 빠르게) */
+function cityPrompt(req: TripRequest, s: CityStay, i: number, total: number): string {
+  return `당신은 한국인 여행자를 위한 여행 일정 설계자입니다. 전체 ${total}개 도시 중 ${i + 1}번째 도시의 일정만 만드세요.
+${travelerLine(req)}
+[도시] ${s.place.name} (${s.place.nameEn}, ${countryName(s.place.country)}) — ${s.arrive} 도착, ${s.depart} 출발, ${s.nights}박
+[일정 날짜 (이 날짜 그대로, 하나씩)] ${s.days.map((d) => d.date).join(", ")}
+
+규칙:
+- 하루 items는 오전/점심/오후/저녁 중심으로 3~5개. 첫날은 도착일이라 오후부터 시작하세요.
+- 실제로 존재하는 유명 명소만 쓰고, 확실하지 않으면 지역 이름(예: "구시가지 산책")으로 쓰세요.
+- 식사(kind "food")에는 식당 이름을 절대 쓰지 말고 음식 종류만 쓰세요.
+- summary는 이 도시 일정의 흐름을 한국어 1~2문장으로.
+JSON: {"summary":"","days":[{"date":"YYYY-MM-DD","theme":"","items":[{"slot":"오전","title":"","kind":"sight","note":""}]}]}`;
+}
+
+/** 구간별 이동수단 후보와 팁만 만드는 프롬프트 */
+function legsPrompt(req: TripRequest, legs: Leg[], hubs: string[]): string {
   const legLines = legs
     .map((l) => `leg ${l.index}: ${l.from.name}(${l.from.nameEn}) → ${l.to.name}(${l.to.nameEn}), ${l.date}, 직선거리 ${l.distanceKm}km`)
     .join("\n");
-  return `당신은 한국인 여행자를 위한 여행 일정 설계자입니다. 아래 틀은 코드가 이미 확정했습니다. 틀을 바꾸지 말고 내용만 채우세요.
-
-[여행자] ${req.travelers}명, 예산: ${BUDGET_KO[req.budget]}, 관심사: ${req.interests.join(", ") || "특별히 없음"}
-
-[도시별 체류 (순서·날짜 고정)]
-${stayLines}
-
+  return `당신은 한국인 여행자를 위한 교통 전문가입니다. 아래 이동 구간마다 현실적인 이동수단 후보를 제안하세요.
+${travelerLine(req)}
 [이동 구간 (순서 고정)]
 ${legLines}
-
 [인천 노선표의 환승 허브 후보 IATA] ${hubs.join(", ")}
 
-출력 규칙:
-1. cities 배열은 위 도시 순서와 이름 그대로, days 배열은 위에 적힌 날짜 그대로 하나씩 만드세요.
-2. 하루 items는 오전/점심/오후/저녁 중심으로 3~5개. 실제로 존재하는 유명 명소만 쓰고, 확실하지 않으면 지역 이름(예: "구시가지 산책")으로 쓰세요.
-3. 식사(kind "food")에는 식당 이름을 절대 쓰지 말고 음식 종류만 쓰세요(예: "에스토니아 전통 요리"). 실제 식당은 앱이 지도 데이터에서 따로 찾습니다.
-4. legs 배열은 위 구간마다 하나씩, index를 그대로 쓰세요. 각 구간에 현실적인 이동수단 후보 1~3개를 넣으세요.
-   - 서울(인천)이 포함된 구간에는 반드시 mode "flight" 후보를 넣고, hubSuggestions에 위 허브 후보 중 검색해 볼 만한 곳을 최대 2개 고르세요.
-   - 국경을 넘으면 borderCrossing: true. 운행 여부가 불확실한 노선은 notes에 "운행 여부 확인 필요"라고 쓰세요.
-   - estDurationMin(분), estPriceKRW(1인 원화)는 대략적인 추정치입니다.
-5. tips에는 이 여정 전체에 필요한 실용 팁 3~5개(결제수단, 통신, 치안 등)를 쓰세요.
-
-JSON 형식:
-{"cities":[{"name":"","summary":"","days":[{"date":"YYYY-MM-DD","theme":"","items":[{"slot":"오전","title":"","kind":"sight","note":""}]}]}],
- "legs":[{"index":0,"candidates":[{"mode":"flight","description":"","operatorHint":"","estDurationMin":0,"estPriceKRW":0,"borderCrossing":true,"notes":""}],"hubSuggestions":["IST"]}],
- "tips":[""]}`;
+규칙:
+- legs 배열은 위 구간마다 하나씩, index를 그대로. 각 구간에 후보 1~3개.
+- 서울(인천)이 포함된 구간에는 반드시 mode "flight" 후보를 넣고, hubSuggestions에 위 허브 후보 중 검색해 볼 만한 곳을 최대 2개.
+- 국경을 넘으면 borderCrossing: true. 운행 여부가 불확실하면 notes에 "운행 여부 확인 필요".
+- estDurationMin(분), estPriceKRW(1인 원화)는 대략적인 추정치.
+- tips: 이 여정 전체에 필요한 실용 팁 3~5개(결제수단, 통신, 치안 등).
+JSON: {"legs":[{"index":0,"candidates":[{"mode":"flight","description":"","operatorHint":"","estDurationMin":0,"estPriceKRW":0,"borderCrossing":true,"notes":""}],"hubSuggestions":["IST"]}],"tips":[""]}`;
 }
 
 function checkAiPlan(ai: AiPlan, stays: CityStay[], legs: Leg[], hubs: string[]): string[] {
   const problems: string[] = [];
   if (ai.cities.length !== stays.length) problems.push(`cities는 ${stays.length}개여야 합니다 (받은 개수 ${ai.cities.length}).`);
-  stays.forEach((s, i) => {
-    const c = ai.cities[i];
-    if (!c) return;
-    const want = s.days.map((d) => d.date).join(",");
-    const got = c.days.map((d) => d.date).join(",");
-    if (want !== got) problems.push(`${s.place.name}의 날짜는 [${want}]여야 합니다.`);
-  });
   if (ai.legs.length !== legs.length) problems.push(`legs는 ${legs.length}개여야 합니다.`);
   for (const l of legs) {
     const a = ai.legs.find((x) => x.index === l.index);
@@ -152,6 +150,16 @@ function checkAiPlan(ai: AiPlan, stays: CityStay[], legs: Leg[], hubs: string[])
     if (badHubs.length) problems.push(`leg ${l.index}의 hubSuggestions ${badHubs.join(",")}는 허브 후보 목록에 없습니다.`);
   }
   return problems;
+}
+
+function checkCity(v: z.infer<typeof CitySchema>, s: CityStay): string[] {
+  const want = s.days.map((d) => d.date).join(",");
+  const got = v.days.map((d) => d.date).join(",");
+  return want === got ? [] : [`days의 날짜는 [${want}]여야 합니다.`];
+}
+
+function checkLegs(v: z.infer<typeof LegsSchema>, legs: Leg[], hubs: string[]): string[] {
+  return checkAiPlan({ cities: [], legs: v.legs, tips: v.tips }, [], legs, hubs);
 }
 
 /* ---------- 4. 틀 만들기 ---------- */
@@ -241,25 +249,37 @@ export async function buildPlan(req: TripRequest): Promise<Plan & { hubSuggestio
     return { mode: "demo", request: req, origin: SEOUL, stays, legs, gateways, tips, generatedBy: "demo-sample", validation, hubSuggestions };
   }
 
-  const prompt = buildPrompt(req, stays, legs, hubs);
-  let result;
+  // 도시별 일정과 이동수단을 따로 요청해 동시에 실행 (한 번에 다 만들면 느려서 시간 초과가 남)
+  const jobs: (() => Promise<void>)[] = [];
+  const hubSuggestions: Record<number, string[]> = {};
+  let tips: string[] = [];
+  stays.forEach((s, i) =>
+    jobs.push(async () => {
+      const r = await generateJson(cityPrompt(req, s, i, stays.length), CitySchema, { extraCheck: (v) => checkCity(v, s), retries: 1 });
+      if (r.fixes.length) validation.push(`${s.place.name}: ${r.fixes.join(" / ")}`);
+      s.summary = r.value.summary;
+      s.days = r.value.days as DayPlan[];
+    }),
+  );
+  jobs.push(async () => {
+    const r = await generateJson(legsPrompt(req, legs, hubs), LegsSchema, { extraCheck: (v) => checkLegs(v, legs, hubs), retries: 1 });
+    if (r.fixes.length) validation.push(`이동 구간: ${r.fixes.join(" / ")}`);
+    legs.forEach((l) => {
+      const a = r.value.legs.find((x) => x.index === l.index)!;
+      l.candidates = withIds(l.index, a.candidates);
+      hubSuggestions[l.index] = a.hubSuggestions ?? [];
+    });
+    tips = r.value.tips;
+  });
   try {
-    result = await generateJson(prompt, AiPlanSchema, { extraCheck: (v) => checkAiPlan(v, stays, legs, hubs), retries: 1 });
+    const queue = [...jobs];
+    // 무료 등급 분당 요청 한도를 고려해 동시에 3개까지
+    await Promise.all(Array.from({ length: 3 }, async () => {
+      while (queue.length) await queue.shift()!();
+    }));
   } catch (e) {
     throw new PlanError((e as Error).message, "ai");
   }
-  validation.push(...result.fixes);
-  const ai = result.value;
-  stays.forEach((s, i) => {
-    s.summary = ai.cities[i].summary;
-    s.days = ai.cities[i].days as DayPlan[];
-  });
-  const hubSuggestions: Record<number, string[]> = {};
-  legs.forEach((l) => {
-    const a = ai.legs.find((x) => x.index === l.index)!;
-    l.candidates = withIds(l.index, a.candidates);
-    hubSuggestions[l.index] = a.hubSuggestions ?? [];
-  });
   return {
     mode: "live",
     request: req,
@@ -267,7 +287,7 @@ export async function buildPlan(req: TripRequest): Promise<Plan & { hubSuggestio
     stays,
     legs,
     gateways,
-    tips: ai.tips,
+    tips,
     generatedBy: env.geminiModel,
     validation,
     hubSuggestions,

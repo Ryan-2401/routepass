@@ -13,10 +13,11 @@ async function callGemini(prompt: string, temperature: number): Promise<string> 
   if (!env.geminiKey) throw new AiError("GEMINI_API_KEY가 설정되지 않았습니다.");
   const models = [env.geminiModel, ...env.geminiFallbackModels.filter((m) => m !== env.geminiModel)];
   const started = Date.now();
-  let lastError = "";
+  const BUDGET = 150000; // 한 요청에 쓰는 최대 시간 (서버 함수 제한 300초 안)
+  const tried: string[] = [];
   for (const model of models) {
     for (let attempt = 0; attempt < 2; attempt++) {
-      if (Date.now() - started > 40000) break; // 서버 함수 시간 제한(60초) 안에 끝내기
+      if (Date.now() - started > BUDGET - 10000) break;
       if (attempt > 0) await sleep(2500);
       const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
       let res: Response;
@@ -28,27 +29,27 @@ async function callGemini(prompt: string, temperature: number): Promise<string> 
             contents: [{ role: "user", parts: [{ text: prompt }] }],
             generationConfig: { responseMimeType: "application/json", temperature },
           }),
-          signal: AbortSignal.timeout(Math.max(5000, 50000 - (Date.now() - started))),
+          signal: AbortSignal.timeout(Math.max(10000, BUDGET - (Date.now() - started))),
         });
       } catch {
-        lastError = `${model} 응답 시간 초과`;
+        tried.push(`${model} 시간 초과`);
         break;
       }
       if (res.ok) {
         const data = (await res.json()) as { candidates?: { content?: { parts?: { text?: string }[] } }[] };
         const text = data.candidates?.[0]?.content?.parts?.map((p) => p.text ?? "").join("") ?? "";
         if (text) return text;
-        lastError = `${model} 빈 응답`;
+        tried.push(`${model} 빈 응답`);
         continue;
       }
       const body = (await res.text()).slice(0, 200);
-      lastError = `${model} 오류 ${res.status}`;
+      tried.push(`${model} ${res.status}`);
       if (res.status === 503 || res.status === 500) continue; // 잠깐 쉬고 같은 모델 재시도
       if (res.status === 429 || res.status === 404) break; // 다음 모델로
       throw new AiError(`Gemini 오류 ${res.status}: ${body}`);
     }
   }
-  throw new AiError(`Gemini 서버가 지금 붐비거나 사용량 한도에 걸렸습니다. 1~2분 뒤 다시 시도하세요. (${lastError})`);
+  throw new AiError(`Gemini 서버가 지금 붐비거나 사용량 한도에 걸렸습니다. 1~2분 뒤 다시 시도하세요. (${tried.join(", ")})`);
 }
 
 function extractJson(text: string): unknown {

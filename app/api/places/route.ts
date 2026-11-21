@@ -2,7 +2,7 @@ import { z } from "zod";
 import { json, readBody } from "@/lib/server/http";
 import { recommendRestaurants } from "@/lib/server/places";
 
-export const maxDuration = 60;
+export const maxDuration = 300;
 
 const Body = z.object({
   lat: z.number(),

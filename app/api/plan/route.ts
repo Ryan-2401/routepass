@@ -2,7 +2,7 @@ import { buildPlan, PlanError } from "@/lib/server/planner";
 import { json, readBody } from "@/lib/server/http";
 import { TripRequestSchema } from "@/lib/schemas";
 
-export const maxDuration = 60;
+export const maxDuration = 300; // Vercel Fluid compute(무료 플랜 최대 300초)
 
 export async function POST(req: Request) {
   const body = await readBody(req, TripRequestSchema);
