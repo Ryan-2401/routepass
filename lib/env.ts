@@ -5,6 +5,11 @@ import "server-only";
 export const env = {
   geminiKey: process.env.GEMINI_API_KEY || "",
   geminiModel: process.env.GEMINI_MODEL || "gemini-flash-latest",
+  // 기본 모델이 붐빌 때 차례로 시도할 모델 (쉼표로 구분)
+  geminiFallbackModels: (process.env.GEMINI_FALLBACK_MODELS || "gemini-flash-lite-latest")
+    .split(",")
+    .map((m) => m.trim())
+    .filter(Boolean),
   tavilyKey: process.env.TAVILY_API_KEY || "",
   serpApiKey: process.env.SERPAPI_KEY || "",
   travelpayoutsToken: process.env.TRAVELPAYOUTS_TOKEN || "",
