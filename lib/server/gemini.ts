@@ -45,6 +45,10 @@ async function callGemini(prompt: string, temperature: number): Promise<string> 
       const body = (await res.text()).slice(0, 200);
       tried.push(`${model} ${res.status}`);
       if (res.status === 503 || res.status === 500) continue; // 잠깐 쉬고 같은 모델 재시도
+      if (res.status === 429 && attempt === 0) {
+        await sleep(8000); // 분당 한도: 조금 기다렸다 한 번 더
+        continue;
+      }
       if (res.status === 429 || res.status === 404) break; // 다음 모델로
       throw new AiError(`Gemini 오류 ${res.status}: ${body}`);
     }

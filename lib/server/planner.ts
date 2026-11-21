@@ -273,8 +273,8 @@ export async function buildPlan(req: TripRequest): Promise<Plan & { hubSuggestio
   });
   try {
     const queue = [...jobs];
-    // 무료 등급 분당 요청 한도를 고려해 동시에 3개까지
-    await Promise.all(Array.from({ length: 3 }, async () => {
+    // 무료 등급 분당 요청 한도를 고려해 동시에 2개까지
+    await Promise.all(Array.from({ length: 2 }, async () => {
       while (queue.length) await queue.shift()!();
     }));
   } catch (e) {

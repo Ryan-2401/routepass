@@ -95,7 +95,7 @@ export default function Home() {
     step("verify", "run");
     step("flights", "run");
     step("eat", "run");
-    const vJob = pool(ground, 2, async ({ l, c }) => {
+    const vJob = pool(ground, 1, async ({ l, c }) => {
       const r = await api.verify(l, c.id).catch(
         (e): VerifyResult => ({ legIndex: l.index, candidateId: c.id, status: "unknown", summary: (e as Error).message, sources: [], method: "none", checkedAt: "" }),
       );
@@ -113,6 +113,7 @@ export default function Home() {
     }).then(() => step("flights", "done"));
 
     let eatFailed = false;
+    await vJob; // 운행 판정(AI)이 끝난 뒤 식당 선택(AI)을 시작해 분당 요청 한도를 넘지 않게
     const eJob = pool(
       p.stays.map((_, i) => i),
       1,
