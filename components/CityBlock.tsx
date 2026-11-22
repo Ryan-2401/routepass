@@ -27,7 +27,7 @@ export default function CityBlock({ stay, demo, eat, onRetryEat }: { stay: CityS
       </p>
       <div className="days">
         {stay.days.map((d, di) => {
-          const fees = d.items.reduce((sum, it) => sum + (it.costKRW ?? 0), 0);
+          const fees = d.items.reduce((sum, it) => sum + (it.kind === "sight" ? (it.costKRW ?? 0) : 0), 0);
           return (
             <details className="day" key={d.date} open>
               <summary>
@@ -50,6 +50,7 @@ export default function CityBlock({ stay, demo, eat, onRetryEat }: { stay: CityS
                         {it.kind === "food" ? "🍽 " : ""}
                         {it.title}
                         {it.costKRW !== undefined && it.kind === "sight" ? <span className="fee">{it.costKRW === 0 ? "무료" : `입장 약 ${won(it.costKRW)}`}</span> : null}
+                        {it.costKRW && it.kind === "food" ? <span className="fee">1인 약 {won(it.costKRW)}</span> : null}
                       </div>
                       {it.desc ? <p className="desc">{it.desc}</p> : null}
                       {it.menu?.length ? (

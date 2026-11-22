@@ -177,6 +177,11 @@ describe("일차별 일정 다듬기", () => {
     expect(d.items[1].warning).toContain("화요일");
     expect(d.items[0].warning).toBeUndefined();
   });
+  it("식사 메뉴 옮기기와 식비 상한 경고", () => {
+    const [d] = polishDays([{ date: "2027-01-11", theme: "", items: [{ slot: "저녁", title: "비스트로", kind: "food", note: "어니언 수프, 스테이크", costKRW: 80000 }] }], 40000);
+    expect(d.items[0].menu).toEqual(["어니언 수프", "스테이크"]);
+    expect(d.items[0].warning).toContain("상한");
+  });
   it("거리로 이동 방법 추정", () => {
     expect(moveText(0.5, "숙소에서")).toContain("도보");
     expect(moveText(5, "앞 장소에서")).toContain("대중교통");

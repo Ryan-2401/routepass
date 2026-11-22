@@ -108,18 +108,21 @@ const CitySchema = z.object({
 });
 
 /** 코드 검사: 시간순 정렬, 휴무 요일과 실제 날짜 비교 */
-export function polishDays(days: DayPlan[]): DayPlan[] {
+export function polishDays(days: DayPlan[], mealBudgetKRW?: number): DayPlan[] {
   const mins = (t?: string) => (t ? Number(t.split(":")[0]) * 60 + Number(t.split(":")[1]) : NaN);
   return days.map((d) => {
     const wd = WEEKDAYS[new Date(`${d.date}T12:00:00Z`).getUTCDay()];
     const items = d.items.every((i) => i.time) ? [...d.items].sort((a, b) => mins(a.time) - mins(b.time)) : d.items;
     return {
       ...d,
-      items: items.map((it) => ({
-        ...it,
-        time: it.time ? it.time.padStart(5, "0") : undefined,
-        warning: it.closedDays?.includes(wd) ? `이 날은 ${wd}요일이에요. ${it.closedDays.join("·")}요일은 정기 휴무일 수 있으니 다른 날로 옮기거나 미리 확인하세요.` : undefined,
-      })),
+      items: items.map((it) => {
+        // 식사 메뉴를 note에 적은 경우 메뉴로 옮김 (숫자 없는 쉼표 목록)
+        const menu = it.menu?.length ? it.menu : it.kind === "food" && it.note && it.note.includes(",") && !/\d/.test(it.note) ? it.note.split(",").map((x) => x.trim()).filter(Boolean) : it.menu;
+        const note = menu !== it.menu ? undefined : it.note;
+        const closed = it.closedDays?.includes(wd) ? `이 날은 ${wd}요일이에요. ${it.closedDays.join("·")}요일은 정기 휴무일 수 있으니 다른 날로 옮기거나 미리 확인하세요.` : undefined;
+        const pricey = it.kind === "food" && mealBudgetKRW && it.costKRW && it.costKRW > mealBudgetKRW * 1.2 ? `예상 식비(${it.costKRW.toLocaleString("ko-KR")}원)가 1끼 상한보다 높아요.` : undefined;
+        return { ...it, menu, note, time: it.time ? it.time.padStart(5, "0") : undefined, warning: [closed, pricey].filter(Boolean).join(" ") || undefined };
+      }),
     };
   });
 }
@@ -146,8 +149,8 @@ ${travelerLine(req)}
 - 각 날짜: theme(짧은 제목), area(주로 다니는 동네), intro(왜 이 순서로 도는지, 오늘의 흐름을 2문장).
 - 각 항목: time(시작 "HH:MM"), durationMin(머무는 분), desc(무엇을 보고 하는지, 왜 가볼 만한지 2~3문장, 구체적으로), moveNext(다음 항목까지 가는 방법과 대략 시간, 예: "도보 12분", "메트로 1호선 15분". 마지막 항목은 숙소까지).
 - tips: 확실한 실용 팁만 0~2개 (사전 예약 필요, 줄이 짧은 시간대, 무료 입장일, 복장 규정 등). 모르면 비우세요.
-- 명소: costKRW에 1인 성인 입장료(원, 무료면 0, 모르면 생략), closedDays에 정기 휴무 요일("월"~"일", 확실할 때만).
-- 식사: desc에 그 음식이 어떤 음식인지, menu에 먹어볼 대표 메뉴 2~3개, note에 1인 예상 가격대.
+- 명소: costKRW에 1인 성인 입장료(원, 무료면 0, 모르면 생략), closedDays에 정기 휴무 요일("월"~"일", 확실할 때만). 휴무 요일에는 그 명소를 넣지 마세요(각 날짜의 요일: ${s.days.map((d) => `${d.date}=${"일월화수목금토"[new Date(`${d.date}T12:00:00Z`).getUTCDay()]}`).join(", ")}).
+- 식사: desc에 그 음식이 어떤 음식인지, menu에 먹어볼 대표 메뉴 2~3개, costKRW에 1인 예상 식사비(원).
 - 실제로 존재하는 유명 명소만 쓰고, 확실하지 않으면 지역 이름(예: "구시가지 산책")으로 쓰세요.
 - 식사(kind "food")에는 식당 이름을 절대 쓰지 말고 음식 종류만 쓰세요.
 - 명소(kind "sight")는 한 항목에 한 곳만 쓰고, placeEn에 지도에서 찾을 수 있는 현지어 또는 영어 공식 이름을 적으세요(예: "Musée du Louvre").
@@ -200,7 +203,13 @@ function checkAiPlan(ai: AiPlan, stays: CityStay[], legs: Leg[], hubs: string[])
 function checkCity(v: z.infer<typeof CitySchema>, s: CityStay): string[] {
   const want = s.days.map((d) => d.date).join(",");
   const got = v.days.map((d) => d.date).join(",");
-  return want === got ? [] : [`days의 날짜는 [${want}]여야 합니다.`];
+  if (want !== got) return [`days의 날짜는 [${want}]여야 합니다.`];
+  // 코드 검사: AI가 스스로 적은 휴무 요일에 그 명소를 배치했으면 다시 짜게 함
+  const clash = v.days.flatMap((d) => {
+    const wd = WEEKDAYS[new Date(`${d.date}T12:00:00Z`).getUTCDay()];
+    return d.items.filter((it) => it.closedDays?.includes(wd)).map((it) => `${d.date}(${wd}요일)에 넣은 "${it.title}"은 ${wd}요일 휴무입니다. 다른 날과 바꾸세요.`);
+  });
+  return clash;
 }
 
 function checkLegs(v: z.infer<typeof LegsSchema>, legs: Leg[], hubs: string[]): string[] {
@@ -307,7 +316,7 @@ export async function buildPlan(req: TripRequest): Promise<Plan & { hubSuggestio
         const r = await generateJson(cityPrompt(req, s, i, stays.length), CitySchema, { extraCheck: (v) => checkCity(v, s), retries: 1 });
         if (r.fixes.length) validation.push(`${s.place.name}: ${r.fixes.join(" / ")}`);
         s.summary = r.value.summary;
-        s.days = polishDays(r.value.days as DayPlan[]);
+        s.days = polishDays(r.value.days as DayPlan[], req.mealBudgetKRW);
         s.estLodgingPerNightKRW = r.value.estLodgingPerNightKRW;
         s.estOtherPerDayKRW = r.value.estOtherPerDayKRW;
       } catch (e) {
