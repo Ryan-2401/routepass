@@ -1,5 +1,6 @@
 "use client";
 import { fmtKoDate } from "@/lib/dates";
+import { chinaTransitNote, CN_AIRPORTS, viaInfo } from "@/lib/transit";
 import type { FlightSearchResult, Leg, VerifyResult } from "@/lib/types";
 import { AiTag, hm, MODE_KO, Sources, Stamp, won } from "./bits";
 
@@ -41,6 +42,7 @@ function SelfTransfers({ leg, hubs, flights, direct }: { leg: Leg; hubs: string[
           </p>
           <FlightTable title={`1구간: ${leg.from.name} → ${c.h}`} st={c.a} />
           <FlightTable title={`2구간: ${c.h} → ${leg.to.name}`} st={c.b} />
+          {CN_AIRPORTS.has(c.h) ? <p className="small muted">{chinaTransitNote(leg.date)}</p> : null}
         </div>
       ))}
       {hidden.length ? (
@@ -61,9 +63,13 @@ function SelfTransfers({ leg, hubs, flights, direct }: { leg: Leg; hubs: string[
   );
 }
 
-function FlightTable({ title, st, onRealtime, realtimeBusy }: { title: string; st?: FlightState; onRealtime?: () => void; realtimeBusy?: boolean }) {
+function FlightTable({ title, st, onRealtime, realtimeBusy, date }: { title: string; st?: FlightState; onRealtime?: () => void; realtimeBusy?: boolean; date?: string }) {
   if (!st) return null;
   const r = st.result;
+  const shown = r?.options.slice(0, 6) ?? [];
+  const vias = shown.map(viaInfo);
+  const anyChina = vias.some((v) => v.china);
+  const anyGuess = vias.some((v) => v.guessed);
   const sample = r?.options.some((o) => o.source === "sample");
   return (
     <div className="flights">
@@ -100,11 +106,13 @@ function FlightTable({ title, st, onRealtime, realtimeBusy }: { title: string; s
             </tr>
           </thead>
           <tbody>
-            {r.options.slice(0, 6).map((o) => (
+            {shown.map((o, i) => (
               <tr key={o.id}>
                 <td className="price">{won(o.priceKRW)}</td>
                 <td>{o.airlines.join(", ") || "-"}</td>
-                <td>{o.via.length ? o.via.join(", ") : o.stops ? `${o.stops}회` : "직항"}</td>
+                <td>
+                  {vias[i].china ? <span className="cat">중국</span> : null} {vias[i].text}
+                </td>
                 <td>{hm(o.durationMin)}</td>
                 <td className="small">
                   {o.source === "serpapi" ? "실시간" : o.source === "travelpayouts" ? "캐시(최근 검색 기준)" : "예시"}
@@ -121,7 +129,14 @@ function FlightTable({ title, st, onRealtime, realtimeBusy }: { title: string; s
             ))}
           </tbody>
         </table>
-      ) : r && st.status === "done" ? (
+      ) : null}
+      {r && r.options.length && (anyGuess || anyChina) ? (
+        <p className="small muted" style={{ margin: "4px 0 0" }}>
+          {anyGuess ? "\"경유 추정\"은 캐시 가격에 경유 공항 정보가 없어 항공사의 주 허브로 짐작한 것이에요. 실시간 가격 확인을 누르면 실제 경유 공항이 나와요. " : ""}
+          {anyChina && date ? chinaTransitNote(date) : ""}
+        </p>
+      ) : null}
+      {r && st.status === "done" && !r.options.length ? (
         <p className="muted small">검색 결과가 없습니다. 위 링크에서 직접 확인하세요.</p>
       ) : null}
     </div>
@@ -190,6 +205,7 @@ export default function LegBlock(props: {
           <FlightTable
             title={`${leg.from.name} → ${leg.to.name} 항공권`}
             st={direct}
+            date={leg.date}
             onRealtime={() => props.onRealtime(`leg${leg.index}`)}
             realtimeBusy={props.realtimeBusy.has(`leg${leg.index}`)}
           />

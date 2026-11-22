@@ -2,6 +2,7 @@
 import { describe, expect, it } from "vitest";
 import { maxDaysInWindow, runEntryChecks } from "@/lib/entry";
 import { stayCost } from "@/lib/budget";
+import { chinaTransitNote, viaInfo } from "@/lib/transit";
 import { gatewayInfo, pickHubs } from "@/lib/incheon";
 import { isOpenAt, moveText } from "@/lib/server/picks";
 import { bestPaths, buildGraph, flightKey } from "@/lib/pathfind";
@@ -205,9 +206,29 @@ describe("별도 발권 환승지 (코드 계산)", () => {
   it("인천 구간만, 우회가 적은 허브 2곳", () => {
     const seoul = { ...city("파리"), name: "서울", country: "KR", lat: 37.46, lng: 126.44, airports: ["ICN"] };
     const hubs = pickHubs({ index: 0, from: city("런던"), to: seoul, date: "", distanceKm: 8800, candidates: [] });
-    expect(hubs).toHaveLength(2);
+    expect(hubs).toHaveLength(3); // 일반 허브 2곳 + 중국 허브 1곳
+    expect(["PVG", "PEK", "CAN"]).toContain(hubs[2]);
     console.log("런던→서울 허브:", hubs, " 파리→서울:", pickHubs({ index: 0, from: city("파리"), to: seoul, date: "", distanceKm: 0, candidates: [] }));
     expect(pickHubs({ index: 1, from: city("파리"), to: city("로마"), date: "", distanceKm: 1100, candidates: [] })).toEqual([]);
     expect(pickHubs({ index: 0, from: seoul, to: city("파리"), date: "", distanceKm: 0, candidates: [] })).not.toContain("CDG");
+  });
+});
+
+describe("중국 경유", () => {
+  it("경유 공항이 없으면 항공사 허브로 추정", () => {
+    expect(viaInfo(fo("a", 1)).text).toBe("직항");
+    const mu = { ...fo("b", 1), stops: 1, airlines: ["MU"] };
+    expect(viaInfo(mu)).toMatchObject({ china: true, guessed: true });
+    expect(viaInfo({ ...mu, via: ["PEK"] })).toMatchObject({ text: "PEK", china: true, guessed: false });
+  });
+  it("날짜에 따라 30일 무비자 또는 240시간 경유 안내", () => {
+    expect(chinaTransitNote("2026-12-20")).toContain("30일 무비자라");
+    expect(chinaTransitNote("2027-01-15")).toContain("240시간");
+  });
+  it("출입국 검사: 2027년 중국 별도 발권 환승은 경고", () => {
+    const stays = [{ name: "파리", country: "FR", arrive: "2027-01-10", depart: "2027-01-14" }];
+    const c = runEntryChecks(stays, [], ["CN"], { CN: "2027-01-14" }).find((x) => x.country === "CN")!;
+    expect(c.level).toBe("warn");
+    expect(runEntryChecks(stays, [], ["CN"], { CN: "2026-12-14" }).find((x) => x.country === "CN")!.level).toBe("info");
   });
 });

@@ -1,7 +1,7 @@
 {
   "_note": "대한민국 일반여권 기준 입국 규칙. confidence: verified=출처를 확인한 항목, baseline=널리 알려진 기준이지만 외교부(0404.go.kr) 재확인 필요, unknown=앱이 판단하지 않음. 규칙을 고칠 때는 source와 checked를 꼭 갱신하세요.",
   "nationality": "KR",
-  "checked": "2026-11-21",
+  "checked": "2026-11-22",
   "groups": {
     "SCHENGEN": {
       "visaFree": true,
@@ -156,6 +156,26 @@
       "maxStayDays": 90,
       "summary": "환승·관광 무비자 (두바이 경유 시)",
       "confidence": "baseline"
+    },
+    "CN": {
+      "visaFree": true,
+      "maxStayDays": 30,
+      "validUntil": "2026-12-31",
+      "summary": "한국 일반여권 30일 무비자(관광·비즈니스·친지 방문·교류·경유), 2026-12-31 24시까지. 그 뒤에는 제3국행 확정 항공권이 있으면 지정 공항에서 240시간(10일) 무비자 경유 가능",
+      "notes": [
+        "2027년 이후 30일 무비자 연장은 2026-11-22 기준 확인되지 않았습니다."
+      ],
+      "sources": [
+        {
+          "title": "한국경제 – 중국 무비자 2026년 12월 31일까지 연장 (2025-11-03)",
+          "url": "https://www.hankyung.com/article/202511031390i"
+        },
+        {
+          "title": "상하이시 정부 – 240시간 무비자 경유 정책 (57개국)",
+          "url": "https://english.shanghai.gov.cn/en-Individuals-ImmigrationandVisas-Visa-freepolicies/20260709/d70a1231ba4641ff9a024e53751ad480.html"
+        }
+      ],
+      "confidence": "verified"
     }
   }
 }

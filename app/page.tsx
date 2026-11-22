@@ -169,12 +169,16 @@ export default function Home() {
       const fallback = l.candidates.find((c) => verify[c.id]?.status !== "suspended") ?? l.candidates[0];
       return { fromCountry: l.from.country, toCountry: l.to.country, mode: cand?.mode ?? (edges.length ? "flight" : fallback?.mode ?? "flight") };
     });
-    const transitCountries = (best?.edges ?? [])
-      .filter((e) => e.selfTransfer && e.via)
-      .map((e) => ROUTES.find((r) => r.iata === e.via)?.country)
-      .filter((x): x is string => !!x);
+    const transitEdges = (best?.edges ?? []).filter((e) => e.selfTransfer && e.via);
+    const transitCountries = transitEdges.map((e) => ROUTES.find((r) => r.iata === e.via)?.country).filter((x): x is string => !!x);
+    const transitDates: Record<string, string> = {};
+    for (const e of transitEdges) {
+      const c = ROUTES.find((r) => r.iata === e.via)?.country;
+      const d = plan.legs.find((l) => l.index === e.legIndex)?.date;
+      if (c && d) transitDates[c] = d;
+    }
     const stays = plan.stays.map((s) => ({ name: s.place.name, country: s.place.country, region: s.place.region, arrive: s.arrive, depart: s.depart }));
-    return JSON.stringify({ stays, legs, transitCountries });
+    return JSON.stringify({ stays, legs, transitCountries, transitDates });
   }, [plan, paths, verify]);
 
   useEffect(() => {

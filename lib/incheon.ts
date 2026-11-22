@@ -12,6 +12,7 @@ export interface RouteRow {
   lng: number;
   status: "operating" | "suspended";
   hub?: boolean;
+  hubGroup?: "CN"; // 중국 허브는 따로 1곳만 고름
   note?: string;
 }
 
@@ -60,10 +61,10 @@ export function pickHubs(leg: Leg, n = 2): string[] {
   if (!kr) return [];
   const eu = kr === leg.from ? leg.to : leg.from;
   const straight = haversineKm(eu, kr);
-  return hubCandidates()
+  const ranked = hubCandidates()
     .filter((h) => !eu.airports.includes(h.iata) && haversineKm(eu, h) > 150)
-    .map((h) => ({ iata: h.iata, detour: haversineKm(eu, h) + haversineKm(h, kr) - straight }))
-    .sort((a, b) => a.detour - b.detour)
-    .slice(0, n)
-    .map((h) => h.iata);
+    .map((h) => ({ iata: h.iata, cn: h.hubGroup === "CN", detour: haversineKm(eu, h) + haversineKm(h, kr) - straight }))
+    .sort((a, b) => a.detour - b.detour);
+  // 유럽·중동·중앙아시아 허브 n곳 + 중국 허브 1곳 (중국 항공사 경유가 싼 경우가 많아서 따로 확인)
+  return [...ranked.filter((h) => !h.cn).slice(0, n), ...ranked.filter((h) => h.cn).slice(0, 1)].map((h) => h.iata);
 }

@@ -1,5 +1,6 @@
 // 출입국 규칙 엔진 (AI를 쓰지 않는 규칙 기반 코드)
 // 비자·체류일·여행금지는 틀리면 위험한 정보라 AI 판단에 맡기지 않고, 출처가 있는 데이터와 계산으로만 결정합니다.
+import { chinaTransitNote } from "@/lib/transit";
 import bans from "@/data/travel-bans.json";
 import kb from "@/data/transport-kb.json";
 import rules from "@/data/entry-rules.json";
@@ -68,7 +69,7 @@ export function maxDaysInWindow(dates: string[], windowDays: number): number {
   return best;
 }
 
-export function runEntryChecks(stays: StayInput[], legs: LegInput[], transitCountries: string[] = []): EntryCheck[] {
+export function runEntryChecks(stays: StayInput[], legs: LegInput[], transitCountries: string[] = [], transitDates: Record<string, string> = {}): EntryCheck[] {
   const checks: EntryCheck[] = [];
   const entries = groupEntries(stays);
   const countries = [...new Set(stays.map((s) => s.country))];
@@ -178,6 +179,19 @@ export function runEntryChecks(stays: StayInput[], legs: LegInput[], transitCoun
   for (const t of [...new Set(transitCountries)]) {
     if (t === "KR" || countries.includes(t)) continue;
     const rule = COUNTRY_RULES[t];
+    const date = transitDates[t];
+    if (t === "CN" && rule) {
+      // 중국은 날짜에 따라 다름: 30일 무비자 기한 안이면 입국 가능, 지나면 240시간 무비자 경유 조건
+      const inTime = !date || !rule.validUntil || date <= rule.validUntil;
+      checks.push({
+        level: inTime ? "info" : "warn",
+        country: t,
+        title: `중국 환승 (별도 발권${date ? ` · ${date}` : ""})`,
+        detail: chinaTransitNote(date ?? "0000-00-00"),
+        sources: [...(rule.sources ?? []), MOFA_LINK],
+      });
+      continue;
+    }
     const free = isSchengen(t) || rule?.visaFree;
     checks.push({
       level: free ? "info" : "warn",

@@ -26,7 +26,7 @@ export const api = {
   verify: (leg: Leg, candidateId: string) => post<VerifyResult>("/api/verify", { leg, candidateId }),
   flights: (p: { from: Place; to: Place; date: string; realtime: boolean; demo: boolean; hub?: string; part?: "a" | "b" }) =>
     post<FlightSearchResult>("/api/flights", p),
-  entry: (p: { stays: { name: string; country: string; region?: string; arrive: string; depart: string }[]; legs: { fromCountry: string; toCountry: string; mode: string }[]; transitCountries: string[] }) =>
+  entry: (p: { stays: { name: string; country: string; region?: string; arrive: string; depart: string }[]; legs: { fromCountry: string; toCountry: string; mode: string }[]; transitCountries: string[]; transitDates?: Record<string, string> }) =>
     post<{ checks: EntryCheck[] }>("/api/entry", p),
   places: (p: { lat: number; lng: number; country: string; cityName: string; foodThemes: string[]; count: number; pool?: Restaurant[] }) =>
     post<{ picks: Restaurant[]; poolSize: number; pickedBy: "ai" | "rule" }>("/api/places", p),
