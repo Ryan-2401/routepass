@@ -38,7 +38,7 @@ const AIRPORT_KO: Record<string, string> = {
   ALA: "알마티", NQZ: "아스타나", TAS: "타슈켄트", HEL: "헬싱키", AMS: "암스테르담", CDG: "파리", ORY: "파리", FRA: "프랑크푸르트", MUC: "뮌헨",
   ZRH: "취리히", VIE: "빈", WAW: "바르샤바", LHR: "런던", LGW: "런던", STN: "런던", FCO: "로마", MXP: "밀라노", BGY: "밀라노", BCN: "바르셀로나",
   MAD: "마드리드", CPH: "코펜하겐", ARN: "스톡홀름", OSL: "오슬로", BRU: "브뤼셀", LIS: "리스본", ATH: "아테네", BUD: "부다페스트", PRG: "프라하",
-  SVO: "모스크바", DME: "모스크바", VKO: "모스크바", LED: "상트페테르부르크", BER: "베를린", CAI: "카이로", ADD: "아디스아바바", BAH: "바레인", MCT: "무스카트",
+  SVO: "모스크바", DME: "모스크바", VKO: "모스크바", LED: "상트페테르부르크", BER: "베를린", CAI: "카이로", ADD: "아디스아바바", TIA: "티라나", BEG: "베오그라드", OTP: "부쿠레슈티", SOF: "소피아", RIX: "리가", TLL: "탈린", VNO: "빌뉴스", KRK: "크라쿠프", DUB: "더블린", EDI: "에든버러", MAN: "맨체스터", NCE: "니스", MRS: "마르세유", VCE: "베네치아", NAP: "나폴리", BLQ: "볼로냐", BAH: "바레인", MCT: "무스카트",
 };
 export const airportLabel = (c: string) => (AIRPORT_KO[c] ? `${c}(${AIRPORT_KO[c]})` : c);
 
