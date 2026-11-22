@@ -6,14 +6,17 @@ import { env } from "@/lib/env";
 
 export class AiError extends Error {}
 
+const GEMMA_FALLBACKS = ["gemma-4-31b-it", "gemma-4-26b-a4b-it"];
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 /** 503(서버 혼잡)·500이면 잠깐 쉬고 다시, 429(한도)나 계속 실패하면 다음 모델로 넘어갑니다. */
 async function callGemini(prompt: string, temperature: number): Promise<string> {
   if (!env.geminiKey) throw new AiError("GEMINI_API_KEY가 설정되지 않았습니다.");
-  const models = [env.geminiModel, ...env.geminiFallbackModels.filter((m) => m !== env.geminiModel)];
+  // 같은 키로 쓸 수 있는 무료 모델을 차례로: 기본 → 가벼운 Gemini → Gemma 4 (한도가 모델마다 따로)
+  const models = [...new Set([env.geminiModel, ...env.geminiFallbackModels, ...GEMMA_FALLBACKS])];
   const started = Date.now();
   const BUDGET = 150000; // 한 요청에 쓰는 최대 시간 (서버 함수 제한 300초 안)
+  const PER_CALL = 50000; // 모델 하나가 시간을 다 써서 다음 모델을 못 쓰는 일이 없게
   const tried: string[] = [];
   for (const model of models) {
     for (let attempt = 0; attempt < 2; attempt++) {
@@ -27,24 +30,26 @@ async function callGemini(prompt: string, temperature: number): Promise<string> 
           headers: { "Content-Type": "application/json", "x-goog-api-key": env.geminiKey },
           body: JSON.stringify({
             contents: [{ role: "user", parts: [{ text: prompt }] }],
-            generationConfig: { responseMimeType: "application/json", temperature },
+            // Gemma는 JSON 모드 대신 프롬프트로 JSON을 받고 코드에서 꺼냄
+            generationConfig: model.startsWith("gemma") ? { temperature } : { responseMimeType: "application/json", temperature },
           }),
-          signal: AbortSignal.timeout(Math.max(10000, BUDGET - (Date.now() - started))),
+          signal: AbortSignal.timeout(Math.max(10000, Math.min(PER_CALL, BUDGET - (Date.now() - started)))),
         });
       } catch {
         tried.push(`${model} 시간 초과`);
         break;
       }
       if (res.ok) {
-        const data = (await res.json()) as { candidates?: { content?: { parts?: { text?: string }[] } }[] };
-        const text = data.candidates?.[0]?.content?.parts?.map((p) => p.text ?? "").join("") ?? "";
+        const data = (await res.json()) as { candidates?: { content?: { parts?: { text?: string; thought?: boolean }[] } }[] };
+        const text = data.candidates?.[0]?.content?.parts?.filter((p) => !p.thought).map((p) => p.text ?? "").join("") ?? "";
         if (text) return text;
         tried.push(`${model} 빈 응답`);
         continue;
       }
       const body = (await res.text()).slice(0, 200);
       tried.push(`${model} ${res.status}`);
-      if (res.status === 503 || res.status === 500) continue; // 잠깐 쉬고 같은 모델 재시도
+      if ((res.status === 503 || res.status === 500) && attempt === 0) continue; // 잠깐 쉬고 같은 모델 한 번 더
+      if (res.status === 503 || res.status === 500) break; // 계속 붐비면 다음 모델로
       if (res.status === 429 && attempt === 0) {
         await sleep(8000); // 분당 한도: 조금 기다렸다 한 번 더
         continue;
@@ -56,9 +61,17 @@ async function callGemini(prompt: string, temperature: number): Promise<string> 
   throw new AiError(`Gemini 서버가 지금 붐비거나 사용량 한도에 걸렸습니다. 1~2분 뒤 다시 시도하세요. (${tried.join(", ")})`);
 }
 
-function extractJson(text: string): unknown {
-  const t = text.trim().replace(/^```(?:json)?/i, "").replace(/```$/, "");
-  return JSON.parse(t);
+export function extractJson(text: string): unknown {
+  const t = text.trim().replace(/^```(?:json)?/i, "").replace(/```$/, "").trim();
+  try {
+    return JSON.parse(t);
+  } catch {
+    // 설명 문장이 앞뒤에 붙은 경우: 첫 { 또는 [ 부터 마지막 } 또는 ] 까지
+    const start = t.search(/[[{]/);
+    const end = Math.max(t.lastIndexOf("}"), t.lastIndexOf("]"));
+    if (start < 0 || end <= start) throw new Error("JSON 없음");
+    return JSON.parse(t.slice(start, end + 1));
+  }
 }
 
 /**

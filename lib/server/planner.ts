@@ -243,6 +243,20 @@ function skeleton(req: TripRequest, places: Place[]) {
   return { stays, legs };
 }
 
+/** AI 없이 만드는 기본 이동 후보 (거리·국가 규칙) */
+export function ruleCandidates(l: Leg): Omit<TransportCandidate, "id">[] {
+  const note = "AI가 붐벼 거리 기준으로 넣은 기본 후보예요. 운행 여부는 아래 확인 결과를 보세요.";
+  if (l.from.country === "KR" || l.to.country === "KR") return [{ mode: "flight", description: `${l.from.name} → ${l.to.name} 항공 (직항 또는 경유)`, notes: note }];
+  const ruBy = (c: string) => c === "RU" || c === "BY";
+  if (ruBy(l.from.country) !== ruBy(l.to.country))
+    return [{ mode: "bus", description: `${l.from.name} → ${l.to.name} 국경 버스 (EU–러시아·벨라루스 사이 직항 항공은 없음)`, borderCrossing: true, notes: note }];
+  const out: Omit<TransportCandidate, "id">[] = [];
+  if (l.distanceKm >= 500) out.push({ mode: "flight", description: `${l.from.name} → ${l.to.name} 항공`, notes: note });
+  if (l.distanceKm <= 1500) out.push({ mode: "train", description: `${l.from.name} → ${l.to.name} 기차`, borderCrossing: l.from.country !== l.to.country, notes: note });
+  if (l.distanceKm <= 900) out.push({ mode: "bus", description: `${l.from.name} → ${l.to.name} 장거리 버스`, borderCrossing: l.from.country !== l.to.country, notes: note });
+  return out;
+}
+
 function withIds(legIndex: number, cands: Omit<TransportCandidate, "id">[]): TransportCandidate[] {
   return cands.map((c, k) => ({ ...c, id: `L${legIndex}-${k}` }));
 }
@@ -331,7 +345,15 @@ export async function buildPlan(req: TripRequest): Promise<Plan & { hubSuggestio
     }),
   );
   jobs.unshift(async () => {
-    const r = await generateJson(legsPrompt(req, legs, hubs), LegsSchema, { extraCheck: (v) => checkLegs(v, legs, hubs), retries: 1 });
+    let r;
+    try {
+      r = await generateJson(legsPrompt(req, legs, hubs), LegsSchema, { extraCheck: (v) => checkLegs(v, legs, hubs), retries: 1 });
+    } catch (e) {
+      // AI가 붐벼도 일정은 보여주기: 거리 기준 기본 후보로 대신하고, 운행 여부는 다음 단계(검색)에서 확인
+      validation.push(`이동 구간: AI 응답 실패로 거리 기준 기본 후보를 썼습니다 — ${(e as Error).message}`);
+      legs.forEach((l) => (l.candidates = withIds(l.index, ruleCandidates(l))));
+      return;
+    }
     if (r.fixes.length) validation.push(`이동 구간: ${r.fixes.join(" / ")}`);
     legs.forEach((l) => {
       const a = r.value.legs.find((x) => x.index === l.index)!;

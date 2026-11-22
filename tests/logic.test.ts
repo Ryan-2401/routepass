@@ -5,7 +5,8 @@ import { stayCost } from "@/lib/budget";
 import { gatewayInfo } from "@/lib/incheon";
 import { isOpenAt, moveText } from "@/lib/server/picks";
 import { bestPaths, buildGraph, flightKey } from "@/lib/pathfind";
-import { allocateNights, banBlock, polishDays } from "@/lib/server/planner";
+import { extractJson } from "@/lib/server/gemini";
+import { allocateNights, banBlock, polishDays, ruleCandidates } from "@/lib/server/planner";
 import { findLocalCity } from "@/lib/server/resolve";
 import { matchKnowledgeBase } from "@/lib/server/verify";
 import type { FlightOption, Leg, TransportCandidate } from "@/lib/types";
@@ -185,5 +186,17 @@ describe("일차별 일정 다듬기", () => {
   it("거리로 이동 방법 추정", () => {
     expect(moveText(0.5, "숙소에서")).toContain("도보");
     expect(moveText(5, "앞 장소에서")).toContain("대중교통");
+  });
+});
+
+describe("AI가 붐빌 때 대비", () => {
+  it("설명이 붙은 JSON도 꺼냄", () => {
+    expect(extractJson('여기 결과입니다:\n{"a":1}\n끝')).toEqual({ a: 1 });
+  });
+  it("거리·국가 규칙 기본 이동 후보", () => {
+    const seoul = { ...city("파리"), country: "KR" };
+    expect(ruleCandidates({ index: 0, from: seoul, to: city("파리"), date: "", distanceKm: 9000, candidates: [] }).map((c) => c.mode)).toEqual(["flight"]);
+    expect(ruleCandidates({ index: 1, from: city("파리"), to: city("런던"), date: "", distanceKm: 340, candidates: [] }).map((c) => c.mode)).toEqual(["train", "bus"]);
+    expect(ruleCandidates({ index: 2, from: city("모스크바"), to: city("리가"), date: "", distanceKm: 840, candidates: [] }).map((c) => c.mode)).toEqual(["bus"]);
   });
 });
