@@ -2,6 +2,7 @@
 import { describe, expect, it } from "vitest";
 import { maxDaysInWindow, runEntryChecks } from "@/lib/entry";
 import { stayCost } from "@/lib/budget";
+import { viaFromLink } from "@/lib/server/flights";
 import { chinaTransitNote, viaInfo } from "@/lib/transit";
 import { gatewayInfo, pickHubs } from "@/lib/incheon";
 import { isOpenAt, moveText } from "@/lib/server/picks";
@@ -219,7 +220,13 @@ describe("중국 경유", () => {
     expect(viaInfo(fo("a", 1)).text).toBe("직항");
     const mu = { ...fo("b", 1), stops: 1, airlines: ["MU"] };
     expect(viaInfo(mu)).toMatchObject({ china: true, guessed: true });
-    expect(viaInfo({ ...mu, via: ["PEK"] })).toMatchObject({ text: "PEK", china: true, guessed: false });
+    expect(viaInfo({ ...mu, via: ["PEK"] })).toMatchObject({ text: "PEK(베이징)", china: true, guessed: false });
+  });
+  it("Aviasales 링크에서 실제 경유 공항 꺼내기", () => {
+    const link = "/search/LON1501PVG1?t=AI18000060001800130800001600STNMXPDELPVG_dd812ea2&search_date=17112026";
+    expect(viaFromLink(link, 2)).toEqual(["MXP", "DEL"]);
+    expect(viaFromLink(link, 1)).toEqual([]); // 경유 횟수가 안 맞으면 버림
+    expect(viaFromLink("/search/x?t=FR123LHRICN_ab", 0)).toEqual([]);
   });
   it("날짜에 따라 30일 무비자 또는 240시간 경유 안내", () => {
     expect(chinaTransitNote("2026-12-20")).toContain("30일 무비자라");

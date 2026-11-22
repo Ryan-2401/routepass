@@ -56,7 +56,7 @@ async function travelpayouts(from: string, to: string, date: string): Promise<Fl
     priceKRW: Math.round(r.price),
     durationMin: r.duration_to ?? r.duration,
     stops: r.transfers ?? 0,
-    via: [],
+    via: viaFromLink(r.link, r.transfers ?? 0),
     segments: [{ from: r.origin_airport ?? r.origin, to: r.destination_airport ?? r.destination, departAt: r.departure_at, airline: r.airline, flightNumber: r.flight_number ? String(r.flight_number) : undefined }],
     airlines: r.airline ? [r.airline] : [],
     departAt: r.departure_at,
@@ -64,6 +64,20 @@ async function travelpayouts(from: string, to: string, date: string): Promise<Fl
     cached: true,
     fetchedAt: now,
   }));
+}
+
+/**
+ * Aviasales 예약 링크의 t= 값 끝에는 경로 공항 코드가 이어 붙어 있음 (예: ...STNMXPDELPVG_해시).
+ * 여기서 출발·도착을 뺀 가운데 공항이 실제 경유지. 형식이 다르면 빈 배열(추정으로 대체).
+ */
+export function viaFromLink(link: string | undefined, transfers: number): string[] {
+  if (!link || !transfers) return [];
+  const t = /[?&]t=([^&]*)/.exec(link)?.[1];
+  const run = t && /([A-Z]{6,})_/.exec(t)?.[1];
+  if (!run || run.length % 3) return [];
+  const codes = run.match(/.{3}/g)!;
+  const via = codes.slice(1, -1);
+  return via.length === transfers ? via : [];
 }
 
 /* ---------- SerpApi (Google Flights) ---------- */

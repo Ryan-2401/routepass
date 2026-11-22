@@ -30,6 +30,18 @@ export const CARRIER_HUB: Record<string, { iata: string; city: string; country: 
 
 export const CN_AIRPORTS = new Set(["PVG", "SHA", "PEK", "PKX", "CAN", "XMN", "CTU", "TFU", "SZX", "KMG", "HGH", "NKG", "XIY", "TAO", "SHE", "DLC", "TSN", "CSX", "WUH", "CKG"]);
 
+/** 자주 나오는 경유 공항 한국어 이름 */
+const AIRPORT_KO: Record<string, string> = {
+  IST: "이스탄불", SAW: "이스탄불", DXB: "두바이", DOH: "도하", AUH: "아부다비", PVG: "상하이", SHA: "상하이", PEK: "베이징", PKX: "베이징",
+  CAN: "광저우", SZX: "선전", XMN: "샤먼", CTU: "청두", TFU: "청두", KMG: "쿤밍", HGH: "항저우", NKG: "난징", XIY: "시안", TAO: "칭다오",
+  CKG: "충칭", WUH: "우한", HKG: "홍콩", TPE: "타이베이", NRT: "도쿄", HND: "도쿄", KIX: "오사카", BKK: "방콕", SIN: "싱가포르", DEL: "델리", BOM: "뭄바이",
+  ALA: "알마티", NQZ: "아스타나", TAS: "타슈켄트", HEL: "헬싱키", AMS: "암스테르담", CDG: "파리", ORY: "파리", FRA: "프랑크푸르트", MUC: "뮌헨",
+  ZRH: "취리히", VIE: "빈", WAW: "바르샤바", LHR: "런던", LGW: "런던", STN: "런던", FCO: "로마", MXP: "밀라노", BGY: "밀라노", BCN: "바르셀로나",
+  MAD: "마드리드", CPH: "코펜하겐", ARN: "스톡홀름", OSL: "오슬로", BRU: "브뤼셀", LIS: "리스본", ATH: "아테네", BUD: "부다페스트", PRG: "프라하",
+  SVO: "모스크바", DME: "모스크바", VKO: "모스크바", LED: "상트페테르부르크", BER: "베를린", CAI: "카이로", ADD: "아디스아바바", BAH: "바레인", MCT: "무스카트",
+};
+export const airportLabel = (c: string) => (AIRPORT_KO[c] ? `${c}(${AIRPORT_KO[c]})` : c);
+
 export interface ViaInfo {
   text: string; // 표에 보일 문구
   china: boolean; // 중국 본토 경유(확인 또는 추정)
@@ -38,7 +50,7 @@ export interface ViaInfo {
 
 export function viaInfo(o: FlightOption): ViaInfo {
   if (!o.stops && !o.via.length) return { text: "직항", china: false, guessed: false };
-  if (o.via.length) return { text: o.via.join(", "), china: o.via.some((v) => CN_AIRPORTS.has(v)), guessed: false };
+  if (o.via.length) return { text: o.via.map(airportLabel).join(" → "), china: o.via.some((v) => CN_AIRPORTS.has(v)), guessed: false };
   const hub = o.airlines.map((a) => CARRIER_HUB[a]).find(Boolean);
   if (!hub) return { text: `${o.stops}회`, china: false, guessed: false };
   return { text: `${o.stops}회 · ${hub.city} 경유 추정`, china: hub.country === "CN", guessed: true };
