@@ -63,12 +63,23 @@ export interface DayItem {
   kind: "sight" | "food" | "move" | "rest";
   note?: string;
   placeEn?: string; // 명소의 현지·영어 이름 (지도에서 찾을 때 사용)
+  time?: string; // 시작 시각 "HH:MM" (AI 제안)
+  durationMin?: number; // 머무는 시간 (AI 제안)
+  desc?: string; // 무엇을 보고 하는지 2~3문장
+  tips?: string[]; // 예약·줄·복장 같은 실용 팁
+  costKRW?: number; // 1인 입장료 추정 (AI 추정)
+  menu?: string[]; // 식사: 먹어볼 대표 메뉴
+  closedDays?: string[]; // 정기 휴무 요일 ("월"~"일", AI가 확실할 때만)
+  moveNext?: string; // 다음 장소까지 이동 방법 (AI 제안)
+  warning?: string; // 코드 검사 결과 (예: 이 날은 휴무 요일)
 }
 
 export interface DayPlan {
   date: string;
   theme: string;
   items: DayItem[];
+  intro?: string; // 오늘 동선의 흐름과 이유
+  area?: string; // 주로 다니는 지역
 }
 
 export interface CityStay {
@@ -213,6 +224,9 @@ export interface RouteStop {
   id: string;
   time: string; // HH:MM
   note?: string;
+  durationMin?: number; // 머무는 시간 (AI 제안)
+  tip?: string; // 실용 팁 (AI 제안)
+  move?: string; // 이전 장소(또는 숙소)에서 오는 방법 — 코드가 거리로 계산
   warning?: string; // 영업시간 충돌 등 코드가 찾은 문제
 }
 

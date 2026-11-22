@@ -2,7 +2,9 @@
 import { countryName } from "@/lib/countries";
 import { fmtKoDate } from "@/lib/dates";
 import type { CityStay, Restaurant } from "@/lib/types";
-import { AiTag } from "./bits";
+import { AiTag, won } from "./bits";
+
+const dur = (m: number) => (m >= 60 ? `${Math.floor(m / 60)}시간${m % 60 ? ` ${m % 60}분` : ""}` : `${m}분`);
 
 export interface EatState {
   status: "idle" | "loading" | "done" | "error";
@@ -24,23 +26,58 @@ export default function CityBlock({ stay, demo, eat, onRetryEat }: { stay: CityS
         <AiTag demo={demo} />
       </p>
       <div className="days">
-        {stay.days.map((d) => (
-          <section className="day" key={d.date}>
-            <div className="d">{fmtKoDate(d.date)}</div>
-            <div className="theme">{d.theme}</div>
-            <ul>
-              {d.items.map((it, k) => (
-                <li key={k} data-kind={it.kind}>
-                  <span className="slot">{it.slot}</span>
-                  <span className="t">
-                    {it.title}
-                    {it.note ? <span className="muted small"> — {it.note}</span> : null}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))}
+        {stay.days.map((d, di) => {
+          const fees = d.items.reduce((sum, it) => sum + (it.costKRW ?? 0), 0);
+          return (
+            <details className="day" key={d.date} open>
+              <summary>
+                <span className="d">
+                  {di + 1}일차 · {fmtKoDate(d.date)}
+                </span>
+                <span className="theme">{d.theme}</span>
+                {d.area ? <span className="cat">{d.area}</span> : null}
+              </summary>
+              {d.intro ? <p className="day-intro">{d.intro}</p> : null}
+              <ol className="timeline">
+                {d.items.map((it, k) => (
+                  <li key={k} data-kind={it.kind}>
+                    <div className="when-col">
+                      <b>{it.time ?? it.slot}</b>
+                      {it.durationMin ? <span>{dur(it.durationMin)}</span> : it.time ? <span>{it.slot}</span> : null}
+                    </div>
+                    <div className="what">
+                      <div className="t">
+                        {it.kind === "food" ? "🍽 " : ""}
+                        {it.title}
+                        {it.costKRW !== undefined && it.kind === "sight" ? <span className="fee">{it.costKRW === 0 ? "무료" : `입장 약 ${won(it.costKRW)}`}</span> : null}
+                      </div>
+                      {it.desc ? <p className="desc">{it.desc}</p> : null}
+                      {it.menu?.length ? (
+                        <div className="menu small">
+                          먹어볼 것:{" "}
+                          {it.menu.map((m) => (
+                            <span className="cat" key={m}>
+                              {m}
+                            </span>
+                          ))}
+                        </div>
+                      ) : null}
+                      {it.note ? <div className="muted small">{it.note}</div> : null}
+                      {it.tips?.map((t) => (
+                        <div className="tip small" key={t}>
+                          팁: {t}
+                        </div>
+                      ))}
+                      {it.warning ? <div className="warn-line">⚠ {it.warning}</div> : null}
+                      {it.moveNext ? <div className="move small">↓ {it.moveNext}</div> : null}
+                    </div>
+                  </li>
+                ))}
+              </ol>
+              {fees ? <p className="muted small">이 날 입장료 합계 약 {won(fees)} (1인, AI 추정 — 공식 사이트에서 확인)</p> : null}
+            </details>
+          );
+        })}
       </div>
 
       <div className="eat">

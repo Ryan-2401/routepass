@@ -3,9 +3,9 @@ import { describe, expect, it } from "vitest";
 import { maxDaysInWindow, runEntryChecks } from "@/lib/entry";
 import { stayCost } from "@/lib/budget";
 import { gatewayInfo } from "@/lib/incheon";
-import { isOpenAt } from "@/lib/server/picks";
+import { isOpenAt, moveText } from "@/lib/server/picks";
 import { bestPaths, buildGraph, flightKey } from "@/lib/pathfind";
-import { allocateNights, banBlock } from "@/lib/server/planner";
+import { allocateNights, banBlock, polishDays } from "@/lib/server/planner";
 import { findLocalCity } from "@/lib/server/resolve";
 import { matchKnowledgeBase } from "@/lib/server/verify";
 import type { FlightOption, Leg, TransportCandidate } from "@/lib/types";
@@ -161,5 +161,24 @@ describe("숙소·식비 예산과 영업시간", () => {
     expect(isOpenAt("Mo-Fr 09:00-18:00", "2027-01-11", "10:00")).toBe(true); // 월요일
     expect(isOpenAt("Mo-Fr 09:00-18:00", "2027-01-10", "10:00")).toBe(false); // 일요일
     expect(isOpenAt(undefined, "2027-01-10", "10:00")).toBeNull();
+  });
+});
+
+describe("일차별 일정 다듬기", () => {
+  it("시간순 정렬과 휴무 요일 경고", () => {
+    const [d] = polishDays([
+      { date: "2027-01-12", theme: "", items: [
+        { slot: "오후", time: "14:00", title: "루브르", kind: "sight", closedDays: ["화"] },
+        { slot: "오전", time: "9:30", title: "산책", kind: "sight" },
+      ] },
+    ]); // 2027-01-12는 화요일
+    expect(d.items.map((i) => i.title)).toEqual(["산책", "루브르"]);
+    expect(d.items[0].time).toBe("09:30");
+    expect(d.items[1].warning).toContain("화요일");
+    expect(d.items[0].warning).toBeUndefined();
+  });
+  it("거리로 이동 방법 추정", () => {
+    expect(moveText(0.5, "숙소에서")).toContain("도보");
+    expect(moveText(5, "앞 장소에서")).toContain("대중교통");
   });
 });

@@ -51,12 +51,22 @@ export function allocateNights(req: TripRequest): number[] {
 }
 
 /* ---------- 3. AI 출력 스키마 ---------- */
+const cut = (n: number) => z.string().transform((s) => (s.length > n ? s.slice(0, n - 1) + "…" : s));
+const WEEKDAYS = ["일", "월", "화", "수", "목", "금", "토"];
 const DayItemSchema = z.object({
   slot: z.enum(["오전", "점심", "오후", "저녁", "밤"]),
   title: z.string().min(1),
   kind: z.enum(["sight", "food", "move", "rest"]),
   note: z.string().optional(),
-  placeEn: z.string().max(120).optional(),
+  placeEn: cut(120).optional(),
+  time: z.string().regex(/^\d{1,2}:\d{2}$/).optional().catch(undefined),
+  durationMin: z.number().int().min(10).max(600).optional().catch(undefined),
+  desc: cut(260).optional(),
+  tips: z.array(cut(110)).optional().transform((t) => t?.slice(0, 3)),
+  costKRW: z.number().min(0).max(1000000).optional().catch(undefined),
+  menu: z.array(cut(40)).optional().transform((t) => t?.slice(0, 4)),
+  closedDays: z.array(z.string()).optional().transform((d) => d?.map((x) => x.trim().slice(0, 1)).filter((x) => WEEKDAYS.includes(x))),
+  moveNext: cut(60).optional(),
 });
 const AiPlanSchema = z.object({
   cities: z.array(
@@ -94,8 +104,25 @@ const CitySchema = z.object({
   summary: z.string(),
   estLodgingPerNightKRW: z.number().min(0).optional(),
   estOtherPerDayKRW: z.number().min(0).optional(),
-  days: z.array(z.object({ date: z.string(), theme: z.string(), items: z.array(DayItemSchema).min(1) })),
+  days: z.array(z.object({ date: z.string(), theme: z.string(), intro: cut(300).optional(), area: cut(60).optional(), items: z.array(DayItemSchema).min(1) })),
 });
+
+/** 코드 검사: 시간순 정렬, 휴무 요일과 실제 날짜 비교 */
+export function polishDays(days: DayPlan[]): DayPlan[] {
+  const mins = (t?: string) => (t ? Number(t.split(":")[0]) * 60 + Number(t.split(":")[1]) : NaN);
+  return days.map((d) => {
+    const wd = WEEKDAYS[new Date(`${d.date}T12:00:00Z`).getUTCDay()];
+    const items = d.items.every((i) => i.time) ? [...d.items].sort((a, b) => mins(a.time) - mins(b.time)) : d.items;
+    return {
+      ...d,
+      items: items.map((it) => ({
+        ...it,
+        time: it.time ? it.time.padStart(5, "0") : undefined,
+        warning: it.closedDays?.includes(wd) ? `이 날은 ${wd}요일이에요. ${it.closedDays.join("·")}요일은 정기 휴무일 수 있으니 다른 날로 옮기거나 미리 확인하세요.` : undefined,
+      })),
+    };
+  });
+}
 const LegsSchema = AiPlanSchema.pick({ legs: true, tips: true });
 
 const LODGING_KO: Record<string, string> = { any: "상관없음", hostel: "호스텔·게스트하우스", "3": "3성급", "4": "4성급", "5": "5성급" };
@@ -115,7 +142,12 @@ ${travelerLine(req)}
 [일정 날짜 (이 날짜 그대로, 하나씩)] ${s.days.map((d) => d.date).join(", ")}
 
 규칙:
-- 하루 items는 오전/점심/오후/저녁 중심으로 3~5개. 첫날은 도착일이라 오후부터 시작하세요.
+- 하루 items는 오전/점심/오후/저녁 중심으로 4~6개(식사 포함). 첫날은 도착일이라 오후부터 시작하세요.
+- 각 날짜: theme(짧은 제목), area(주로 다니는 동네), intro(왜 이 순서로 도는지, 오늘의 흐름을 2문장).
+- 각 항목: time(시작 "HH:MM"), durationMin(머무는 분), desc(무엇을 보고 하는지, 왜 가볼 만한지 2~3문장, 구체적으로), moveNext(다음 항목까지 가는 방법과 대략 시간, 예: "도보 12분", "메트로 1호선 15분". 마지막 항목은 숙소까지).
+- tips: 확실한 실용 팁만 0~2개 (사전 예약 필요, 줄이 짧은 시간대, 무료 입장일, 복장 규정 등). 모르면 비우세요.
+- 명소: costKRW에 1인 성인 입장료(원, 무료면 0, 모르면 생략), closedDays에 정기 휴무 요일("월"~"일", 확실할 때만).
+- 식사: desc에 그 음식이 어떤 음식인지, menu에 먹어볼 대표 메뉴 2~3개, note에 1인 예상 가격대.
 - 실제로 존재하는 유명 명소만 쓰고, 확실하지 않으면 지역 이름(예: "구시가지 산책")으로 쓰세요.
 - 식사(kind "food")에는 식당 이름을 절대 쓰지 말고 음식 종류만 쓰세요.
 - 명소(kind "sight")는 한 항목에 한 곳만 쓰고, placeEn에 지도에서 찾을 수 있는 현지어 또는 영어 공식 이름을 적으세요(예: "Musée du Louvre").
@@ -124,7 +156,7 @@ ${travelerLine(req)}
 - estLodgingPerNightKRW: 이 도시에서 위 숙소 등급으로 1박 숙소비(1인 기준, 원) 추정.
 - estOtherPerDayKRW: 하루 입장료·시내교통 합계(1인, 원) 추정. 식비와 숙소비, 도시 간 이동비는 빼세요.
 - 식사는 1끼 식비 상한에 맞는 수준으로 고르세요.
-JSON: {"summary":"","estLodgingPerNightKRW":0,"estOtherPerDayKRW":0,"days":[{"date":"YYYY-MM-DD","theme":"","items":[{"slot":"오전","title":"","kind":"sight","note":"","placeEn":""}]}]}`;
+JSON: {"summary":"","estLodgingPerNightKRW":0,"estOtherPerDayKRW":0,"days":[{"date":"YYYY-MM-DD","theme":"","area":"","intro":"","items":[{"slot":"오전","time":"09:30","durationMin":120,"title":"","kind":"sight","placeEn":"","desc":"","tips":[""],"costKRW":0,"closedDays":[],"moveNext":"","note":""}]}]}`;
 }
 
 /** 구간별 이동수단 후보와 팁만 만드는 프롬프트 */
@@ -275,7 +307,7 @@ export async function buildPlan(req: TripRequest): Promise<Plan & { hubSuggestio
         const r = await generateJson(cityPrompt(req, s, i, stays.length), CitySchema, { extraCheck: (v) => checkCity(v, s), retries: 1 });
         if (r.fixes.length) validation.push(`${s.place.name}: ${r.fixes.join(" / ")}`);
         s.summary = r.value.summary;
-        s.days = r.value.days as DayPlan[];
+        s.days = polishDays(r.value.days as DayPlan[]);
         s.estLodgingPerNightKRW = r.value.estLodgingPerNightKRW;
         s.estOtherPerDayKRW = r.value.estOtherPerDayKRW;
       } catch (e) {

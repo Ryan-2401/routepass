@@ -8,7 +8,7 @@ import { z } from "zod";
 import { distanceKm } from "@/lib/geo";
 import { generateJson } from "@/lib/server/gemini";
 import { webSearch } from "@/lib/server/verify";
-import type { DayRoute, PlaceOption, Restaurant } from "@/lib/types";
+import type { DayRoute, PlaceOption, Restaurant, RouteStop } from "@/lib/types";
 
 export const FOOD_CATEGORIES = ["현지 전통", "가성비", "카페·디저트", "분위기 좋은 저녁", "파인다이닝"] as const;
 
@@ -139,12 +139,27 @@ const ReplanSchema = z.object({
   days: z.array(
     z.object({
       date: z.string(),
-      stops: z.array(z.object({ id: z.string(), time: z.string().regex(/^\d{2}:\d{2}$/), note: z.string().max(120).optional() })),
+      stops: z.array(
+        z.object({
+          id: z.string(),
+          time: z.string().regex(/^\d{2}:\d{2}$/),
+          note: z.string().transform((s) => s.slice(0, 200)).optional(),
+          durationMin: z.number().int().min(10).max(600).optional().catch(undefined),
+          tip: z.string().transform((s) => s.slice(0, 120)).optional(),
+        }),
+      ),
     }),
   ),
 });
 
 /** OpenStreetMap 영업시간 문자열로 그 날짜·시각에 문을 여는지 (판단 불가면 null) */
+/** 직선거리로 이동 방법 추정: 실제 길은 직선보다 약 1.3배, 걷기 시속 4.5km, 대중교통은 대기 포함 시속 15km */
+export function moveText(km: number, from: string): string {
+  const road = km * 1.3;
+  if (road <= 1.6) return `${from} 도보 약 ${Math.max(3, Math.round((road / 4.5) * 60))}분 (${km.toFixed(1)}km)`;
+  return `${from} 대중교통 약 ${Math.round((road / 15) * 60 + 8)}분 또는 도보 ${Math.round((road / 4.5) * 60)}분 (직선 ${km.toFixed(1)}km)`;
+}
+
 export function isOpenAt(openingHours: string | undefined, date: string, time: string): boolean | null {
   if (!openingHours) return null;
   try {
@@ -181,8 +196,8 @@ ${items}
 2. 식당은 점심 11:30~14:00 또는 저녁 18:00~21:00에, 카페·디저트는 오후에.
 3. 가까운 곳끼리 같은 날 묶고, 하루 안에서는 이동 거리가 짧은 순서로.
 4. 영업시간이 있으면 문 여는 시각에만 배치.
-5. note는 한국어 한 줄(머무는 시간이나 팁).
-JSON: {"days":[{"date":"${p.dates[0]}","stops":[{"id":"","time":"10:00","note":""}]}]}`;
+5. note는 그곳에서 무엇을 하면 좋은지 한국어 1~2문장(식당이면 먹어볼 메뉴), durationMin은 머무는 분, tip은 확실한 실용 팁 한 줄(예약·줄·휴무 등, 모르면 생략).
+JSON: {"days":[{"date":"${p.dates[0]}","stops":[{"id":"","time":"10:00","durationMin":90,"note":"","tip":""}]}]}`;
   const ids = new Set(p.picks.map((x) => x.id));
   const { value } = await generateJson(prompt, ReplanSchema, {
     temperature: 0.3,
@@ -209,9 +224,15 @@ JSON: {"days":[{"date":"${p.dates[0]}","stops":[{"id":"","time":"10:00","note":"
         const open = isOpenAt(place.openingHours, date, s.time);
         return {
           ...s,
+          tip: s.tip || undefined,
           warning: open === false ? `지도 데이터상 ${s.time}에는 영업하지 않는 시간이에요. 시간을 바꾸거나 다른 곳을 고르세요.` : undefined,
         };
       });
+    // 코드 계산: 앞 장소(첫 장소는 숙소)에서 오는 거리와 방법
+    stops.forEach((s, i) => {
+      const prev = i === 0 ? p.hotel : byId.get(stops[i - 1].id);
+      if (prev) (s as RouteStop).move = moveText(distanceKm(prev, byId.get(s.id)!), i === 0 ? "숙소에서" : "앞 장소에서");
+    });
     const pts = [p.hotel, ...stops.map((s) => byId.get(s.id)!), p.hotel].filter((x): x is PlaceOption => !!x);
     const walkKm = pts.slice(1).reduce((sum, x, i) => sum + distanceKm(pts[i], x), 0);
     return { date, stops, walkKm: Math.round(walkKm * 10) / 10 };

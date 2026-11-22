@@ -411,7 +411,7 @@ export default function PlacePicker(props: {
           <h5>
             고른 곳으로 짠 동선 <AiTag demo={props.demo} />
           </h5>
-          <p className="small muted">시간과 순서는 AI가 정했고, 영업시간 충돌과 걷는 거리는 코드가 지도 데이터로 다시 계산했어요.</p>
+          <p className="small muted">시간·순서·설명은 AI가 정했고, 영업시간 충돌과 장소 사이 거리·이동 시간은 코드가 지도 좌표로 다시 계산했어요(직선거리 기준 추정).</p>
           <CityRouteMap days={props.route.days} byId={byId} hotel={selection.hotel} />
           <div className="route-days">
             {props.route.days.map((d, di) => (
@@ -420,11 +420,14 @@ export default function PlacePicker(props: {
                   {di + 1}일차 · {fmtKoDate(d.date)} <span className="muted small">· 이동 직선거리 약 {d.walkKm}km</span>
                 </div>
                 {d.stops.length ? (
-                  <ol>
+                  <ol className="route-stops">
                     {d.stops.map((s) => (
                       <li key={s.id}>
+                        {s.move ? <div className="move small muted">↓ {s.move}</div> : null}
                         <b>{s.time}</b> {byId.get(s.id)?.name}
-                        {s.note ? <span className="muted small"> — {s.note}</span> : null}
+                        {s.durationMin ? <span className="muted small"> · {s.durationMin >= 60 ? `${Math.floor(s.durationMin / 60)}시간${s.durationMin % 60 ? ` ${s.durationMin % 60}분` : ""}` : `${s.durationMin}분`}</span> : null}
+                        {s.note ? <div className="small">{s.note}</div> : null}
+                        {s.tip ? <div className="small" style={{ color: "var(--changed)" }}>팁: {s.tip}</div> : null}
                         {s.warning ? <div className="warn-line">⚠ {s.warning}</div> : null}
                       </li>
                     ))}

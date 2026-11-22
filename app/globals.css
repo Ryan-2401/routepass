@@ -150,14 +150,25 @@ button, input, select { font: inherit; color: inherit; }
 .city h4 { margin: 0; font-size: 24px; letter-spacing: -0.025em; }
 .city .when { color: var(--ink-2); font-size: 14px; margin: 2px 0 var(--s-3); }
 .city .summary { max-width: 72ch; margin: 0 0 var(--s-4); }
-.days { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: var(--s-4); }
+.days { display: grid; gap: var(--s-4); }
 .day { border-top: 2px solid var(--ink); padding-top: var(--s-2); }
-.day .d { font-weight: 700; font-size: 14px; }
-.day .theme { color: var(--ink-2); font-size: 13.5px; margin-bottom: var(--s-2); }
-.day ul { list-style: none; padding: 0; margin: 0; }
-.day li { display: grid; grid-template-columns: 36px 1fr; font-size: 14px; padding: 3px 0; }
-.day li .slot { color: var(--ink-3); font-size: 12.5px; padding-top: 1px; }
-.day li[data-kind="food"] .t::before { content: "🍽 "; }
+.day > summary { cursor: pointer; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; list-style-position: outside; }
+.day .d { font-weight: 700; font-size: 15px; }
+.day .theme { color: var(--ink); font-size: 15px; }
+.day-intro { margin: 6px 0 var(--s-3); color: var(--ink-2); font-size: 14.5px; max-width: 72ch; }
+.timeline { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-3); }
+.timeline > li { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: var(--s-3); }
+.when-col { display: flex; flex-direction: column; font-size: 13px; color: var(--ink-3); padding-top: 1px; }
+.when-col b { color: var(--ink); font-size: 15px; font-variant-numeric: tabular-nums; }
+.what { border-left: 2px solid var(--rule); padding-left: var(--s-3); max-width: 72ch; }
+.timeline > li[data-kind="food"] .what { border-left-color: #e2b878; }
+.what .t { font-weight: 600; font-size: 15px; }
+.what .desc { margin: 3px 0 4px; font-size: 14.5px; line-height: 1.6; }
+.what .fee { margin-left: 8px; font-weight: 400; font-size: 12.5px; color: var(--ink-2); background: var(--paper-2); padding: 1px 7px; border-radius: 999px; }
+.what .menu { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; margin-bottom: 3px; }
+.what .tip { color: var(--changed); }
+.what .move { color: var(--ink-3); margin-top: 6px; }
+@media (max-width: 560px) { .timeline > li { grid-template-columns: 50px minmax(0, 1fr); gap: var(--s-2); } }
 .eat { margin-top: var(--s-4); border-top: 1px dashed var(--rule); padding-top: var(--s-3); }
 .eat h5 { margin: 0 0 var(--s-2); font-size: 14.5px; }
 .eat ol { margin: 0; padding-left: 20px; font-size: 14px; }
@@ -287,3 +298,4 @@ footer.foot { margin-top: var(--s-7); font-size: 12.5px; color: var(--ink-3); ma
   .picker-grid { grid-template-columns: 1fr; }
   .basket { position: static; }
 }
+.route-stops li { padding: 3px 0; }
