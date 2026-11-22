@@ -1,7 +1,7 @@
 // Gemini API 호출 + JSON 결과 검증
 // AI 출력은 항상 zod 스키마로 검사하고, 틀리면 오류 내용을 알려주고 한 번 더 시도합니다.
 import "server-only";
-import type { z } from "zod";
+import { z } from "zod";
 import { env } from "@/lib/env";
 
 export class AiError extends Error {}
@@ -87,7 +87,12 @@ export async function generateJson<S extends z.ZodTypeAny>(
       fixes.push(`시도 ${attempt + 1}: JSON 파싱 실패`);
       continue;
     }
-    const r = schema.safeParse(parsed);
+    let r = schema.safeParse(parsed);
+    // AI가 {"items":[…]} 대신 […]만 보내는 경우: 배열 칸이 하나뿐인 스키마면 그 칸에 넣어 다시 검사
+    if (!r.success && Array.isArray(parsed) && schema instanceof z.ZodObject) {
+      const arrayKeys = Object.entries(schema.shape as Record<string, z.ZodTypeAny>).filter(([, v]) => v instanceof z.ZodArray);
+      if (arrayKeys.length === 1) r = schema.safeParse({ [arrayKeys[0][0]]: parsed });
+    }
     if (!r.success) {
       lastProblems = r.error.issues.slice(0, 8).map((i) => `${i.path.join(".")}: ${i.message}`);
       fixes.push(`시도 ${attempt + 1}: 스키마 위반 ${lastProblems.length}건`);
