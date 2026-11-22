@@ -1,7 +1,9 @@
 // 핵심 규칙 테스트: npm test
 import { describe, expect, it } from "vitest";
 import { maxDaysInWindow, runEntryChecks } from "@/lib/entry";
+import { stayCost } from "@/lib/budget";
 import { gatewayInfo } from "@/lib/incheon";
+import { isOpenAt } from "@/lib/server/picks";
 import { bestPaths, buildGraph, flightKey } from "@/lib/pathfind";
 import { allocateNights, banBlock } from "@/lib/server/planner";
 import { findLocalCity } from "@/lib/server/resolve";
@@ -15,10 +17,10 @@ const fo = (id: string, price: number, dur = 600): FlightOption => ({ id, source
 
 describe("체류일 배분", () => {
   it("입력한 박 수를 그대로 쓴다", () => {
-    expect(allocateNights({ cities: [{ name: "a", days: 3 }, { name: "b", days: 2 }], startDate: "2027-01-01", budgetKRW: 3000000, budgetToleranceKRW: 300000, interests: [], travelers: 1 })).toEqual([3, 2]);
+    expect(allocateNights({ cities: [{ name: "a", days: 3 }, { name: "b", days: 2 }], startDate: "2027-01-01", budgetKRW: 3000000, budgetToleranceKRW: 300000, lodgingClass: "any", mealBudgetKRW: 40000, interests: [], travelers: 1 })).toEqual([3, 2]);
   });
   it("비운 도시는 전체 일수에서 나눈다", () => {
-    expect(allocateNights({ cities: [{ name: "a", days: 4 }, { name: "b" }, { name: "c" }], totalDays: 9, startDate: "2027-01-01", budgetKRW: 3000000, budgetToleranceKRW: 300000, interests: [], travelers: 1 })).toEqual([4, 3, 2]);
+    expect(allocateNights({ cities: [{ name: "a", days: 4 }, { name: "b" }, { name: "c" }], totalDays: 9, startDate: "2027-01-01", budgetKRW: 3000000, budgetToleranceKRW: 300000, lodgingClass: "any", mealBudgetKRW: 40000, interests: [], travelers: 1 })).toEqual([4, 3, 2]);
   });
 });
 
@@ -140,5 +142,24 @@ describe("출입국 규칙", () => {
   });
   it("180일 창 계산", () => {
     expect(maxDaysInWindow(["2027-01-01", "2027-01-02", "2027-08-01"], 180)).toBe(2);
+  });
+});
+
+describe("숙소·식비 예산과 영업시간", () => {
+  it("고른 숙소는 실제 가격, 안 고른 도시는 AI 추정, 식비는 1끼 상한 × 2끼", () => {
+    const base = { place: city("파리"), arrive: "2027-01-10", depart: "2027-01-12", nights: 2, days: [], estLodgingPerNightKRW: 100000, estOtherPerDayKRW: 20000 };
+    const plan = { request: { travelers: 2, mealBudgetKRW: 30000 }, stays: [base, { ...base, place: city("로마") }] } as unknown as Parameters<typeof stayCost>[0];
+    const hotel = { id: "h", kind: "hotel", name: "H", lat: 0, lng: 0, priceKRW: 300000, mapUrl: "", source: "google-hotels" } as const;
+    const c = stayCost(plan, { 0: { hotel, picks: [] } });
+    expect(c.realHotels).toBe(1);
+    expect(c.estimatedHotels).toBe(1);
+    expect(c.lodging).toBe(300000 + 200000); // 방값 30만×2박÷2명 + 10만×2박
+    expect(c.food).toBe(30000 * 2 * 4);
+    expect(c.other).toBe(20000 * 4);
+  });
+  it("영업시간 검사", () => {
+    expect(isOpenAt("Mo-Fr 09:00-18:00", "2027-01-11", "10:00")).toBe(true); // 월요일
+    expect(isOpenAt("Mo-Fr 09:00-18:00", "2027-01-10", "10:00")).toBe(false); // 일요일
+    expect(isOpenAt(undefined, "2027-01-10", "10:00")).toBeNull();
   });
 });

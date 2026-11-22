@@ -26,9 +26,13 @@ export interface TripRequest {
   totalDays?: number; // 도시별 일수를 비웠을 때 AI가 나눌 전체 일수
   budgetKRW: number; // 1인 총예산 (항공·교통·숙박·식비 포함)
   budgetToleranceKRW: number; // 허용 범위 ±
+  lodgingClass: LodgingClass; // 숙소 등급 선호
+  mealBudgetKRW: number; // 1인 1끼 식비 상한 (미슐랭이면 15만 원 이상)
   interests: string[];
   travelers: number;
 }
+
+export type LodgingClass = "any" | "hostel" | "3" | "4" | "5";
 
 export type TransportMode = "flight" | "train" | "bus" | "ferry" | "car" | "walk";
 
@@ -58,6 +62,7 @@ export interface DayItem {
   title: string;
   kind: "sight" | "food" | "move" | "rest";
   note?: string;
+  placeEn?: string; // 명소의 현지·영어 이름 (지도에서 찾을 때 사용)
 }
 
 export interface DayPlan {
@@ -73,7 +78,9 @@ export interface CityStay {
   nights: number;
   summary: string;
   days: DayPlan[];
-  estDailyCostKRW?: number; // AI 추정: 1인 하루 숙박·식사·입장료
+  estDailyCostKRW?: number; // AI 추정: 1인 하루 숙박·식사·입장료 (구버전 호환)
+  estLodgingPerNightKRW?: number; // AI 추정: 1박 숙소비 (1인 기준)
+  estOtherPerDayKRW?: number; // AI 추정: 하루 입장료·시내교통
 }
 
 export interface GatewayInfo {
@@ -175,4 +182,42 @@ export interface Restaurant {
   website?: string;
   osmUrl: string;
   reason?: string;
+}
+
+/* ---------- 장소 고르기 (숙소·식당·명소) ---------- */
+
+export type PlaceKind = "hotel" | "restaurant" | "sight";
+
+export interface PlaceOption {
+  id: string;
+  kind: PlaceKind;
+  name: string;
+  lat: number;
+  lng: number;
+  category?: string; // 식당: 현지 전통 / 가성비 / 카페·디저트 / 분위기 좋은 저녁 / 파인다이닝 / 미슐랭 가이드
+  priceKRW?: number; // 호텔: 1박 실제 가격 (검색 시점)
+  priceNote?: string; // 식당: 가격대 설명 (AI 추정이면 그렇게 표시)
+  stars?: number; // 호텔 등급
+  rating?: number;
+  reviews?: number;
+  openingHours?: string; // OpenStreetMap opening_hours 형식
+  hoursText?: string; // 사람이 읽는 영업시간 (검색 결과)
+  link?: string;
+  mapUrl: string;
+  source: "google-hotels" | "osm" | "search+ai" | "ai-plan";
+  reason?: string;
+  special?: { by: string; title: string; url: string }; // 스페셜 픽 출처
+}
+
+export interface RouteStop {
+  id: string;
+  time: string; // HH:MM
+  note?: string;
+  warning?: string; // 영업시간 충돌 등 코드가 찾은 문제
+}
+
+export interface DayRoute {
+  date: string;
+  stops: RouteStop[];
+  walkKm: number;
 }

@@ -70,7 +70,11 @@ button, input, select { font: inherit; color: inherit; }
 }
 .side input::placeholder { color: #8fa9a4; }
 .side input[type="date"] { color-scheme: dark; }
-.city-row { display: grid; grid-template-columns: 16px 1fr 1fr 48px 18px 22px; gap: 5px; align-items: center; margin-bottom: var(--s-2); }
+.city-row input[type="number"] { padding-left: 4px; padding-right: 2px; text-align: center; }
+.seg-5 { grid-template-columns: repeat(5, 1fr); }
+.seg-4 { grid-template-columns: repeat(4, 1fr); }
+.seg-5 button, .seg-4 button { font-size: 13px; padding: 7px 0; }
+.city-row { display: grid; grid-template-columns: 16px 1fr 1fr 50px 18px 22px; gap: 5px; align-items: center; margin-bottom: var(--s-2); }
 .city-row .custom-city { grid-column: 2 / 5; }
 .remove-btn { height: 28px; padding: 0; font-size: 13px; }
 .geo-msg { grid-column: 2 / 7; margin: 0 0 2px; font-size: 12.5px; color: #ffd7d2; }
@@ -236,3 +240,50 @@ button, input, select { font: inherit; color: inherit; }
 .empty p { color: var(--ink-2); }
 .empty ol { color: var(--ink-2); padding-left: 20px; }
 footer.foot { margin-top: var(--s-7); font-size: 12.5px; color: var(--ink-3); max-width: 80ch; }
+
+/* ---------- 숙소·식당·명소 고르기 ---------- */
+.picker-closed { margin: var(--s-3) 0 var(--s-4); }
+.picker { margin: var(--s-3) 0 var(--s-5); padding: var(--s-4); border: 1px solid var(--rule); border-radius: var(--r-md); background: var(--sheet); }
+.picker-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-3); }
+.picker-head h5, .route-result h5 { margin: 0 0 var(--s-3); font-size: 16px; }
+.text-link { background: none; border: 0; padding: 0; color: var(--changed); text-decoration: underline; cursor: pointer; font: inherit; }
+.picker-grid { display: grid; grid-template-columns: minmax(0, 1fr) 270px; gap: var(--s-4); align-items: start; }
+.tabs { display: flex; flex-wrap: wrap; gap: 2px; border-bottom: 2px solid var(--ink); margin-bottom: var(--s-3); }
+.tabs button { background: none; border: 0; padding: 7px 13px; cursor: pointer; font: inherit; font-size: 14px; color: var(--ink-2); border-radius: var(--r-sm) var(--r-sm) 0 0; }
+.tabs button[aria-selected="true"] { background: var(--ink); color: #fff; font-weight: 600; }
+.chips.light { margin-bottom: var(--s-2); }
+.chips.light .chip { border-color: var(--rule); color: var(--ink-2); }
+.chips.light .chip[aria-pressed="true"] { background: var(--cover); color: #fff; border-color: var(--cover); }
+.pick-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-2); max-height: 520px; overflow: auto; }
+.pick-card { display: flex; gap: var(--s-3); justify-content: space-between; align-items: flex-start; padding: var(--s-3); border: 1px solid var(--rule); border-radius: var(--r-sm); background: #fff; cursor: grab; }
+.pick-card.added { opacity: 0.55; cursor: default; }
+.pick-card .btn { flex: none; }
+.pick-name { font-weight: 600; }
+.pick-meta { display: flex; flex-wrap: wrap; gap: 4px 10px; color: var(--ink-2); font-size: 13.5px; margin-top: 2px; }
+.pick-meta .price { color: var(--ink); font-weight: 600; }
+.pick-reason { font-size: 13.5px; margin-top: 4px; }
+.pick-links { display: flex; gap: 10px; margin-top: 4px; }
+.cat { display: inline-block; padding: 0 7px; border-radius: 999px; background: var(--paper-2); color: var(--ink-2); font-size: 12.5px; }
+.special-badge { display: inline-block; margin-right: 6px; padding: 1px 8px; border-radius: 999px; background: #f4d35e; color: var(--ink); font-size: 12px; font-weight: 700; }
+.basket { position: sticky; top: var(--s-3); padding: var(--s-3); border: 2px dashed var(--rule); border-radius: var(--r-md); background: var(--paper); }
+.basket.over { border-color: var(--cover); background: #e2ece9; }
+.basket h6 { margin: 0; font-size: 15px; }
+.basket-hotel { font-size: 14px; margin: var(--s-2) 0; }
+.basket-list { margin: 0 0 var(--s-3); padding-left: 20px; font-size: 14px; display: grid; gap: 3px; }
+.kind { font-size: 11.5px; padding: 0 5px; border-radius: 3px; background: var(--paper-2); }
+.kind.restaurant { background: #f6e3c8; }
+.kind.sight { background: #d9e4f3; }
+.x { background: none; border: 0; color: var(--ink-3); cursor: pointer; margin-left: 4px; font-size: 13px; }
+.x:hover { color: var(--stop); }
+.small-primary { width: 100%; padding: 9px 12px; font-size: 14.5px; }
+.route-result { margin-top: var(--s-4); padding-top: var(--s-4); border-top: 1px solid var(--rule); }
+.small-map { height: 320px; margin-bottom: var(--s-3); }
+.route-days { display: grid; gap: var(--s-3); }
+.route-day .d { font-weight: 600; margin-bottom: 4px; }
+.route-day ol { margin: 0; padding-left: 22px; display: grid; gap: 3px; }
+.warn-line { color: var(--cond); font-size: 13px; }
+.nearby { margin-top: 6px; padding: 6px 10px; background: var(--paper); border-radius: var(--r-sm); display: grid; gap: 3px; }
+@media (max-width: 760px) {
+  .picker-grid { grid-template-columns: 1fr; }
+  .basket { position: static; }
+}

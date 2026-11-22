@@ -6,6 +6,7 @@ import CityBlock, { type EatState } from "@/components/CityBlock";
 import EntryPanel from "@/components/EntryPanel";
 import LegBlock, { type FlightState } from "@/components/LegBlock";
 import PathCompare from "@/components/PathCompare";
+import PlacePicker, { type RouteResult, type Selection } from "@/components/PlacePicker";
 import RouteLine from "@/components/RouteLine";
 import TripForm from "@/components/TripForm";
 import { AiTag } from "@/components/bits";
@@ -33,6 +34,8 @@ export default function Home() {
   const [checks, setChecks] = useState<EntryCheck[] | null>(null);
   const [steps, setSteps] = useState<Partial<Record<Step, StepState>>>({});
   const [rtBusy, setRtBusy] = useState<Set<string>>(new Set());
+  const [selections, setSelections] = useState<Record<number, Selection>>({});
+  const [routes, setRoutes] = useState<Record<number, RouteResult | undefined>>({});
   const run = useRef(0);
 
   useEffect(() => {
@@ -65,6 +68,8 @@ export default function Home() {
     setFlights({});
     setEat({});
     setChecks(null);
+    setSelections({});
+    setRoutes({});
     setSteps({ plan: "run" });
     let p: PlanResponse;
     try {
@@ -298,7 +303,18 @@ export default function Home() {
                       directNote={directNote(leg.index)}
                     />
                     {plan.stays[i] ? (
-                      <CityBlock stay={plan.stays[i]} demo={demo} eat={eat[i]} onRetryEat={() => loadEat(plan, i, run.current).catch(() => {})} />
+                      <>
+                        <CityBlock stay={plan.stays[i]} demo={demo} eat={eat[i]} onRetryEat={() => loadEat(plan, i, run.current).catch(() => {})} />
+                        <PlacePicker
+                          stay={plan.stays[i]}
+                          request={plan.request}
+                          demo={demo}
+                          selection={selections[i] ?? { picks: [] }}
+                          onChange={(s) => setSelections((x) => ({ ...x, [i]: s }))}
+                          route={routes[i]}
+                          onRoute={(r) => setRoutes((x) => ({ ...x, [i]: r }))}
+                        />
+                      </>
                     ) : null}
                   </div>
                 ))}
@@ -310,7 +326,7 @@ export default function Home() {
               <p className="lede">
                 이동비는 모은 항공권과 이동수단으로 다익스트라 알고리즘이 계산한 값이고(운행 중단 수단 제외), 체류비는 AI가 도시별로 추정한 값입니다. 둘을 더해 예산 범위와 비교합니다.
               </p>
-              <PathCompare plan={plan} paths={paths} />
+              <PathCompare plan={plan} paths={paths} selections={selections} />
             </section>
 
             <section className="section" id="entry">

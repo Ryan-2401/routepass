@@ -56,6 +56,7 @@ const DayItemSchema = z.object({
   title: z.string().min(1),
   kind: z.enum(["sight", "food", "move", "rest"]),
   note: z.string().optional(),
+  placeEn: z.string().max(120).optional(),
 });
 const AiPlanSchema = z.object({
   cities: z.array(
@@ -91,16 +92,19 @@ type AiPlan = z.infer<typeof AiPlanSchema>;
 
 const CitySchema = z.object({
   summary: z.string(),
-  estDailyCostKRW: z.number().min(0).optional(),
+  estLodgingPerNightKRW: z.number().min(0).optional(),
+  estOtherPerDayKRW: z.number().min(0).optional(),
   days: z.array(z.object({ date: z.string(), theme: z.string(), items: z.array(DayItemSchema).min(1) })),
 });
 const LegsSchema = AiPlanSchema.pick({ legs: true, tips: true });
 
+const LODGING_KO: Record<string, string> = { any: "상관없음", hostel: "호스텔·게스트하우스", "3": "3성급", "4": "4성급", "5": "5성급" };
+
 function travelerLine(req: TripRequest) {
   const won = (n: number) => `${n.toLocaleString("ko-KR")}원`;
-  return `[여행자] ${req.travelers}명, 1인 총예산(항공·교통·숙박·식비 포함): ${won(req.budgetKRW)} (± ${won(req.budgetToleranceKRW)}), 관심사: ${
-    req.interests.join(", ") || "특별히 없음"
-  }`;
+  return `[여행자] ${req.travelers}명, 1인 총예산(항공·교통·숙박·식비 포함): ${won(req.budgetKRW)} (± ${won(req.budgetToleranceKRW)}), 숙소 등급: ${
+    LODGING_KO[req.lodgingClass] ?? "상관없음"
+  }, 1인 1끼 식비 상한: ${won(req.mealBudgetKRW)}${req.mealBudgetKRW >= 150000 ? " (미슐랭·파인다이닝 희망)" : ""}, 관심사: ${req.interests.join(", ") || "특별히 없음"}`;
 }
 
 /** 도시 하나의 일정만 만드는 짧은 프롬프트 (여러 도시를 동시에 요청해 빠르게) */
@@ -114,10 +118,13 @@ ${travelerLine(req)}
 - 하루 items는 오전/점심/오후/저녁 중심으로 3~5개. 첫날은 도착일이라 오후부터 시작하세요.
 - 실제로 존재하는 유명 명소만 쓰고, 확실하지 않으면 지역 이름(예: "구시가지 산책")으로 쓰세요.
 - 식사(kind "food")에는 식당 이름을 절대 쓰지 말고 음식 종류만 쓰세요.
+- 명소(kind "sight")는 한 항목에 한 곳만 쓰고, placeEn에 지도에서 찾을 수 있는 현지어 또는 영어 공식 이름을 적으세요(예: "Musée du Louvre").
 - 예산에 맞는 숙소·식사 수준을 고르세요.
 - summary는 이 도시 일정의 흐름을 한국어 1~2문장으로.
-- estDailyCostKRW: 이 도시에서 1인 하루에 드는 숙박·식사·입장료·시내교통 합계 추정(원). 도시 간 이동비는 빼세요.
-JSON: {"summary":"","estDailyCostKRW":0,"days":[{"date":"YYYY-MM-DD","theme":"","items":[{"slot":"오전","title":"","kind":"sight","note":""}]}]}`;
+- estLodgingPerNightKRW: 이 도시에서 위 숙소 등급으로 1박 숙소비(1인 기준, 원) 추정.
+- estOtherPerDayKRW: 하루 입장료·시내교통 합계(1인, 원) 추정. 식비와 숙소비, 도시 간 이동비는 빼세요.
+- 식사는 1끼 식비 상한에 맞는 수준으로 고르세요.
+JSON: {"summary":"","estLodgingPerNightKRW":0,"estOtherPerDayKRW":0,"days":[{"date":"YYYY-MM-DD","theme":"","items":[{"slot":"오전","title":"","kind":"sight","note":"","placeEn":""}]}]}`;
 }
 
 /** 구간별 이동수단 후보와 팁만 만드는 프롬프트 */
@@ -269,7 +276,8 @@ export async function buildPlan(req: TripRequest): Promise<Plan & { hubSuggestio
         if (r.fixes.length) validation.push(`${s.place.name}: ${r.fixes.join(" / ")}`);
         s.summary = r.value.summary;
         s.days = r.value.days as DayPlan[];
-        s.estDailyCostKRW = r.value.estDailyCostKRW;
+        s.estLodgingPerNightKRW = r.value.estLodgingPerNightKRW;
+        s.estOtherPerDayKRW = r.value.estOtherPerDayKRW;
       } catch (e) {
         // 도시 하나가 실패해도 나머지 결과는 보여줌 (이동·출입국·항공은 그대로 계산)
         validation.push(`${s.place.name}: AI 일정 생성 실패 — ${(e as Error).message}`);

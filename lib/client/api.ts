@@ -1,5 +1,5 @@
 // 브라우저에서 서버 API를 부르는 함수들
-import type { EntryCheck, FlightSearchResult, Leg, Place, Plan, Restaurant, TripRequest, VerifyResult } from "@/lib/types";
+import type { DayRoute, EntryCheck, FlightSearchResult, LodgingClass, Leg, Place, PlaceOption, Plan, Restaurant, TripRequest, VerifyResult } from "@/lib/types";
 
 export class ApiError extends Error {
   constructor(message: string, public kind?: string) {
@@ -30,6 +30,13 @@ export const api = {
     post<{ checks: EntryCheck[] }>("/api/entry", p),
   places: (p: { lat: number; lng: number; country: string; cityName: string; foodThemes: string[]; count: number; pool?: Restaurant[] }) =>
     post<{ picks: Restaurant[]; poolSize: number; pickedBy: "ai" | "rule" }>("/api/places", p),
+  hotels: (p: { cityEn: string; checkIn: string; checkOut: string; adults: number; lodgingClass: LodgingClass }) =>
+    post<{ options: PlaceOption[]; message: string }>("/api/hotels", p),
+  curate: (p: { cityName: string; mealBudgetKRW: number; themes: string[]; pool: Restaurant[] }) => post<{ options: PlaceOption[] }>("/api/curate", p),
+  special: (p: { cityName: string; cityEn: string; kind: "youtuber" | "michelin" }) =>
+    post<{ items: { name: string; searchName: string; by: string; hoursText?: string; source: { title: string; url: string } }[] }>("/api/special", p),
+  replan: (p: { cityName: string; dates: string[]; arriveDate: string; hotel?: PlaceOption; picks: PlaceOption[] }) =>
+    post<{ days: DayRoute[]; unused: string[] }>("/api/replan", p),
   status: async () => (await fetch("/api/status")).json() as Promise<Record<string, boolean | string>>,
 };
 

@@ -5,9 +5,22 @@ import menuData from "@/data/city-menu.json";
 import countriesData from "@/data/countries.json";
 import bans from "@/data/travel-bans.json";
 import { geocodeCity, type GeoHit } from "@/lib/client/geocode";
-import type { TripRequest } from "@/lib/types";
+import type { LodgingClass, TripRequest } from "@/lib/types";
 
 const INTERESTS = ["미술관", "역사", "현지 음식", "야경", "자연", "건축", "쇼핑", "덜 걷기"];
+const LODGING: [LodgingClass, string][] = [
+  ["any", "상관없음"],
+  ["hostel", "호스텔"],
+  ["3", "3성"],
+  ["4", "4성"],
+  ["5", "5성"],
+];
+const MEAL_PRESETS: [number, string][] = [
+  [15000, "가볍게"],
+  [40000, "보통"],
+  [80000, "맛집 위주"],
+  [200000, "미슐랭"],
+];
 const CUSTOM = "__custom__";
 
 const COUNTRY_NAMES = countriesData.countries as Record<string, { ko: string }>;
@@ -62,6 +75,8 @@ export default function TripForm(props: { busy: boolean; onSubmit: (r: TripReque
   const [start, setStart] = useState(defaultStart);
   const [budget, setBudget] = useState("3000000");
   const [tolerance, setTolerance] = useState("300000");
+  const [lodging, setLodging] = useState<LodgingClass>("any");
+  const [meal, setMeal] = useState("40000");
   const [interests, setInterests] = useState<string[]>(["미술관", "현지 음식"]);
   const [travelers, setTravelers] = useState(1);
   const [formError, setFormError] = useState("");
@@ -99,6 +114,8 @@ export default function TripForm(props: { busy: boolean; onSubmit: (r: TripReque
     const t = Number(tolerance || 0);
     if (!Number.isFinite(b) || b < 100000) return setFormError("1인 총예산을 10만 원 이상 숫자로 적어 주세요.");
     if (!Number.isFinite(t) || t < 0) return setFormError("허용 범위는 0 이상의 숫자로 적어 주세요.");
+    const m = Number(meal);
+    if (!Number.isFinite(m) || m < 5000) return setFormError("1끼 식비는 5,000원 이상 숫자로 적어 주세요.");
     setFormError("");
     // 직접 입력한 도시는 브라우저에서 먼저 찾음 (Nominatim 이용 정책: 초당 1회)
     const geos: (GeoHit | undefined)[] = [];
@@ -127,6 +144,8 @@ export default function TripForm(props: { busy: boolean; onSubmit: (r: TripReque
       startDate: start,
       budgetKRW: Math.round(b),
       budgetToleranceKRW: Math.round(t),
+      lodgingClass: lodging,
+      mealBudgetKRW: Math.round(m),
       interests,
       travelers,
     });
@@ -180,7 +199,8 @@ export default function TripForm(props: { busy: boolean; onSubmit: (r: TripReque
                 aria-label={`${i + 1}번째 도시 박 수`}
                 min={1}
                 max={30}
-                placeholder="박"
+                placeholder="3박"
+                title="박 수 (비우면 3박)"
                 value={r.days}
                 onChange={(e) => update(i, { days: e.target.value })}
               />
@@ -257,6 +277,33 @@ export default function TripForm(props: { busy: boolean; onSubmit: (r: TripReque
           허용: {won(Number(budget) - Number(tolerance || 0))} ~ {won(Number(budget) + Number(tolerance || 0))}
           <br />
           항공·교통·숙박·식비를 모두 포함한 1인 금액이에요.
+        </p>
+      </div>
+
+      <div className="field">
+        <span className="label">숙소 등급</span>
+        <div className="seg seg-5" role="group" aria-label="숙소 등급">
+          {LODGING.map(([v, t]) => (
+            <button type="button" key={v} aria-pressed={lodging === v} onClick={() => setLodging(v)}>
+              {t}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="field">
+        <label htmlFor="meal">1인 1끼 식비 상한 (원)</label>
+        <div className="seg seg-4" role="group" aria-label="식비 빠른 선택" style={{ marginBottom: 6 }}>
+          {MEAL_PRESETS.map(([v, t]) => (
+            <button type="button" key={v} aria-pressed={Number(meal) === v} onClick={() => setMeal(String(v))}>
+              {t}
+            </button>
+          ))}
+        </div>
+        <input id="meal" type="number" inputMode="numeric" min={5000} step={5000} value={meal} onChange={(e) => setMeal(e.target.value)} />
+        <p className="hint">
+          {won(Number(meal))}까지
+          {Number(meal) >= 150000 ? " · 미슐랭·파인다이닝 식당도 찾아요" : Number(meal) <= 20000 ? " · 가성비·현지 식당 위주로 찾아요" : ""}
         </p>
       </div>
 
