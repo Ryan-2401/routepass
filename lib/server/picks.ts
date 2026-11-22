@@ -88,10 +88,16 @@ const SpecialSchema = z.object({
 export async function specialPicks(p: { cityName: string; cityEn: string; kind: "youtuber" | "michelin" }): Promise<SpecialCandidate[]> {
   const queries =
     p.kind === "youtuber"
-      ? [`${p.cityName} 맛집 유튜버 추천`, `${p.cityName} 맛집 먹방 유튜브 다녀온 곳`]
+      ? [`${p.cityName} 맛집 유튜버 추천`, `${p.cityName} 맛집 먹방 유튜브 다녀온 곳`, `${p.cityEn} best restaurants YouTube food vlog`]
       : [`Michelin Guide ${p.cityEn} starred restaurants`, `${p.cityEn} Michelin star restaurant list 2026`];
   const hits = (await Promise.all(queries.map((q) => webSearch(q).catch(() => [])))).flat();
-  const uniq = hits.filter((h, i) => hits.findIndex((x) => x.url === h.url) === i).slice(0, 10);
+  const isYoutube = (h: { url: string }) => /(^|\.)(youtube\.com|youtu\.be)\//.test(h.url.replace(/^https?:\/\//, ""));
+  const mentionsYoutube = (h: { title: string; content: string }) => /유튜브|유튜버|youtube|youtuber|먹방/i.test(`${h.title} ${h.content}`);
+  const uniq = hits
+    .filter((h, i) => hits.findIndex((x) => x.url === h.url) === i)
+    // 유튜버 픽은 유튜브 영상이거나 본문에 유튜브·유튜버가 언급된 글만 근거로 인정
+    .filter((h) => p.kind !== "youtuber" || isYoutube(h) || mentionsYoutube(h))
+    .slice(0, 10);
   if (!uniq.length) return [];
   const list = uniq.map((h, i) => `[${i}] ${h.title}\nURL: ${h.url}\n내용: ${h.content.slice(0, 700)}`).join("\n\n");
   const what =
@@ -100,17 +106,29 @@ export async function specialPicks(p: { cityName: string; cityEn: string; kind: 
       : "미슐랭 가이드에 오른 식당(별 개수나 빕 구르망 여부를 by에 적기, 예: \"미슐랭 1스타\")";
   const prompt = `아래 검색 결과에서 ${p.cityName}(${p.cityEn})에 있는 ${what}만 뽑으세요. 최대 8곳.
 규칙: 검색 결과 본문에 이름과 추천 사실이 실제로 적힌 곳만. sourceIndex는 근거가 된 검색 결과 번호. 다른 도시 식당, 추측, 기억은 금지.
-name은 한국어 표기(없으면 원어), searchName은 지도에서 찾을 현지 원어 이름, by는 추천한 유튜버·채널 이름(모르면 "유튜버 추천"), hoursText는 본문에 영업시간이 있을 때만.
+name은 한국어 표기(없으면 원어), searchName은 지도에서 찾을 현지 원어 이름, hoursText는 본문에 영업시간이 있을 때만.
+${p.kind === "youtuber" ? "by에는 본문이나 제목에 적힌 유튜버·채널 이름을 그대로 쓰세요. 이름이 없으면 그 식당은 빼세요(단, 근거가 유튜브 영상 자체라면 by를 \"유튜브 영상\"으로). 블로그·게시판 글쓴이 본인의 후기는 유튜버 추천이 아니므로 빼세요." : ""}
 [검색 결과]
 ${list}
 JSON: {"items":[{"name":"","searchName":"","by":"","hoursText":"","sourceIndex":0}]}`;
   const { value } = await generateJson(prompt, SpecialSchema, { temperature: 0.1 });
+  const norm = (t: string) => t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   return value.items
     .filter((x) => x.sourceIndex >= 0 && x.sourceIndex < uniq.length)
+    .filter((x) => {
+      const src = uniq[x.sourceIndex];
+      const text = norm(`${src.title} ${src.content}`);
+      // 코드 검사 1: 식당 이름이 근거 글에 실제로 있어야 함
+      if (![x.searchName, x.name].some((n) => n && text.includes(norm(n)))) return false;
+      if (p.kind !== "youtuber") return true;
+      // 코드 검사 2: 유튜버 이름이 근거 글에 있거나, 근거가 유튜브 영상이어야 함
+      if (isYoutube(src)) return true;
+      return x.by !== "유튜브 영상" && !/^유튜버/.test(x.by) && text.includes(norm(x.by));
+    })
     .map((x) => ({
       name: x.name,
       searchName: x.searchName || x.name,
-      by: x.by,
+      by: p.kind === "youtuber" && isYoutube(uniq[x.sourceIndex]) && /^유튜버|^$/.test(x.by) ? "유튜브 영상" : x.by,
       hoursText: x.hoursText || undefined,
       source: { title: uniq[x.sourceIndex].title, url: uniq[x.sourceIndex].url },
     }));
