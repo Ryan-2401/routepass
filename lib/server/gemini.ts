@@ -68,7 +68,13 @@ function extractJson(text: string): unknown {
 export async function generateJson<S extends z.ZodTypeAny>(
   prompt: string,
   schema: S,
-  opts: { temperature?: number; extraCheck?: (v: z.infer<S>) => string[]; retries?: number } = {},
+  opts: {
+    temperature?: number;
+    extraCheck?: (v: z.infer<S>) => string[];
+    /** 고치면 좋지만 마지막 시도에서도 남으면 그대로 받아들이는 문제 (화면에 경고로 표시) */
+    softCheck?: (v: z.infer<S>) => string[];
+    retries?: number;
+  } = {},
 ): Promise<{ value: z.infer<S>; attempts: number; fixes: string[] }> {
   const retries = opts.retries ?? 1;
   let lastProblems: string[] = [];
@@ -104,6 +110,13 @@ export async function generateJson<S extends z.ZodTypeAny>(
       fixes.push(`시도 ${attempt + 1}: 규칙 위반 — ${problems.join(" / ")}`);
       continue;
     }
+    const soft = opts.softCheck?.(r.data) ?? [];
+    if (soft.length && attempt < retries) {
+      lastProblems = soft;
+      fixes.push(`시도 ${attempt + 1}: 고칠 점 — ${soft.join(" / ")}`);
+      continue;
+    }
+    if (soft.length) fixes.push(`남은 문제(경고로 표시): ${soft.join(" / ")}`);
     return { value: r.data, attempts: attempt + 1, fixes };
   }
   throw new AiError(`AI 결과가 규칙을 계속 어겼습니다: ${lastProblems.join(" / ")}`);

@@ -203,11 +203,14 @@ function checkAiPlan(ai: AiPlan, stays: CityStay[], legs: Leg[], hubs: string[])
 function checkCity(v: z.infer<typeof CitySchema>, s: CityStay): string[] {
   const want = s.days.map((d) => d.date).join(",");
   const got = v.days.map((d) => d.date).join(",");
-  if (want !== got) return [`days의 날짜는 [${want}]여야 합니다.`];
-  // 코드 검사: AI가 스스로 적은 휴무 요일에 그 명소를 배치했으면 다시 짜게 함
+  return want === got ? [] : [`days의 날짜는 [${want}]여야 합니다.`];
+}
+
+/** 코드 검사: AI가 스스로 적은 휴무 요일에 그 명소를 배치했으면 한 번 다시 짜게 함 (그래도 남으면 경고로 표시) */
+function closedDayClash(v: z.infer<typeof CitySchema>): string[] {
   const clash = v.days.flatMap((d) => {
     const wd = WEEKDAYS[new Date(`${d.date}T12:00:00Z`).getUTCDay()];
-    return d.items.filter((it) => it.closedDays?.includes(wd)).map((it) => `${d.date}(${wd}요일)에 넣은 "${it.title}"은 ${wd}요일 휴무입니다. 다른 날과 바꾸세요.`);
+    return d.items.filter((it) => it.closedDays?.includes(wd)).map((it) => `${d.date}(${wd}요일)에 넣은 "${it.title}"은 ${wd}요일 휴무입니다. 다른 날과 바꾸거나, 그날 문을 여는 다른 명소로 바꾸세요.`);
   });
   return clash;
 }
@@ -313,7 +316,7 @@ export async function buildPlan(req: TripRequest): Promise<Plan & { hubSuggestio
   stays.forEach((s, i) =>
     jobs.push(async () => {
       try {
-        const r = await generateJson(cityPrompt(req, s, i, stays.length), CitySchema, { extraCheck: (v) => checkCity(v, s), retries: 1 });
+        const r = await generateJson(cityPrompt(req, s, i, stays.length), CitySchema, { extraCheck: (v) => checkCity(v, s), softCheck: closedDayClash, retries: 1 });
         if (r.fixes.length) validation.push(`${s.place.name}: ${r.fixes.join(" / ")}`);
         s.summary = r.value.summary;
         s.days = polishDays(r.value.days as DayPlan[], req.mealBudgetKRW);
