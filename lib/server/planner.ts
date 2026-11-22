@@ -8,7 +8,7 @@ import { countryName } from "@/lib/countries";
 import { addDays } from "@/lib/dates";
 import { env } from "@/lib/env";
 import { haversineKm } from "@/lib/geo";
-import { gatewayInfo, hubCandidates } from "@/lib/incheon";
+import { gatewayInfo, hubCandidates, pickHubs } from "@/lib/incheon";
 import { generateJson } from "@/lib/server/gemini";
 import { resolveCity, SEOUL } from "@/lib/server/resolve";
 import type { CityStay, DayPlan, Leg, Place, Plan, TransportCandidate, TripRequest } from "@/lib/types";
@@ -171,15 +171,14 @@ function legsPrompt(req: TripRequest, legs: Leg[], hubs: string[]): string {
 ${travelerLine(req)}
 [이동 구간 (순서 고정)]
 ${legLines}
-[인천 노선표의 환승 허브 후보 IATA] ${hubs.join(", ")}
 
 규칙:
 - legs 배열은 위 구간마다 하나씩, index를 그대로. 각 구간에 후보 1~3개.
-- 서울(인천)이 포함된 구간에는 반드시 mode "flight" 후보를 넣고, hubSuggestions에 위 허브 후보 중 검색해 볼 만한 곳을 최대 2개.
+- 서울(인천)이 포함된 구간에는 반드시 mode "flight" 후보를 넣으세요. (환승지는 앱이 거리로 따로 계산하므로 hubSuggestions는 비워 두세요.)
 - 국경을 넘으면 borderCrossing: true. 운행 여부가 불확실하면 notes에 "운행 여부 확인 필요".
 - estDurationMin(분), estPriceKRW(1인 원화)는 대략적인 추정치.
 - tips: 이 여정 전체에 필요한 실용 팁 3~5개(결제수단, 통신, 치안 등).
-JSON: {"legs":[{"index":0,"candidates":[{"mode":"flight","description":"","operatorHint":"","estDurationMin":0,"estPriceKRW":0,"borderCrossing":true,"notes":""}],"hubSuggestions":["IST"]}],"tips":[""]}`;
+JSON: {"legs":[{"index":0,"candidates":[{"mode":"flight","description":"","operatorHint":"","estDurationMin":0,"estPriceKRW":0,"borderCrossing":true,"notes":""}]}],"tips":[""]}`;
 }
 
 function checkAiPlan(ai: AiPlan, stays: CityStay[], legs: Leg[], hubs: string[]): string[] {
@@ -194,8 +193,6 @@ function checkAiPlan(ai: AiPlan, stays: CityStay[], legs: Leg[], hubs: string[])
     }
     const touchesSeoul = l.from.country === "KR" || l.to.country === "KR";
     if (touchesSeoul && !a.candidates.some((c) => c.mode === "flight")) problems.push(`leg ${l.index}에는 flight 후보가 필요합니다.`);
-    const badHubs = (a.hubSuggestions ?? []).filter((h) => !hubs.includes(h));
-    if (badHubs.length) problems.push(`leg ${l.index}의 hubSuggestions ${badHubs.join(",")}는 허브 후보 목록에 없습니다.`);
   }
   return problems;
 }
@@ -282,7 +279,7 @@ function applyDemo(stays: CityStay[], legs: Leg[]) {
   legs.forEach((l) => {
     const src = demoPlan.legs.find((x) => x.index === l.index);
     l.candidates = withIds(l.index, (src?.candidates ?? []) as Omit<TransportCandidate, "id">[]);
-    hubSuggestions[l.index] = src?.hubSuggestions ?? [];
+    hubSuggestions[l.index] = pickHubs(l);
   });
   return { tips: demoPlan.tips, hubSuggestions };
 }
@@ -351,14 +348,17 @@ export async function buildPlan(req: TripRequest): Promise<Plan & { hubSuggestio
     } catch (e) {
       // AI가 붐벼도 일정은 보여주기: 거리 기준 기본 후보로 대신하고, 운행 여부는 다음 단계(검색)에서 확인
       validation.push(`이동 구간: AI 응답 실패로 거리 기준 기본 후보를 썼습니다 — ${(e as Error).message}`);
-      legs.forEach((l) => (l.candidates = withIds(l.index, ruleCandidates(l))));
+      legs.forEach((l) => {
+        l.candidates = withIds(l.index, ruleCandidates(l));
+        hubSuggestions[l.index] = pickHubs(l);
+      });
       return;
     }
     if (r.fixes.length) validation.push(`이동 구간: ${r.fixes.join(" / ")}`);
     legs.forEach((l) => {
       const a = r.value.legs.find((x) => x.index === l.index)!;
       l.candidates = withIds(l.index, a.candidates);
-      hubSuggestions[l.index] = a.hubSuggestions ?? [];
+      hubSuggestions[l.index] = pickHubs(l); // 환승지는 AI가 아니라 우회 거리로 코드가 고름
     });
     tips = r.value.tips;
   });

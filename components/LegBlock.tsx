@@ -9,6 +9,58 @@ export interface FlightState {
   error?: string;
 }
 
+const minPrice = (st?: FlightState) => (st?.status === "done" && st.result?.options.length ? Math.min(...st.result.options.map((o) => o.priceKRW)) : undefined);
+
+/**
+ * 별도 발권 조합: 환승지는 코드가 우회 거리로 고르고, 두 표 최저가 합이 일반 연결편 최저가보다 5% 이상 쌀 때만 보여줌.
+ * 더 비싸면 한 줄로 접어 "확인했지만 숨겼다"고 알려줌.
+ */
+function SelfTransfers({ leg, hubs, flights, direct }: { leg: Leg; hubs: string[]; flights: Record<string, FlightState>; direct?: FlightState }) {
+  if (!hubs.length) return null;
+  const combos = hubs.map((h) => {
+    const a = flights[`leg${leg.index}:${h}:a`];
+    const b = flights[`leg${leg.index}:${h}:b`];
+    const pa = minPrice(a);
+    const pb = minPrice(b);
+    return { h, a, b, total: pa !== undefined && pb !== undefined ? pa + pb : undefined, loading: a?.status === "loading" || b?.status === "loading" };
+  });
+  if (combos.some((c) => c.loading) || direct?.status === "loading") return <p className="small muted">별도 발권(두 장 따로 사기) 조합도 확인하는 중…</p>;
+  const base = minPrice(direct);
+  const good = combos.filter((c) => c.total !== undefined && (base === undefined || c.total < base * 0.95));
+  const hidden = combos.filter((c) => !good.includes(c));
+  return (
+    <>
+      {good.map((c) => (
+        <div key={c.h} style={{ marginTop: 12 }}>
+          <p className="small" style={{ margin: "0 0 4px" }}>
+            <b>
+              별도 발권 조합: {c.h} 경유 · 합계 {won(c.total!)}
+              {base !== undefined ? ` (일반 연결편보다 ${won(base - c.total!)} 쌈)` : " (일반 연결편 가격 없음)"}
+            </b>{" "}
+            — 표 두 장을 따로 사는 방법입니다. 앞 비행기가 늦어도 보상이 없고, 짐을 찾아 다시 부치려면 {c.h}에 입국해야 할 수 있습니다. 환승 시간을 넉넉히(3시간 이상) 잡으세요.
+          </p>
+          <FlightTable title={`1구간: ${leg.from.name} → ${c.h}`} st={c.a} />
+          <FlightTable title={`2구간: ${c.h} → ${leg.to.name}`} st={c.b} />
+        </div>
+      ))}
+      {hidden.length ? (
+        <details className="small muted" style={{ marginTop: 8 }}>
+          <summary>
+            별도 발권 조합 {hidden.map((c) => `${c.h} 경유 ${c.total !== undefined ? won(c.total) : "가격 없음"}`).join(", ")}도 확인했지만
+            {base !== undefined ? ` 일반 연결편(${won(base)})보다 싸지 않아 숨겼어요.` : " 가격을 찾지 못해 숨겼어요."}
+          </summary>
+          {hidden.map((c) => (
+            <div key={c.h} style={{ marginTop: 8 }}>
+              <FlightTable title={`1구간: ${leg.from.name} → ${c.h}`} st={c.a} />
+              <FlightTable title={`2구간: ${c.h} → ${leg.to.name}`} st={c.b} />
+            </div>
+          ))}
+        </details>
+      ) : null}
+    </>
+  );
+}
+
 function FlightTable({ title, st, onRealtime, realtimeBusy }: { title: string; st?: FlightState; onRealtime?: () => void; realtimeBusy?: boolean }) {
   if (!st) return null;
   const r = st.result;
@@ -141,16 +193,7 @@ export default function LegBlock(props: {
             onRealtime={() => props.onRealtime(`leg${leg.index}`)}
             realtimeBusy={props.realtimeBusy.has(`leg${leg.index}`)}
           />
-          {props.hubs.map((h) => (
-            <div key={h} style={{ marginTop: 12 }}>
-              <p className="small" style={{ margin: "0 0 4px" }}>
-                <b>별도 발권 조합: {h} 경유</b> — 표 두 장을 따로 사는 방법입니다. 앞 비행기가 늦어도 보상이 없고, 짐을 찾아 다시 부치려면 {h}에 입국해야 할 수 있습니다.
-                <AiTag demo={props.demo} />
-              </p>
-              <FlightTable title={`1구간: ${leg.from.name} → ${h}`} st={props.flights[`leg${leg.index}:${h}:a`]} />
-              <FlightTable title={`2구간: ${h} → ${leg.to.name}`} st={props.flights[`leg${leg.index}:${h}:b`]} />
-            </div>
-          ))}
+          <SelfTransfers leg={leg} hubs={props.hubs} flights={props.flights} direct={direct} />
         </>
       ) : null}
     </section>

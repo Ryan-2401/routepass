@@ -1,7 +1,7 @@
 // 인천 출발 노선표(data/incheon-routes.json)를 다루는 순수 함수들
 import routesData from "@/data/incheon-routes.json";
 import { haversineKm } from "@/lib/geo";
-import type { GatewayInfo, Place } from "@/lib/types";
+import type { GatewayInfo, Leg, Place } from "@/lib/types";
 
 export interface RouteRow {
   city: string;
@@ -45,7 +45,25 @@ export function gatewayInfo(place: Place, limit = 3): GatewayInfo {
   return { city: place.name, hasDirect, suspendedDirect, nearest };
 }
 
-/** 환승 허브 후보 (노선표에서 hub 표시된 공항) — AI가 검색할 허브를 고를 때 후보로 제공 */
+/** 환승 허브 후보 (노선표에서 hub 표시되고 운항 중인 공항) */
 export function hubCandidates(): RouteRow[] {
   return operatingRoutes().filter((r) => r.hub);
+}
+
+/**
+ * 별도 발권 환승지 고르기 (AI 없이 거리 계산):
+ * 유럽 도시 → 허브 → 인천이 직선 경로보다 얼마나 돌아가는지(우회 거리)가 작은 허브부터 n곳.
+ * 인천이 끼지 않은 구간이나, 도시 바로 옆(150km 안) 허브는 제외.
+ */
+export function pickHubs(leg: Leg, n = 2): string[] {
+  const kr = leg.from.country === "KR" ? leg.from : leg.to.country === "KR" ? leg.to : null;
+  if (!kr) return [];
+  const eu = kr === leg.from ? leg.to : leg.from;
+  const straight = haversineKm(eu, kr);
+  return hubCandidates()
+    .filter((h) => !eu.airports.includes(h.iata) && haversineKm(eu, h) > 150)
+    .map((h) => ({ iata: h.iata, detour: haversineKm(eu, h) + haversineKm(h, kr) - straight }))
+    .sort((a, b) => a.detour - b.detour)
+    .slice(0, n)
+    .map((h) => h.iata);
 }

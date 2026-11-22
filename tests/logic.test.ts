@@ -2,7 +2,7 @@
 import { describe, expect, it } from "vitest";
 import { maxDaysInWindow, runEntryChecks } from "@/lib/entry";
 import { stayCost } from "@/lib/budget";
-import { gatewayInfo } from "@/lib/incheon";
+import { gatewayInfo, pickHubs } from "@/lib/incheon";
 import { isOpenAt, moveText } from "@/lib/server/picks";
 import { bestPaths, buildGraph, flightKey } from "@/lib/pathfind";
 import { extractJson } from "@/lib/server/gemini";
@@ -198,5 +198,16 @@ describe("AI가 붐빌 때 대비", () => {
     expect(ruleCandidates({ index: 0, from: seoul, to: city("파리"), date: "", distanceKm: 9000, candidates: [] }).map((c) => c.mode)).toEqual(["flight"]);
     expect(ruleCandidates({ index: 1, from: city("파리"), to: city("런던"), date: "", distanceKm: 340, candidates: [] }).map((c) => c.mode)).toEqual(["train", "bus"]);
     expect(ruleCandidates({ index: 2, from: city("모스크바"), to: city("리가"), date: "", distanceKm: 840, candidates: [] }).map((c) => c.mode)).toEqual(["bus"]);
+  });
+});
+
+describe("별도 발권 환승지 (코드 계산)", () => {
+  it("인천 구간만, 우회가 적은 허브 2곳", () => {
+    const seoul = { ...city("파리"), name: "서울", country: "KR", lat: 37.46, lng: 126.44, airports: ["ICN"] };
+    const hubs = pickHubs({ index: 0, from: city("런던"), to: seoul, date: "", distanceKm: 8800, candidates: [] });
+    expect(hubs).toHaveLength(2);
+    console.log("런던→서울 허브:", hubs, " 파리→서울:", pickHubs({ index: 0, from: city("파리"), to: seoul, date: "", distanceKm: 0, candidates: [] }));
+    expect(pickHubs({ index: 1, from: city("파리"), to: city("로마"), date: "", distanceKm: 1100, candidates: [] })).toEqual([]);
+    expect(pickHubs({ index: 0, from: seoul, to: city("파리"), date: "", distanceKm: 0, candidates: [] })).not.toContain("CDG");
   });
 });
