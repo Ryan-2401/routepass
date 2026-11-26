@@ -343,6 +343,7 @@ export default function TripForm(props: { busy: boolean; onSubmit: (r: TripReque
           <>
             <div>
               <b>AI 일정</b> {k.gemini ? `연결됨 (${k.model})` : "키 없음 — 예시 여정만 가능"}
+              {k.gemini ? (k.groq ? " · 예비: Gemma 4, Groq" : " · 예비: Gemma 4") : ""}
             </div>
             <div>
               <b>운행 검색</b> {k.tavily ? "연결됨" : "키 없음 — 저장된 사례만 판정"}

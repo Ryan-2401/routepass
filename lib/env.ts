@@ -10,6 +10,8 @@ export const env = {
     .split(",")
     .map((m) => m.trim())
     .filter(Boolean),
+  // Gemini가 붐빌 때 쓰는 예비 AI (선택). 있으면 자동으로 사용
+  groqKey: process.env.GROQ_API_KEY || "",
   tavilyKey: process.env.TAVILY_API_KEY || "",
   serpApiKey: process.env.SERPAPI_KEY || "",
   travelpayoutsToken: process.env.TRAVELPAYOUTS_TOKEN || "",
@@ -20,6 +22,7 @@ export const env = {
 export function keyStatus() {
   return {
     gemini: !!env.geminiKey,
+    groq: !!env.groqKey,
     tavily: !!env.tavilyKey,
     serpapi: !!env.serpApiKey,
     travelpayouts: !!env.travelpayoutsToken,

@@ -27,6 +27,7 @@ npm run dev
 | 변수 | 어디서 받나 | 무료 한도 | 없으면 |
 |---|---|---|---|
 | `GEMINI_API_KEY` | Google AI Studio (aistudio.google.com) | 무료 등급 (요청 수 제한) | 예시 여정만 가능 |
+| `GROQ_API_KEY` (선택) | console.groq.com | 무료 플랜, 한도 넘으면 429만 반환 | Gemini·Gemma만 사용 |
 | `TAVILY_API_KEY` | app.tavily.com | 월 1,000 크레딧, 카드 불필요 | 저장된 사례만 판정, 나머지 "확인 불가" |
 | `SERPAPI_KEY` | serpapi.com | 월 250회 | 실시간 가격 버튼 비활성 |
 | `TRAVELPAYOUTS_TOKEN` | travelpayouts.com 가입 → Aviasales 프로그램 연결 | 무료 (캐시 가격) | 예시 가격 |

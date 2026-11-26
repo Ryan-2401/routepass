@@ -10,39 +10,71 @@ const GEMMA_FALLBACKS = ["gemma-4-31b-it", "gemma-4-26b-a4b-it"];
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 /** 503(서버 혼잡)·500이면 잠깐 쉬고 다시, 429(한도)나 계속 실패하면 다음 모델로 넘어갑니다. */
+type Step = { provider: "gemini" | "groq"; model: string };
+
+/**
+ * AI 호출: 무료 모델을 차례로 시도
+ * 기본 Gemini → 가벼운 Gemini → Groq GPT-OSS 120B(키 있을 때) → Gemma 4 → Groq GPT-OSS 20B
+ * 한도가 회사·모델마다 따로라서, 하나가 붐비거나 한도에 걸려도 다음 것으로 넘어감
+ */
 async function callGemini(prompt: string, temperature: number): Promise<string> {
-  if (!env.geminiKey) throw new AiError("GEMINI_API_KEY가 설정되지 않았습니다.");
-  // 같은 키로 쓸 수 있는 무료 모델을 차례로: 기본 → 가벼운 Gemini → Gemma 4 (한도가 모델마다 따로)
-  const models = [...new Set([env.geminiModel, ...env.geminiFallbackModels, ...GEMMA_FALLBACKS])];
+  if (!env.geminiKey && !env.groqKey) throw new AiError("GEMINI_API_KEY가 설정되지 않았습니다.");
+  const gemini = env.geminiKey ? [...new Set([env.geminiModel, ...env.geminiFallbackModels])].map((model): Step => ({ provider: "gemini", model })) : [];
+  const gemma = env.geminiKey ? GEMMA_FALLBACKS.map((model): Step => ({ provider: "gemini", model })) : [];
+  const groq = (model: string): Step[] => (env.groqKey ? [{ provider: "groq", model }] : []);
+  const steps: Step[] = [...gemini, ...groq("openai/gpt-oss-120b"), ...gemma, ...groq("openai/gpt-oss-20b")];
   const started = Date.now();
   const BUDGET = 150000; // 한 요청에 쓰는 최대 시간 (서버 함수 제한 300초 안)
   const PER_CALL = 50000; // 모델 하나가 시간을 다 써서 다음 모델을 못 쓰는 일이 없게
   const tried: string[] = [];
-  for (const model of models) {
+  for (const { provider, model } of steps) {
     for (let attempt = 0; attempt < 2; attempt++) {
       if (Date.now() - started > BUDGET - 10000) break;
       if (attempt > 0) await sleep(2500);
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+      const signal = AbortSignal.timeout(Math.max(10000, Math.min(PER_CALL, BUDGET - (Date.now() - started))));
       let res: Response;
       try {
-        res = await fetch(url, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", "x-goog-api-key": env.geminiKey },
-          body: JSON.stringify({
-            contents: [{ role: "user", parts: [{ text: prompt }] }],
-            // Gemma는 JSON 모드 대신 프롬프트로 JSON을 받고 코드에서 꺼냄
-            generationConfig: model.startsWith("gemma") ? { temperature } : { responseMimeType: "application/json", temperature },
-          }),
-          signal: AbortSignal.timeout(Math.max(10000, Math.min(PER_CALL, BUDGET - (Date.now() - started)))),
-        });
+        res =
+          provider === "groq"
+            ? await fetch("https://api.groq.com/openai/v1/chat/completions", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", Authorization: `Bearer ${env.groqKey}` },
+                body: JSON.stringify({
+                  model,
+                  messages: [{ role: "user", content: prompt }],
+                  temperature,
+                  response_format: { type: "json_object" },
+                  reasoning_effort: "low",
+                }),
+                signal,
+              })
+            : await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "x-goog-api-key": env.geminiKey },
+                body: JSON.stringify({
+                  contents: [{ role: "user", parts: [{ text: prompt }] }],
+                  // Gemma는 JSON 모드 대신 프롬프트로 JSON을 받고 코드에서 꺼냄
+                  generationConfig: model.startsWith("gemma") ? { temperature } : { responseMimeType: "application/json", temperature },
+                }),
+                signal,
+              });
       } catch {
         tried.push(`${model} 시간 초과`);
         break;
       }
       if (res.ok) {
-        const data = (await res.json()) as { candidates?: { content?: { parts?: { text?: string; thought?: boolean }[] } }[] };
-        const text = data.candidates?.[0]?.content?.parts?.filter((p) => !p.thought).map((p) => p.text ?? "").join("") ?? "";
-        if (text) return text;
+        let text = "";
+        if (provider === "groq") {
+          const data = (await res.json()) as { choices?: { message?: { content?: string } }[] };
+          text = data.choices?.[0]?.message?.content ?? "";
+        } else {
+          const data = (await res.json()) as { candidates?: { content?: { parts?: { text?: string; thought?: boolean }[] } }[] };
+          text = data.candidates?.[0]?.content?.parts?.filter((p) => !p.thought).map((p) => p.text ?? "").join("") ?? "";
+        }
+        if (text) {
+          lastModel = model;
+          return text;
+        }
         tried.push(`${model} 빈 응답`);
         continue;
       }
@@ -50,16 +82,19 @@ async function callGemini(prompt: string, temperature: number): Promise<string> 
       tried.push(`${model} ${res.status}`);
       if ((res.status === 503 || res.status === 500) && attempt === 0) continue; // 잠깐 쉬고 같은 모델 한 번 더
       if (res.status === 503 || res.status === 500) break; // 계속 붐비면 다음 모델로
-      if (res.status === 429 && attempt === 0) {
+      if (res.status === 429 && attempt === 0 && provider === "gemini") {
         await sleep(8000); // 분당 한도: 조금 기다렸다 한 번 더
         continue;
       }
-      if (res.status === 429 || res.status === 404) break; // 다음 모델로
+      if ([400, 401, 403, 404, 413, 429].includes(res.status) && (provider === "groq" || res.status === 429 || res.status === 404)) break; // 다음 모델로
       throw new AiError(`Gemini 오류 ${res.status}: ${body}`);
     }
   }
-  throw new AiError(`Gemini 서버가 지금 붐비거나 사용량 한도에 걸렸습니다. 1~2분 뒤 다시 시도하세요. (${tried.join(", ")})`);
+  throw new AiError(`AI 서버가 지금 붐비거나 사용량 한도에 걸렸습니다. 1~2분 뒤 다시 시도하세요. (${tried.join(", ")})`);
 }
+
+/** 마지막으로 응답한 모델 (평가·로그용) */
+export let lastModel = "";
 
 export function extractJson(text: string): unknown {
   const t = text.trim().replace(/^```(?:json)?/i, "").replace(/```$/, "").trim();
